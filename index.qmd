@@ -1,0 +1,11 @@
+---
+title: "psyc1010-labs"
+---
+
+This is a Quarto website.
+
+To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+
+```{r}
+1 + 1
+```
