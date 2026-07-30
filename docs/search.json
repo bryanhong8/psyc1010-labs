@@ -1,0 +1,65 @@
+[
+  {
+    "objectID": "lab01_intro-to-R_exploring-data.html",
+    "href": "lab01_intro-to-R_exploring-data.html",
+    "title": "Lab 1: Introduction to R + Exploring Data",
+    "section": "",
+    "text": "In this lab, you’ll be introduced to the basics of the programming language R and how it will be used to help us better understand the concepts we are learning in this course. Before starting this lab, make sure to have read Chapter 1: Statistics are Everywhere from your textbook.\n\n\nBy the end of this lab, you should be able to:\n\nDescribe what R is and what it can be used for\nDescribe and use basic R syntax\nLoad in data and describe how it is structured"
+  },
+  {
+    "objectID": "lab01_intro-to-R_exploring-data.html#learning-objectives",
+    "href": "lab01_intro-to-R_exploring-data.html#learning-objectives",
+    "title": "Lab 1: Introduction to R + Exploring Data",
+    "section": "",
+    "text": "By the end of this lab, you should be able to:\n\nDescribe what R is and what it can be used for\nDescribe and use basic R syntax\nLoad in data and describe how it is structured"
+  },
+  {
+    "objectID": "lab01_intro-to-R_exploring-data.html#comments-and-commands",
+    "href": "lab01_intro-to-R_exploring-data.html#comments-and-commands",
+    "title": "Lab 1: Introduction to R + Exploring Data",
+    "section": "Comments and commands",
+    "text": "Comments and commands\nYou might notice that in each of the code blocks above, the first line did not seem to do anything. These first lines are called comments. Comments are sections of code that we leave to help other humans read and understand the code later on, but are intended to be ignored by computers. In R, we will use the # symbol to denote that something is a comment. In other words, any line that starts with a # will be considered a comment and ignored, and any line that does not start with a # will be considered a command and run.\nIn practice, comments are used all the time to communicate with others who are trying to use the code. This includes describing the purpose of a chunk of code, what options are available to change, etc. You should get in the habit of using comments since oftentimes, the other person you are helping is yourself in the future. If you want to write a longer comment, it is a good idea to put a # at the beginning of multiple lines.\nLet’s try this for ourselves! You can click into the window below and try typing whatever you want after a line that begins with a #. Afterwards, run the code in the window and see what happens.\n\n\n\n\n\n\n\n\nNotice that running this code did not anything since each line began with a # so it was ignored."
+  },
+  {
+    "objectID": "lab01_intro-to-R_exploring-data.html#objects",
+    "href": "lab01_intro-to-R_exploring-data.html#objects",
+    "title": "Lab 1: Introduction to R + Exploring Data",
+    "section": "Objects",
+    "text": "Objects\nOne of the most important things we can do R (or any other programming language) is to store information in an object. You can think of an object like a box that you can store anything in—a number, a message, a dataset, a plot, etc. The value of an object is whatever you put inside this box, and the name is whatever name you end up calling it so that both you and the computer can refer to it later on.\nTo create an object, we will need to use an assignment operator, which allows us to assign a value to an object name. In R, the assignment operator looks like an arrow: &lt;-\nLet’s try it for ourselves! We will go through a simple example to show how this is done.\n\n\n\n\n\n\n\n\nWe can then use this object later on to reference the information stored in it. What do you think the output of the code below will be?\n\n\n\n\n\n\n\n\nA few important things to note about objects! You can name your objects anything you want, but there are a few rules that you need to follow:\n\nR is case-sensitive, so any little change in the name of an object will be considered a separate object (e.g., “favourite_number” is different than “Favourite_number”.\nYou can use letters, numbers, underscores, and periods for your name, but they must always start with a letter.\nNames need to all be in one word (i.e., no spaces).\n\nLastly, it’s important to remember that the order in which you run R code is very important. R code is evaluated in order, from the top of the page to the bottom. Objects created first will be stored for later on, but you can only access it once it has been created. If you are trying to access an object at the bottom of the page before creating it earlier on, this will result in an error. In addition, you can overwrite the value in an object if you assign a new value to an existing object later on.\n\n\n\n\n\n\nTipActivity 1\n\n\n\nLet’s try assigning a new value to the favourite_number object. What do you think will happen when we subtract 2 from favourite_number now?"
+  },
+  {
+    "objectID": "lab01_intro-to-R_exploring-data.html#functions",
+    "href": "lab01_intro-to-R_exploring-data.html#functions",
+    "title": "Lab 1: Introduction to R + Exploring Data",
+    "section": "Functions",
+    "text": "Functions\nSo far, we’ve used simple operators to do basic arithmetic and assign values to objects. Oftentimes, we will want to do more complex things. In these cases, we will use what is called a function. Functions compute an operation, but are not limited to what individual symbols mean (in fact, operators are just special kinds of functions). If we are thinking about R as a language, we can think of functions like verbs and objects like nouns.\nWe’ve already come across a function at the beginning of this lab: print(\"Hello, world!\").\nWe can think of functions as having three basic parts:\n\nThe first part is the name of the function (e.g., print)\nThe second part is what you are putting into the function, or the arguments (e.g., \"Hello, world!\"). Sometimes a function can take more than one argument, separated by commas. Each function is unique in what it can do and what arguments it uses. We will learn about some other useful functions as we progress throughout the course.\nThe last part is the output of the function, which is whatever results from the corresponding operation.\n\n\n\n\n\n\n\nTipActivity 2\n\n\n\nHere, we will try out a new function called sum() to add up all the numbers in it. sum() is an example of a function that takes multiple arguments. Let’s use it to add up the numbers 5, 10, and 15."
+  },
+  {
+    "objectID": "lab01_intro-to-R_exploring-data.html#errors",
+    "href": "lab01_intro-to-R_exploring-data.html#errors",
+    "title": "Lab 1: Introduction to R + Exploring Data",
+    "section": "Errors",
+    "text": "Errors\nR is a very flexible language that allows you to do literally thousands of different things. That being said, it is quite picky, which means that you are going to encounter an error eventually. Get comfortable with seeing errors, because everyone, even the most experienced coders, will have errors with their code at first. When this happens, consider this to be a “first draft” of your code which you can then refine until your code does what you want.\nFiguring out why your code has an error is a big part of programming. You will oftentimes not be the first one to run into a certain error message, so you can usually solve this by:\n\nSearching the internet. You can typically find your answer if you copy and paste your error message into Google. You will usually come across examples where other have encountered the same problem and looked for help. StackOverflow is a website that can be particularly helpful since it collates answers based on how useful others found it.\nAsking somebody in the real-world: You can also show your code to a friend (e.g., someone else in the course, your TA, or Dr. Hong) to see if they have any advice when you get stuck.\nA note on generative AI. It is getting increasingly common for people to use generative AI tools like ChatGPT to get help while coding. You will likely receive some helpful guidance here by asking what you did wrong, but these answers are not always reliable. These tools can generate plausible, but incorrect and/or misleading, information, and it is necessary to build the knowledge and skills to evaluate their responses. Since this course is an introductory course, it is recommended that you avoid getting help from generative AI tools as you are building up your foundations."
+  },
+  {
+    "objectID": "lab01_intro-to-R_exploring-data.html#references",
+    "href": "lab01_intro-to-R_exploring-data.html#references",
+    "title": "Lab 1: Introduction to R + Exploring Data",
+    "section": "References",
+    "text": "References\nKosīte, D., König, L. M., De-Loyde, K., Lee, I., Pechey, E., Clarke, N., … & Hollands, G. J. (2019). Plate size and food consumption: a pre-registered experimental study in a general population sample. International Journal of Behavioral Nutrition and Physical Activity, 16(1), 75. https://doi.org/10.1186/s12966-019-0826-1"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Labs Overview",
+    "section": "",
+    "text": "Welcome! This page is meant to accompany the PSYC*1010: Making Sense of Data in Psychological Research course, taught at the University of Guelph by Dr. Bryan Hong.\nYou can access the workbooks for each of the weekly labs below:\n\nLab 1: Introduction to R + Exploring Data"
+  }
+]
