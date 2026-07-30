@@ -7,8 +7,23 @@ description: "PSYC*1010: Making Sense of Data in Psychological Research"
 format: live-html
 ---
 
-Welcome! This page is meant to accompany the PSYC\*1010: Making Sense of Data in Psychological Research course, taught at the University of Guelph by Dr. Bryan Hong.
+Welcome! This page is meant to accompany the **PSYC\*1010: Making Sense of Data in Psychological Research course, taught at the University of Guelph** by Bryan Hong.
 
 You can access the workbooks for each of the weekly labs below:
 
 -   [Lab 1: Introduction to R + Exploring Data](lab01_intro-to-R_exploring-data.qmd)
+-   [Lab 2: Visualizing Data](lab02_visualizing-data.qmd)
+
+# Acknowledgements
+
+This content largely builds and adapts upon materials and resources from other statistics and programming educators, many of which are made publicly available. Many thanks to the following individuals and teams:
+
+-   [Dr. Molly Metz, University of Toronto](https://www.psych.utoronto.ca/people/directories/all-faculty/molly-metz)
+-   [Dr. Judith Fan, Stanford University](https://psych10.github.io/)
+-   [Dr. Shannon Burns, Pomona College](https://www.shannonmburns.com/Psyc158/intro.html)
+-   [Dr. Matthew Crump, Brooklyn College](https://www.crumplab.com/statisticsLab/)
+-   [Dr. Danielle Navarro's Learning Statistics with R](https://learningstatisticswithr.com/)
+-   [psyTeachR, University of Glasgow](https://psyteachr.github.io/)
+-   [CourseKata](https://www.coursekata.org/)
+-   [OpenIntro](https://www.openintro.org/)
+-   [The Carpentries](https://carpentries.org/)

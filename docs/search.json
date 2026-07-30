@@ -1,5 +1,75 @@
 [
   {
+    "objectID": "lab02_visualizing-data.html",
+    "href": "lab02_visualizing-data.html",
+    "title": "Lab 2: Visualizing Data",
+    "section": "",
+    "text": "In this lab, we’ll be using R to help us visualize data. Before starting this lab, make sure to have read Chapter 2: Using Graphs to Visualize Data from your textbook.\n\n\n\n\n\n\nNoteLearning objectives\n\n\n\nBy the end of this lab, you should be able to:\n\nDescribe what packages in R are\nRecognize the initial steps of exploring, preparing, and visualizing data\nUse dplyr() to create frequency tables\nUse ggplot() to create different types of graphs (bar graphs, histograms, and scatterplots)\nApply best practices for creating graphs\nVisually describe the shape of a distribution"
+  },
+  {
+    "objectID": "lab02_visualizing-data.html#packages",
+    "href": "lab02_visualizing-data.html#packages",
+    "title": "Lab 2: Visualizing Data",
+    "section": "Packages",
+    "text": "Packages\nBefore we get started, we will have to learn about packages (or libraries). When you first install R onto your computer, you’ll have access to many basic functions like print() and sum(). However, other users in the R coding community are always writing and distributing new functions for the rest of the world to use. You can kind of think of this like downloading new DLC content to expand what you can do in a video game (except it is freely available!) In R, these collections of functions for download are called packages. Rather than having to re-invent the wheel and re-write code from scratch each time we want to do something new, we can load in functions already contained within these accessible packages instead.\nInstalling new packages into your R environment is a two-step process:\n\nFirst, you need to download and install them onto your computer, typically using the function install.packages().\nSecondly, you need to actually load the package so that you can use it in your current code, using the function library().\n\nToday, we’ll be installing and using two packages. dplyr (pronounced “dee-ply-er”) contains a few different functions that are helpful for preparing and organizing data, and ggplot2 (usually referred to us just “gee-gee-plot”) contains functions that can help us make all sorts of different graphs.\nRun the code in the window below to install and load in the dplyr and ggplot2 packages. Note that you might get some warning messages here, but that should be OK!\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nImportant\n\n\n\nWhen working with R, you will need to load in the packages each time you use them. Since we are using R online, this means that you will need to re-install and re-load these packages each time you refresh the page."
+  },
+  {
+    "objectID": "lab02_visualizing-data.html#frequency-tables-with-dplyr",
+    "href": "lab02_visualizing-data.html#frequency-tables-with-dplyr",
+    "title": "Lab 2: Visualizing Data",
+    "section": "Frequency tables with dplyr",
+    "text": "Frequency tables with dplyr\nLet’s start by making a frequency table. A frequency table organizes our data so that we can see the number of participants (or frequency) that corresponds to a particular response for a given variable.\nWe’ll be using the count() function from the dplyr package to create a frequency table. A handy feature of the dplyr package is the pipe, which looks like |&gt;. The pipe allows us to take the output of one function and send it directly to the next, which helps us to chain together different functions that we might want to apply to the same dataset.\nTo create a frequency table using dplyr, we need to specify both the name of the dataset we are working with and the name of the column that we want to summarize.\nLet’s use the code below to create a frequency table for the Education variable, which captures someone’s highest degree of education obtained.\n\n\n\n\n\n\n\n\nGreat job, you just created a frequency table! Here, the frequency of a given response is denoted by the n column. Oftentimes, it is helpful to also know the relative frequency to tell us the percentage of participants corresponding to a given response. To do so, we’ll use the mutate() function, which allows us to create or modify columns in our dataset.\nLet’s use the mutate() function to create a new column that divides each frequency by the total number of participants we are working with.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCautionRecap\n\n\n\nWhich scale of measurement would best describe the Education variable?\n\nviewof userChoice = Inputs.radio(\n  [\n    \"Nominal\",\n    \"Ordinal\",\n    \"Interval\",\n    \"Ratio\"\n  ], \n  {\n    label: null,\n    value: null\n  }\n);\n\n\n\n\n\n\n\n{\n  if (userChoice === null) {\n    return html`&lt;em&gt;Please select an answer above.&lt;/em&gt;`;\n  } else if (userChoice === \"Ordinal\") {\n    return html`&lt;div style=\"color: green; font-weight: bold;\"&gt; Correct!&lt;/div&gt;`;\n  } else {\n    return html`&lt;div style=\"color: red;\"&gt; Try again!&lt;/div&gt;`;\n  }\n}\n\n\n\n\n\n\n\n\nBy default, R will sort groups by alphabetical order. However, it is oftentimes helpful to provide some sort of order when we are creating frequency tables to make them easier to read. Here, we can first convert Education into a factor, which allows us to specify an order to our groups (or levels), before creating our frequency table.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTipActivity 1\n\n\n\nNow it’s your turn! Create a frequency table to summarize the MaritalStatus variable, which captures someone’s marital status (as either “Married”, “NeverMarried”, “LivePartner”, “Divorced”, “Separated”, or “Widowed”). Remember, R is a bit sensitive so it will have trouble even if you make a little change to the name of a variable you are working with."
+  },
+  {
+    "objectID": "lab02_visualizing-data.html#bar-graphs",
+    "href": "lab02_visualizing-data.html#bar-graphs",
+    "title": "Lab 2: Visualizing Data",
+    "section": "Bar graphs",
+    "text": "Bar graphs\nFor our first graph, let’s compare the frequencies of each Education level and plot it as a bar graph, which helps us compare values across categories. For our bar graph, our key components will be:\n\nData: The NHANES dataset we are working with. Like with our frequency tables, we’ll re-order the levels to make it a bit more intuitive to read.\nAesthetics: We’ll map our different Education levels onto the x-axis (horizontal).\nGeometry: Since we’re creating a bar graph, we will use the geom_bar() function. This will automatically calculate the frequencies and map it onto the y-axis (vertical).\n\nLet’s put this altogether to make our bar graph.\n\n\n\n\n\n\n\n\nGreat, we just made our first bar graph! Note that we had seen this data being presented both as a frequency table and as a bar graph. Depending on what you are using it for, you may opt to use one or the other. One thing that you might have noticed is that ggplot uses a + to add on additional layers instead of the pipe (|&gt;) we used earlier.\nLet’s use these additional layers to customize our plot a bit.\n\nFirstly, you might notice that our axes labels are a bit uninformative. It’s always a good idea to give your graph informative titles and labels to help readers better interpret them.\nAdditionally, when creating data visualizations, it is usually a good idea to minimize the visual clutter to help your data better show through.\nThat being said, there’s a lot room for creativity in your figures, as long as you’re communicating your findings effectively, ethically, and efficiently.\n\nHere, we’ll add a title and labels to our graph with the labs() function. We’ll also clean up our graph a bit using the theme_minimal() function. Last, we’ll add a color by adding a fill argument to our geom_bar() function."
+  },
+  {
+    "objectID": "lab02_visualizing-data.html#scatterplots",
+    "href": "lab02_visualizing-data.html#scatterplots",
+    "title": "Lab 2: Visualizing Data",
+    "section": "Scatterplots",
+    "text": "Scatterplots\nNow that we know how ggplot2 works, we can apply this same idea to make other types of graphs. We create a scatterplot to explore the relationship between different continuous variables. In this example, let’s look at the relationship between Weight and Height in our dataset. Many of the steps involved will be the same:\n\nData: Just like before, we’ll use our NHANES dataset. Note that we will not need to re-order our levels because we are working with two continuous variables.\nAesthetics: Here, we need to specify which variable will be on our x-axis and which will be on our y-axis. In this case, we’ll put Weight on our x-axis and Height on our y-axis.\nGeometry: To create a scatterplot, we’ll use the geom_point() function to plot each participant as a datapoint.\nJust like before, we’ll customize our plot a bit to add titles and axes labels, and minimize visual clutter.\n\nLet’s use the code below to make a scatterplot to visualize the relationship between Weight and Height."
+  },
+  {
+    "objectID": "lab02_visualizing-data.html#histograms",
+    "href": "lab02_visualizing-data.html#histograms",
+    "title": "Lab 2: Visualizing Data",
+    "section": "Histograms",
+    "text": "Histograms\nThe last graph that we’ll cover today is a histogram. Although a histogram looks quite a bit like a bar graph, it helps us to visualize continuous, rather than categorical data. This is particularly helpful in showing us the distribution of a given variable. Using the same general idea as before, let’s use a histogram to visualize the distribution of our Height variable.\nThis time, we’ll use the geom_histogram() function to make a histogram for our Height variable.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTipActivity 2\n\n\n\nOne of the variables in the NHANES dataset is called DaysMentHlthBad, which is the number of days that the participant reported that their mental health was not good out of the past 30 days. Use the code below to plot a histogram of the DaysMentHlthBad variable. You can use the link here to pick your own colour for your graph: https://r-charts.com/colors/"
+  },
+  {
+    "objectID": "lab02_visualizing-data.html#other-types-of-graphs",
+    "href": "lab02_visualizing-data.html#other-types-of-graphs",
+    "title": "Lab 2: Visualizing Data",
+    "section": "Other types of graphs",
+    "text": "Other types of graphs\nAlthough we’ve only covered a few of the basic graphs in this lab, you can use the same general principles to create a whole host of different graphs. For example, you can use the geom_violin() function to make violin plots, geom_density() to make density plots, geom_jitter() to make jitter plots, and so on! You can check out the gallery here to get an idea of the wide range of graphs you can make using ggplot2: https://r-graph-gallery.com/"
+  },
+  {
+    "objectID": "lab02_visualizing-data.html#references",
+    "href": "lab02_visualizing-data.html#references",
+    "title": "Lab 2: Visualizing Data",
+    "section": "References",
+    "text": "References\nCenters for Disease Control and Prevention (CDC). National Center for Health Statistics (NCHS). National Health and Nutrition Examination Survey Data. Hyattsville, MD: U.S. Department of Health and Human Services, Centers for Disease Control and Prevention. Sample data from: https://www.openintro.org/data/index.php?data=nhanes.samp.adult.500"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Labs Overview",
+    "section": "",
+    "text": "Welcome! This page is meant to accompany the PSYC*1010: Making Sense of Data in Psychological Research course, taught at the University of Guelph by Bryan Hong.\nYou can access the workbooks for each of the weekly labs below:\n\nLab 1: Introduction to R + Exploring Data\nLab 2: Visualizing Data\n\n\nAcknowledgements\nThis content largely builds and adapts upon materials and resources from other statistics and programming educators, many of which are made publicly available. Many thanks to the following individuals and teams:\n\nDr. Molly Metz, University of Toronto\nDr. Judith Fan, Stanford University\nDr. Shannon Burns, Pomona College\nDr. Matthew Crump, Brooklyn College\nDr. Danielle Navarro’s Learning Statistics with R\npsyTeachR, University of Glasgow\nCourseKata\nOpenIntro\nThe Carpentries"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\n1 + 1\n\n[1] 2"
+  },
+  {
     "objectID": "lab01_intro-to-R_exploring-data.html",
     "href": "lab01_intro-to-R_exploring-data.html",
     "title": "Lab 1: Introduction to R + Exploring Data",
@@ -47,19 +117,5 @@
     "title": "Lab 1: Introduction to R + Exploring Data",
     "section": "References",
     "text": "References\nKosīte, D., König, L. M., De-Loyde, K., Lee, I., Pechey, E., Clarke, N., … & Hollands, G. J. (2019). Plate size and food consumption: a pre-registered experimental study in a general population sample. International Journal of Behavioral Nutrition and Physical Activity, 16(1), 75. https://doi.org/10.1186/s12966-019-0826-1"
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site\n\n1 + 1\n\n[1] 2"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Labs Overview",
-    "section": "",
-    "text": "Welcome! This page is meant to accompany the PSYC*1010: Making Sense of Data in Psychological Research course, taught at the University of Guelph by Dr. Bryan Hong.\nYou can access the workbooks for each of the weekly labs below:\n\nLab 1: Introduction to R + Exploring Data"
   }
 ]
