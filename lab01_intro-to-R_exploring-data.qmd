@@ -1,0 +1,218 @@
+---
+title: "Lab 1: Introduction to R + Exploring Data"
+author: 
+  - name: "Bryan Hong"
+    affiliation: "University of Guelph"
+description: "PSYC*1010: Making Sense of Data in Psychological Research"
+format: live-html
+toc: true
+editor: visual
+engine: knitr
+resources:
+  - data/plate-size.csv
+webr:
+  render-df: gt-interactive
+---
+
+{{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
+
+# Getting started
+
+In this lab, you'll be introduced to the basics of the programming language `R` and how it will be used to help us better understand the concepts we are learning in this course. Before starting this lab, make sure to have read **Chapter 1: Statistics are Everywhere** from your textbook.
+
+## Learning objectives
+
+By the end of this lab, you should be able to:
+
+-   Describe what `R` is and what it can be used for
+-   Describe and use basic `R` syntax
+-   Load in data and describe how it is structured
+
+# What is `R` and why are we using it?
+
+The overarching goal of this course is to help you develop your *statistical literacy*, or your ability to understand, assess, and apply different statistical arguments both in psychological research and in your everday life. As part of developing this literacy, it is necessary to understand the mathematical foundations underlying our ability to make statistical arguments. In other words, it is important not just to learn *about* statistics, but also to learn *how to do* statistics.
+
+In this course, we will be using `R` as a tool to help us gain a better understanding of the statistical concepts that we are learning. `R` is a free, cross-platform, and open-source computer programming language that is commonly used for statistical analysis. Oftentimes, statistics is taught with a focus on working with solving equations and computing calculations by hand. In this course, `R` will help us to conduct these analyses so that we can better understand and reason the deeper concepts that motivate them. This gives you a hands-on opportunity to work with data, try out different things, and think through solving statistical problems.
+
+If you are feeling like this is a little (or even very) daunting, do not worry—this is completely normal! **You do not have to have prior coding experience to do well on these labs.** In this course, we will only be scratching the surface for what `R` can do, and each lab is intended to help you build your skills and understanding from the ground up. It will feel challenging at times, and at first, it'll be unlikely that you will understand everything as we are first working through it all. However, you will be surprised at how much you can learn in a short amount of time. By the end of this course, you will not only better understand the statistical concepts that we are learning in this course, but also be able to do things you might not have initially thought that you could do!
+
+# How will we be using `R`?
+
+You can think of `R` as a common language that we and our computers can understand. This means that we will write down instructions (or **code**) in `R`, which our computer can then follow (or **run** or **execute**).
+
+Typically, you will need to install `R` onto your own device, but in this course, we'll be running all of our code online so you will not need to worry about any setup, aside from internet access.
+
+::: callout-important
+Since this code is being accessed online, any edits or changes that you make will **NOT be saved**. I suggest setting aside a block of time (e.g., lecture) so that you can complete the activities in a single session. As you are working through activities, be mindful of refreshing your page since this will reset your progress.
+:::
+
+# Let's get started coding with `R`!
+
+Before we start working with data, let's go over some of the basic fundamentals of using `R` (which will be similar to many other programming languages). Although it might seem a bit abstract at first, you will start to understand more complex things you can do and how it applies to statisitical concepts with practice.
+
+For example, let's try running our first bit of code in the window below. As a reminder, code acts as a set of instructions for our computer to follow, but you will need to actually "run" the code for it to follow those instructions. **Before you run it, read the code below. What do you think it will do?**
+
+```{webr}
+# You can use R to "print" messages to the console. Try it for yourself! 
+print("Hello, world!")
+```
+
+Congratulations, you are officially coding! Printing out the words "Hello world!" is traditionally the first task for folks learning a programming language. Like any other language, we will need to learn the basic vocabulary to express what we want to do in a way that the computer can understand. We will cover the vocabulary you used in a bit (e.g., the word "print", the parentheses, the quotation marks, etc.), but let's try something else that you might be more familiar with first: arithmetic.
+
+**Let's try running the code in the window below.**
+
+```{webr}
+# You can use R as a basic calculator. 
+5 + 1 
+10 - 3 
+2 * 4 
+9 / 3
+```
+
+Basic math symbols like `+`, `-`, `*`, `/`, etc. can be used in R. For each line of code, R evaluates the calculation and returns an output.
+
+Notice that you can put more than one line of code in a single R window. When you run the code, all the commands will be run, one after another, and displayed in the order in which they appear.
+
+## Comments and commands
+
+You might notice that in each of the code blocks above, the first line did not seem to do anything. These first lines are called **comments**. Comments are sections of code that we leave to help other *humans* read and understand the code later on, but are intended to be ignored by *computers*. In `R`, we will use the `#` symbol to denote that something is a comment. In other words, any line that starts with a `#` will be considered a comment and ignored, and any line that does not start with a `#` will be considered a command and run.
+
+In practice, comments are used all the time to communicate with others who are trying to use the code. This includes describing the purpose of a chunk of code, what options are available to change, etc. You should get in the habit of using comments since oftentimes, the other person you are helping is yourself in the future. If you want to write a longer comment, it is a good idea to put a `#` at the beginning of multiple lines.
+
+**Let's try this for ourselves! You can click into the window below and try typing whatever you want after a line that begins with a `#`. Afterwards, run the code in the window and see what happens.**
+
+```{webr}
+# Any line that begins with a # symbol is a comment and will be ignored 
+# You can replace this text with whatever you want and try running it!
+```
+
+Notice that running this code did not anything since each line began with a `#` so it was ignored.
+
+## Objects
+
+One of the most important things we can do `R` (or any other programming language) is to store information in an **object**. You can think of an object like a box that you can store anything in—a number, a message, a dataset, a plot, etc. The **value** of an object is whatever you put inside this box, and the **name** is whatever name you end up calling it so that both you and the computer can refer to it later on.
+
+To create an object, we will need to use an **assignment operator**, which allows us to assign a value to an object name. In `R`, the assignment operator looks like an arrow: `<-`
+
+**Let's try it for ourselves! We will go through a simple example to show how this is done.**
+
+```{webr}
+# First, we will create an object named favourite_number and assign it was a value of 47 
+favourite_number <- 47  
+
+# Next, we can return the value of favourite_number by typing it's name.  
+# Note that I do not need to use the print() function like before, we can just type the object's name 
+favourite_number
+```
+
+**We can then use this object later on to reference the information stored in it. What do you think the output of the code below will be?**
+
+```{webr}
+favourite_number - 2 
+```
+
+A few important things to note about objects! You can name your objects anything you want, but there are a few rules that you need to follow:
+
+-   `R` is case-sensitive, so any little change in the name of an object will be considered a separate object (e.g., "favourite_number" is different than "Favourite_number".
+-   You can use letters, numbers, underscores, and periods for your name, but they must always start with a letter.
+-   Names need to all be in one word (i.e., no spaces).
+
+Lastly, it's important to remember that **the order in which you run `R` code is very important.** R code is evaluated in order, from the top of the page to the bottom. Objects created first will be stored for later on, but you can only access it once it has been created. If you are trying to access an object at the bottom of the page before creating it earlier on, this will result in an error. In addition, you can overwrite the value in an object if you assign a new value to an existing object later on.
+
+::: callout-tip
+## Activity 1
+
+Let's try assigning a new value to the `favourite_number` object. What do you think will happen when we subtract 2 from `favourite_number` now?
+:::
+
+```{webr}
+#| exercise: ex_1 
+# Put in a new value for favourite_number 
+favourite_number <- ______  
+
+# What will happen when we subtract 2 from favourite_number? favourite_number - 2
+```
+
+## Functions
+
+So far, we've used simple operators to do basic arithmetic and assign values to objects. Oftentimes, we will want to do more complex things. In these cases, we will use what is called a **function**. Functions compute an operation, but are not limited to what individual symbols mean (in fact, operators are just special kinds of functions). If we are thinking about `R` as a language, we can think of functions like verbs and objects like nouns.
+
+We've already come across a function at the beginning of this lab: `print("Hello, world!")`.
+
+We can think of functions as having three basic parts:
+
+-   The first part is the *name* of the function (e.g., `print`)
+-   The second part is what you are putting into the function, or the *arguments* (e.g., `"Hello, world!"`). Sometimes a function can take more than one argument, separated by commas. Each function is unique in what it can do and what arguments it uses. We will learn about some other useful functions as we progress throughout the course.
+-   The last part is the *output* of the function, which is whatever results from the corresponding operation.
+
+::: callout-tip
+## Activity 2
+
+Here, we will try out a new function called `sum()` to add up all the numbers in it. `sum()` is an example of a function that takes multiple arguments. Let's use it to add up the numbers 5, 10, and 15.
+:::
+
+```{webr}
+#| exercise: ex_2 
+# Edit the code below to use the sum() function to add up the numbers 5, 10, and 15. 
+sum(______)
+```
+
+```{webr}
+#| exercise: ex_2 
+#| check: true 
+if (identical(.result, sum(5,10,15))) {   
+  list(correct = TRUE, message = "✅ Nice work!") 
+} else {   
+  list(correct = FALSE, message = "❌ Hmm... try again!") 
+}
+```
+
+## Errors
+
+`R` is a very flexible language that allows you to do literally thousands of different things. That being said, it is quite picky, which means that you are going to encounter an **error** eventually. Get comfortable with seeing errors, because *everyone*, even the most experienced coders, will have errors with their code at first. When this happens, consider this to be a "first draft" of your code which you can then refine until your code does what you want.
+
+Figuring out why your code has an error is a big part of programming. You will oftentimes not be the first one to run into a certain error message, so you can usually solve this by:
+
+-   *Searching the internet*. You can typically find your answer if you copy and paste your error message into Google. You will usually come across examples where other have encountered the same problem and looked for help. *StackOverflow* is a website that can be particularly helpful since it collates answers based on how useful others found it.
+-   *Asking somebody in the real-world*: You can also show your code to a friend (e.g., someone else in the course, your TA, or Dr. Hong) to see if they have any advice when you get stuck.
+-   *A note on generative AI*. It is getting increasingly common for people to use generative AI tools like ChatGPT to get help while coding. You will likely receive some helpful guidance here by asking what you did wrong, but these answers **are not always reliable**. These tools can generate plausible, but incorrect and/or misleading, information, and it is necessary to build the knowledge and skills to evaluate their responses. **Since this course is an introductory course, it is recommended that you avoid getting help from generative AI tools as you are building up your foundations.**
+
+# Exploring data
+
+Now that we know some basics about working with `R`, let's actually start working with some data! The dataset we'll be working with comes from a real study that aims to answer a simple question: Do people eat more food if their meals are served on larger plates? (Kosīte et al., 2019). In this study, 134 participants were provided with either a small or large plate, and the quantity of food they consumed was measured.
+
+This is an example of **open data**, where researchers will publicly share raw, de-identified data so that others can freely access and use it. Across disciples, researchers are encouraged to share open data from their research to help advance a more inclusive, accessible, and transparent scientific community.
+
+**Let's try loading in the data ourselves! We'll be using a function called `read.csv()` to load in the data for us to use.**
+
+```{webr}
+# Use the read.csv() function to load in the dataset from Kosīte et al. (2019) 
+data <- read.csv("data/plate-size.csv")  
+
+# Let's return the value from our data object by typing it's name 
+data
+```
+
+Great, you've loaded in your first dataset! In this dataset, each **row** represents the data for a given participant and each **column** represents the variables being collected.
+
+Oftentimes, a dataset will have an associated **data dictionary** (or **codebook**) that provides a description of each variable and how it was collected. Below are the descriptions for the columns in this dataset:
+
+-   `ID`: Participant ID number
+-   `gender`: Gender. 1 = male, 2 = female, 3 = other, 4 = rather not say.
+-   `age`: Age (years)
+-   `ethnicity`: Ethnicity. 1 = white; 2 = mixed white and black, Asian, Caribbean, or other; 3 = Asian; 4 = Black; 5 = other; 6 = rather not say.
+-   `highest.qual`: Highest educational qualification. 1 = none, 2 = up to 4 GCSEs, 3 = 5 or more GCSEs or 1 A-level, 4 = 2 or more A-levels, 5 = bachelor’s degree, 6 = post-graduate degree, 7 = rather not say.
+-   `income`: Total household income per year, before tax (self-reported). 1 = up to £4,499; 2 = up to £6,499; 3 = up to £7,499; 4 = up to £9,499; 5 = up to £11,499; 6 = up to £13,499; 7 = up to £15,499; 8 = up to £17,499; 9 = up to £24,999; 10 = up to £29,999; 11 = up to £39,999; 12 = up to £49,999; 13 = up to £74,999; 14 = up to £99,999; 15 = over £100,000
+-   `plate.size`: 0 = small plate, 1 = large plate
+-   `kcal.consumed`: Total number of calories consumed
+-   `g.consumed`: Mass of food the participant ate (grams)
+-   `meal.duration`: Time from the first bite to the last bite (minutes)
+-   `n.bites`: Number of bites taken
+
+# That's all for now, great work!
+
+**Use what you have learned to answer some questions about this lab in the corresponding Assignment on CourseLink!**
+
+## References
+
+Kosīte, D., König, L. M., De-Loyde, K., Lee, I., Pechey, E., Clarke, N., ... & Hollands, G. J. (2019). Plate size and food consumption: a pre-registered experimental study in a general population sample. *International Journal of Behavioral Nutrition and Physical Activity, 16*(1), 75. <https://doi.org/10.1186/s12966-019-0826-1>

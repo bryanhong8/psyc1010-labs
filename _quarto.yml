@@ -1,13 +1,10 @@
 project:
   type: website
+  output-dir: docs
 
 website:
-  title: "psyc1010-labs"
-  navbar:
-    left:
-      - href: index.qmd
-        text: Home
-      - about.qmd
+  title: "PSYC*1010 Labs"
+
 
 format:
   html:

@@ -1,11 +1,14 @@
 ---
-title: "psyc1010-labs"
+title: "Labs Overview"
+author: 
+  - name: "Bryan Hong"
+    affiliation: "University of Guelph"
+description: "PSYC*1010: Making Sense of Data in Psychological Research"
+format: live-html
 ---
 
-This is a Quarto website.
+Welcome! This page is meant to accompany the PSYC\*1010: Making Sense of Data in Psychological Research course, taught at the University of Guelph by Dr. Bryan Hong.
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+You can access the workbooks for each of the weekly labs below:
 
-```{r}
-1 + 1
-```
+-   [Lab 1: Introduction to R + Exploring Data](lab01_intro-to-R_exploring-data.qmd)
