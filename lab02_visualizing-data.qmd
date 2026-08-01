@@ -73,7 +73,6 @@ Today, we will be using a dataset of 500 individuals drawn from the National Hea
 
 ```{webr}
 # Use the read.csv() function to load in the NHANES dataset
-# NOTE TO SELF: NEED TO CHANGE DATA LOCATION
 data <- read.csv("data/nhanes-500.csv")
 
 # Use the head() function to see the first few rows of the dataset

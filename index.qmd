@@ -13,6 +13,7 @@ You can access the workbooks for each of the weekly labs below:
 
 -   [Lab 1: Introduction to R + Exploring Data](lab01_intro-to-R_exploring-data.qmd)
 -   [Lab 2: Visualizing Data](lab02_visualizing-data.qmd)
+-   [Lab 3: Describing Data](lab03_describing-data.qmd)
 
 # Acknowledgements
 

@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Bryan Hong">
+<meta name="description" content="PSYC*1010: Making Sense of Data in Psychological Research">
+
+<title>Lab 3: Describing Data – PSYC*1010 Labs</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-1d4f84655f446305ac42a8f1abcf7405.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/live-runtime/live-runtime.js" type="module"></script>
+<link href="site_libs/quarto-contrib/live-runtime/live-runtime.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script type="module" src="site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
+<link href="site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-search-results"></div>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link active" data-scroll-target="#getting-started">Getting started</a></li>
+  <li><a href="#describing-data" id="toc-describing-data" class="nav-link" data-scroll-target="#describing-data">Describing data</a></li>
+  <li><a href="#central-tendency" id="toc-central-tendency" class="nav-link" data-scroll-target="#central-tendency">Central tendency</a>
+  <ul class="collapse">
+  <li><a href="#mean" id="toc-mean" class="nav-link" data-scroll-target="#mean">Mean</a></li>
+  <li><a href="#median" id="toc-median" class="nav-link" data-scroll-target="#median">Median</a></li>
+  <li><a href="#mode" id="toc-mode" class="nav-link" data-scroll-target="#mode">Mode</a></li>
+  <li><a href="#which-measure-should-we-use" id="toc-which-measure-should-we-use" class="nav-link" data-scroll-target="#which-measure-should-we-use">Which measure should we use?</a></li>
+  </ul></li>
+  <li><a href="#variability" id="toc-variability" class="nav-link" data-scroll-target="#variability">Variability</a>
+  <ul class="collapse">
+  <li><a href="#range" id="toc-range" class="nav-link" data-scroll-target="#range">Range</a></li>
+  <li><a href="#interquartile-range" id="toc-interquartile-range" class="nav-link" data-scroll-target="#interquartile-range">Interquartile range</a></li>
+  <li><a href="#standard-deviation-and-variance" id="toc-standard-deviation-and-variance" class="nav-link" data-scroll-target="#standard-deviation-and-variance">Standard deviation and variance</a></li>
+  </ul></li>
+  <li><a href="#reporting-descriptive-statistics" id="toc-reporting-descriptive-statistics" class="nav-link" data-scroll-target="#reporting-descriptive-statistics">Reporting descriptive statistics</a></li>
+  <li><a href="#thats-all-for-now-great-work" id="toc-thats-all-for-now-great-work" class="nav-link" data-scroll-target="#thats-all-for-now-great-work">That’s all for now, great work!</a>
+  <ul class="collapse">
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Lab 3: Describing Data</h1>
+</div>
+
+<div>
+  <div class="description">
+    PSYC*1010: Making Sense of Data in Psychological Research
+  </div>
+</div>
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Bryan Hong </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            University of Guelph
+          </p>
+      </div>
+  </div>
+
+<div class="quarto-title-meta">
+
+      
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="getting-started" class="level1">
+<h1>Getting started</h1>
+<p>In this lab, we’ll be using R to help us describe the data that we are working with. Before starting this lab, make sure to have read <strong>Chapter 3: Middle-ish: Describing the Middle and Spread of Your Data</strong> from your textbook.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Learning objectives
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>By the end of this lab, you should be able to:</p>
+<ul>
+<li>Use <code>R</code> to calculate different measures of central tendency (mean, median, mode)</li>
+<li>Identify scenarios when each measure of central tendency would be most appropriate to use</li>
+<li>Use <code>R</code> to calculate different measures of variability (range, interquartile range, standard deviation, variance)</li>
+<li>Identify scenarios when each measure of variability would be most appropriate to use</li>
+<li>Report descriptive statistics using APA formatting</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="describing-data" class="level1">
+<h1>Describing data</h1>
+<p>In the last lab, we had gone over some different ways of visualizing our data. In addition to data visualizations, we will oftentimes want to use <strong>descriptive statistics</strong> to summarize important characteristics of our data such as its middle (or <strong>central tendency</strong>) and spread (or <strong>variability</strong>). In this lab, we’ll go over some ways in which we can use <code>R</code> to compute these descriptive statistics, in addition to seeing the underlying calculations from which they are derived from.</p>
+</section>
+<section id="central-tendency" class="level1">
+<h1>Central tendency</h1>
+<p>After first visualizing your data, the next thing that you will most likely do is calculate a measure of <strong>central tendency</strong>. This is helpful because it gives you a quick idea of what is an “average” or “middle” or “typical” value looks like in your dataset. The three most commonly used measures of central tendency are the <strong>mean</strong>, <strong>median</strong>, and <strong>mode</strong>.</p>
+<p>Before we start working with actual data, we will start exploring these different measures of central tendency with some example numbers.</p>
+<p><strong>Here, let’s use the <code>c()</code> function (short for <em>combine</em> or <em>concatenate</em>) to assign a list of numbers into an object:</strong></p>
+<div class="cell">
+<div>
+<div id="webr-1" class="exercise-cell">
+
+</div>
+<script type="webr-1-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBDb21iaW5lIGEgbGlzdCBvZiBudW1iZXJzIGFuZCBhc3NpZ24gaXQgdG8gbXlfbnVtYmVyc1xubXlfbnVtYmVycyA9IGMoMTAsIDExLCA4LCA5LCAxMCwgMTUsIDYpXG5teV9udW1iZXJzIn0=
+</script>
+</div>
+</div>
+<section id="mean" class="level2">
+<h2 class="anchored" data-anchor-id="mean">Mean</h2>
+<p>Let’s start off with the <strong>mean</strong>, which is what we tend to think of when we imagine an “average”. This is a popular and commonly used measure of central tendency, which is computed by adding up the value of all of your data points and then dividing by the total number of data points that you are working with. In mathematical notation, this can be expressed as:</p>
+<p><span class="math display">\[
+M=\dfrac{\Sigma X}{n}
+\]</span></p>
+<p>Breaking down this formula a bit:</p>
+<ul>
+<li><span class="math inline">\(M\)</span>typically denotes the mean.</li>
+<li><span class="math inline">\(X\)</span>refers to the total set of data that we are working with.</li>
+<li><span class="math inline">\(\Sigma\)</span> is the Greek capital letter sigma, which tells you to calculate the <em>sum</em>. Here, when we see <span class="math inline">\(\Sigma X\)</span>, this tells us to calculate the sum of <span class="math inline">\(X\)</span>, or all of the data points that we are working with.</li>
+<li><span class="math inline">\(n\)</span> refers to the number of data points in the sample that we are working with. In the context of psychology research, this oftentimes refers to the <strong>sample size</strong>, or the total number of people in our sample.</li>
+</ul>
+<p><strong>Let’s try it for ourselves! We can use two functions: <code>sum()</code></strong> <strong>to sum the values of a set of data, and <code>length()</code></strong> <strong>to count up the number of values in a set of data. Let’s use these to calculate the mean of <code>my_numbers</code></strong> :</p>
+<div class="cell">
+<div>
+<div id="webr-2" class="exercise-cell">
+
+</div>
+<script type="webr-2-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBzdW0oKSBzdW1zIHVwIHRoZSB2YWx1ZXMgb2YgYSBzZXQgb2YgZGF0YVxuIyBsZW5ndGgoKSBjb3VudHMgdXAgdGhlIG51bWJlciBvZiB2YWx1ZXMgaW4gYSBzZXQgb2YgZGF0YVxuIyBXZSBjYW4gdGhlbiBmaW5kIHRoZSBtZWFuIGJ5IGRpdmlkaW5nIHRoZXNlIHR3b1xuc3VtKG15X251bWJlcnMpL2xlbmd0aChteV9udW1iZXJzKSJ9
+</script>
+</div>
+</div>
+<p>Although it’s pretty straightforward to calculate the mean like this, there’s an even easier way to do so, the <code>mean()</code> function!</p>
+<p><strong>Let’s use the <code>mean()</code></strong> <strong>function to calculate the mean of <code>my_numbers</code></strong> <strong>instead:</strong></p>
+<div class="cell">
+<div>
+<div id="webr-3" class="exercise-cell">
+
+</div>
+<script type="webr-3-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBVc2UgdGhlIG1lYW4oKSBmdW5jdGlvbiB0byBjYWxjdWxhdGUgdGhlIG1lYW5cbm1lYW4obXlfbnVtYmVycykifQ==
+</script>
+</div>
+</div>
+</section>
+<section id="median" class="level2">
+<h2 class="anchored" data-anchor-id="median">Median</h2>
+<p>Another common measure of central tendency is the <strong>median</strong>, which corresponds to the <em>middle</em> value of your set of data. To compute this, we list the values in order and then find the middle number of the list.</p>
+<ul>
+<li><p>If we have an <em>odd</em> number of data points, there will be a single middle number that corresponds to our median. For example, the median of the numbers below would be 3: <span class="math display">\[1,2,\textbf{3},4,5\]</span></p></li>
+<li><p>If we have an <em>even</em> number of data points, there will be two middle numbers. In this case, we take the mean of those numbers. For example, the median of the numbers below would be 3.5:</p>
+<p><span class="math display">\[1,2,\textbf{3,4},5,6\]</span></p></li>
+</ul>
+<p><strong>Let’s try it for ourselves! We’ll use the <code>sort()</code></strong> <strong>function to sort <code>my_numbers</code></strong> <strong>so that we can then find the median:</strong></p>
+<div class="cell">
+<div>
+<div id="webr-4" class="exercise-cell">
+
+</div>
+<script type="webr-4-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBVc2UgdGhlIHNvcnQoKSBmdW5jdGlvbiB0byBzb3J0IHRoZSBkYXRhIGluIG51bWVyaWNhbCBvcmRlclxuc29ydChteV9udW1iZXJzKSJ9
+</script>
+</div>
+</div>
+<p>After sorting the list, it’s relatively straightforward to find the median, especially since our data is fairly small. Once we are working with lots of numbers, this gets fairly tedious. Fortunately, there is a <code>median()</code> function to help compute this for us.</p>
+<p><strong>Let’s use the <code>median()</code></strong> <strong>function to calculate the median of <code>my_numbers</code></strong> <strong>instead:</strong></p>
+<div class="cell">
+<div>
+<div id="webr-5" class="exercise-cell">
+
+</div>
+<script type="webr-5-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBVc2UgdGhlIG1lZGlhbigpIGZ1bmN0aW9uIHRvIGNhbGN1bGF0ZSB0aGUgbWVkaWFuXG5tZWRpYW4obXlfbnVtYmVycykifQ==
+</script>
+</div>
+</div>
+</section>
+<section id="mode" class="level2">
+<h2 class="anchored" data-anchor-id="mode">Mode</h2>
+<p>The last common measure of central tendency is the <strong>mode</strong>, which tells you the most frequently occurring value in your data. Unlike the mean and median, <code>R</code> does not actually have a preset function to calculate the mode for us (there is actually a <code>mode()</code> function, but it does something completely different). However, we did learn a tool to quickly glean how frequent each value appears in our dataset: the <strong>frequency table</strong>. As a quick reminder, we used the <code>dplyr</code> package to help us make some nice looking frequency tables last time, but we can make a quick-and-dirty version of this using the <code>table()</code> function instead.</p>
+<p><strong>Let’s use the <code>table()</code></strong> <strong>function to help us identify the mode of <code>my_numbers</code></strong>:</p>
+<div class="cell">
+<div>
+<div id="webr-6" class="exercise-cell">
+
+</div>
+<script type="webr-6-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBVc2UgdGhlIHRhYmxlKCkgZnVuY3Rpb24gdG8gY3JlYXRlIGEgcXVpY2sgZnJlcXVlbmN5IHRhYmxlXG50YWJsZShteV9udW1iZXJzKSJ9
+</script>
+</div>
+</div>
+<p>Note that you can have multiple modes in your dataset if there are multiple values that are most common (sometimes referred to as <strong>bimodal</strong> if there are two modes, or <strong>multimodal</strong> if there are even more). Also note that this means that sometimes the mode may not be informative, such as when all values are equally as common (e.g., a <strong>uniform distribution</strong>).</p>
+</section>
+<section id="which-measure-should-we-use" class="level2">
+<h2 class="anchored" data-anchor-id="which-measure-should-we-use">Which measure should we use?</h2>
+<p>The mean, median, and mode all provide a measure of central tendency, but each do so in a different way. Knowing how to calculate each is helpful, but understanding when to use each and what they imply is critical for accurately describing your data. For example, let’s look at the scenario below to see how each of these measures can be affected by our data.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Activity 1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Let’s see how the mean and median change when we change our data. <code>list1</code> and <code>list2</code> below have the same data, except for the last number. Fill in the blank with whatever number you want and see how the corresponding mean and median change. You can try this as many times as you want – just press the <code>Start Over</code> button and run the code again. What happens when you put in a very small number? What about a very big number?</p>
+</div>
+</div>
+<div class="cell" data-exercise="ex_1">
+<div>
+<div id="webr-7" class="exercise-cell">
+
+</div>
+<script type="webr-7-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfMSJ9LCJjb2RlIjoiIyBCb3RoIGxpc3RzIGJlbG93IGhhdmUgdGhlIHNhbWUgdmFsdWUsIGV4Y2VwdCBmb3IgdGhlIGxhc3QgbnVtYmVyXG4jIEZpbGwgaW4gdGhlIGJsYW5rIHdpdGggd2hhdGV2ZXIgbnVtYmVyIHlvdSB3YW50XG5saXN0MSA8LSBjKDUwLCA1MCwgNTUsIDQyLCA1MSwgNTgsIDQ3LCA1MCwgNDEpXG5saXN0MiA8LSBjKDUwLCA1MCwgNTUsIDQyLCA1MSwgNTgsIDQ3LCA1MCwgX19fX19fKVxuXG4jIExldCdzIGNhbGN1bGF0ZSB0aGUgbWVhbiBhbmQgbWVkaWFuIG9mIGJvdGggbGlzdHNcbiMgSG93IGRvIHRoZXNlIG1lYXN1cmVzIGRpZmZlcj9cbm1lYW4obGlzdDEpXG5tZWRpYW4obGlzdDEpXG5cbm1lYW4obGlzdDIpXG5tZWRpYW4obGlzdDIpIn0=
+</script>
+</div>
+</div>
+<p>As you’ll find with most things in statistics, there aren’t necessarily hard and fast rules for when to use each of these different measures. However, you can use the following as a rough guideline as you are deciding what measure of central tendency would be most appropriate for a given set of data:</p>
+<ul>
+<li><p>If you are working with <strong>nominal</strong> data, you should be using the mode (e.g., how would you calculate the mean or median for a nominal variable like eye colour?) Even if your nominal data are represented as numbers, both the mean and median assume that the numbers in your data are meaningful, so these will be uninterpretable if the numbers are arbitrarily assigned.</p></li>
+<li><p>If you are working with <strong>ordinal</strong> data, you most likely want to use the median instead of the mean. The median requires that you have some sort of meaningful order to your data, but does not depend on the precise numbers involved – however, this is important when calculating the mean, so it is less appropriate when working with ordinal data.</p></li>
+<li><p>If you are working with <strong>interval</strong> or <strong>ratio</strong> data, the mean is usually a good default since many statistical tools are based on the mean and lots of people know what it is. However, as we saw earlier, the mean is susceptible to <strong>outliers</strong>, or extreme scores in our dataset. This can be particularly noticeable if you have some sort of <strong>skew</strong> in your dataset, where the mean gets pulled in the direction of the extreme scores. In these scenarios, the median likely provides a better definition of where the center of your data is. This is also why it is important to first explore and visualize your data to get a rough idea of the data that you are working with.</p></li>
+</ul>
+</section>
+</section>
+<section id="variability" class="level1">
+<h1>Variability</h1>
+<p>Knowing the center of our data is tremendously useful, but it does not tell the full story. For example, two distributions can both have a mean of 60, but if one ranges between 50 and 70 while the other ranges from 2 to 200, we would want to characterize this difference. In addition to the measure of central tendency, we also need to think about the <strong>variability</strong>, or how spread out our data are. Just like central tendency, there are a few different measures of variability we can use. Today, we’ll be going over the <strong>range</strong>, <strong>interquartile range</strong>, <strong>variance</strong>, and <strong>standard deviation</strong>.</p>
+<section id="range" class="level2">
+<h2 class="anchored" data-anchor-id="range">Range</h2>
+<p>The most straightforward measure of variability is the range, which is the biggest value minus the smallest value. When looking at <code>my_numbers</code>, the biggest (or <strong>maximum</strong>) value is 15 and the smallest (or <strong>minimum</strong>) value is 6, so we can calculate the range by subtracting these two.</p>
+<p><strong>Let’s use the <code>max()</code></strong> <strong>and <code>min()</code></strong> <strong>functions to help us calculate the range of <code>my_numbers</code>:</strong></p>
+<div class="cell">
+<div>
+<div id="webr-8" class="exercise-cell">
+
+</div>
+<script type="webr-8-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBVc2UgdGhlIG1heCgpIGZ1bmN0aW9uIHRvIGZpbmQgdGhlIGJpZ2dlc3QgdmFsdWVcbm1heChteV9udW1iZXJzKVxuXG4jIFVzZSB0aGUgbWluKCkgZnVuY3Rpb24gdG8gZmluZCB0aGUgc21hbGxlc3QgdmFsdWVcbm1pbihteV9udW1iZXJzKVxuXG4jIFRha2UgdGhlIGRpZmZlcmVuY2UgYmV0d2VlbiB0aGVzZSB0d28gdG8gY2FsY3VsYXRlIHRoZSByYW5nZVxubWF4KG15X251bWJlcnMpIC0gbWluKG15X251bWJlcnMpIn0=
+</script>
+</div>
+</div>
+<p><strong>Alternatively, we can use the <code>range()</code></strong> <strong>function:</strong></p>
+<div class="cell">
+<div>
+<div id="webr-9" class="exercise-cell">
+
+</div>
+<script type="webr-9-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBVc2UgdGhlIHJhbmdlKCkgZnVuY3Rpb24gdG8gY2FsY3VsYXRlIHRoZSByYW5nZVxucmFuZ2UobXlfbnVtYmVycykifQ==
+</script>
+</div>
+</div>
+<p>Although the range is straightforward measure of variability, it is oftentimes not the most nuanced. Since it only relies on two data points, it is especially susceptible to outliers in our data. For example, think back to the earlier activity comparing the means and medians for <code>list1</code> and <code>list2</code> – what are the ranges of these lists?</p>
+</section>
+<section id="interquartile-range" class="level2">
+<h2 class="anchored" data-anchor-id="interquartile-range">Interquartile range</h2>
+<p>One way to get around some of the issues with the range is using the <strong>interquartile range (IQR)</strong>. This is like the range, except instead of calculating the difference between the biggest and smallest value, we calculate the range of the middle 50% of our data. Because we are only looking at the middle 50%, it is affected less by extreme scores at the ends of your data.</p>
+<p>We do this by taking the difference between the <em>first quartile</em> (<span class="math inline">\(Q_1\)</span> or the 25th percentile) and the <em>third quartile</em> (<span class="math inline">\(Q_3\)</span> or the 75th percentile). What is a <strong>quartile</strong>? Our quartiles correspond to the values that split up our data into four equal parts. For example, if we know that <span class="math inline">\(Q_1=10\)</span>, that’d mean that 25% of the scores in our data are smaller than 10. <strong>Percentiles</strong> are a similar concept, where a specific percentage of your data are smaller than a given value. For example, if your score is at the 99th percentile, that means your score is greater or equal to 99% of the rest of the data.</p>
+<p><strong>To find our quartiles, we’ll be using the <code>quantile()</code></strong> <strong>function. We can specify specific percentiles, but by default, this function will tell us our different quartile values, in addition to the minimum and maximum values. Similarly to the range, we can also use the <code>IQR()</code></strong> <strong>function to calculate the interquartile range directly.</strong></p>
+<div class="cell">
+<div>
+<div id="webr-10" class="exercise-cell">
+
+</div>
+<script type="webr-10-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBVc2UgdGhlIHF1YW50aWxlKCkgZnVuY3Rpb24gdG8gZmluZCB0aGUgdmFsdWVzIGNvcnJlc3BvbmRpbmcgdG8gdGhlIGRpZmZlcmVudCBxdWFydGlsZXNcbnF1YW50aWxlKG15X251bWJlcnMpXG5cbiMgVXNlIHRoZSBJUVIoKSBmdW5jdGlvbiB0byBmaW5kIHRoZSBpbnRlcnF1YXJ0aWxlIHJhbmdlXG5JUVIobXlfbnVtYmVycykifQ==
+</script>
+</div>
+</div>
+<p>Note that we already came across this idea a bit when discussing our median, which corresponds to the middle of our data – in other words, 50% of the data fall below the median and 50% of the data fall above the median.</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Caution</span>Recap
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Which of the following values is equivalent to the median?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb1" data-startfrom="213" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 212;"><span id="cb1-213"><a href="#cb1-213" aria-hidden="true" tabindex="-1"></a>viewof userChoice <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">radio</span>(</span>
+<span id="cb1-214"><a href="#cb1-214" aria-hidden="true" tabindex="-1"></a>  [</span>
+<span id="cb1-215"><a href="#cb1-215" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Q1"</span><span class="op">,</span></span>
+<span id="cb1-216"><a href="#cb1-216" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Q2"</span><span class="op">,</span></span>
+<span id="cb1-217"><a href="#cb1-217" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Q3"</span><span class="op">,</span></span>
+<span id="cb1-218"><a href="#cb1-218" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Q4"</span></span>
+<span id="cb1-219"><a href="#cb1-219" aria-hidden="true" tabindex="-1"></a>  ]<span class="op">,</span> </span>
+<span id="cb1-220"><a href="#cb1-220" aria-hidden="true" tabindex="-1"></a>  {</span>
+<span id="cb1-221"><a href="#cb1-221" aria-hidden="true" tabindex="-1"></a>    <span class="dt">label</span><span class="op">:</span> <span class="kw">null</span><span class="op">,</span></span>
+<span id="cb1-222"><a href="#cb1-222" aria-hidden="true" tabindex="-1"></a>    <span class="dt">value</span><span class="op">:</span> <span class="kw">null</span></span>
+<span id="cb1-223"><a href="#cb1-223" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-224"><a href="#cb1-224" aria-hidden="true" tabindex="-1"></a>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb2" data-startfrom="229" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 228;"><span id="cb2-229"><a href="#cb2-229" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb2-230"><a href="#cb2-230" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (userChoice <span class="op">===</span> <span class="kw">null</span>) {</span>
+<span id="cb2-231"><a href="#cb2-231" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">html</span><span class="vs">`&lt;em&gt;Please select an answer above.&lt;/em&gt;`</span><span class="op">;</span></span>
+<span id="cb2-232"><a href="#cb2-232" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (userChoice <span class="op">===</span> <span class="st">"Q2"</span>) {</span>
+<span id="cb2-233"><a href="#cb2-233" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">html</span><span class="vs">`&lt;div style="color: green; font-weight: bold;"&gt; Correct!&lt;/div&gt;`</span><span class="op">;</span></span>
+<span id="cb2-234"><a href="#cb2-234" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb2-235"><a href="#cb2-235" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">html</span><span class="vs">`&lt;div style="color: red;"&gt; Try again!&lt;/div&gt;`</span><span class="op">;</span></span>
+<span id="cb2-236"><a href="#cb2-236" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb2-237"><a href="#cb2-237" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-2" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="standard-deviation-and-variance" class="level2">
+<h2 class="anchored" data-anchor-id="standard-deviation-and-variance">Standard deviation and variance</h2>
+<p>Another way to think about describing the variability in the data is to calculate the <strong>standard deviation (SD)</strong>. Like how the mean is the most commonly reported measure of central tendency, the standard deviation is the most commonly reported measure of variability. The general premise of the standard deviation is to tell us the average (i.e., <em>standard</em>) distance that your points tend to be from the mean (i.e., <em>deviation</em>). If this number is large, that means that many of our data points are far away from the middle, so our distribution is spread out. On the other hand, if this number is small, that means that many of our data points are close to the middle, so our distribution is clustered together.</p>
+<p>To make this a bit more concrete, let’s apply this to our list of <code>my_numbers</code>. Previously, we found the mean of our list to be <span class="math inline">\(M=9.86\)</span>. We can first see how far each of our scores are from that mean value by taking the difference between the value and the mean (<span class="math inline">\(X-M\)</span>):</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>X</th>
+<th>Deviation from the Mean (X - M)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>10</td>
+<td>0.14</td>
+</tr>
+<tr class="even">
+<td>11</td>
+<td>1.14</td>
+</tr>
+<tr class="odd">
+<td>8</td>
+<td>-1.86</td>
+</tr>
+<tr class="even">
+<td>9</td>
+<td>-0.86</td>
+</tr>
+<tr class="odd">
+<td>10</td>
+<td>0.14</td>
+</tr>
+<tr class="even">
+<td>15</td>
+<td>5.14</td>
+</tr>
+<tr class="odd">
+<td>6</td>
+<td>-3.86</td>
+</tr>
+</tbody>
+</table>
+<p><strong>We can then take the average, or mean, of these deviations to give us a measure of variability. When calculating the mean, the first step is to <code>sum()</code></strong> <strong>up all the values, so let’s try this first:</strong></p>
+<div class="cell">
+<div>
+<div id="webr-11" class="exercise-cell">
+
+</div>
+<script type="webr-11-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBTdWJ0cmFjdCB0aGUgbWVhbiBmcm9tIGFsbCB0aGUgdmFsdWVzIGluIG15X251bWJlcnNcbmRldmlhdGlvbnMgPC0gbXlfbnVtYmVycyAtIG1lYW4obXlfbnVtYmVycylcbmRldmlhdGlvbnNcblxuIyBMZXQncyB0aGVuIHRyeSBzdW1taW5nIHVwIHRoZXNlIGRldmlhdGlvbnNcbnN1bShkZXZpYXRpb25zKSJ9
+</script>
+</div>
+</div>
+<p>Hmm… there seems to be a problem since our sum of deviations is pretty much 0<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. This will <em>always</em> be the case since positive deviations from the mean will cancel out with negative deviations from the mean. One way in which we can get around this issue is to square all of our deviations, which makes everything a positive number. We can then sum up these squared deviation values to then calculate this average deviation – this sum has its own term: the <strong>sum of squares</strong>. Going back to our <code>my_numbers</code>, this would look something like:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>X</th>
+<th>Deviations (X - M)</th>
+<th>Deviations squared (X - M)<sup>2</sup></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>10</td>
+<td>0.14</td>
+<td>0.020</td>
+</tr>
+<tr class="even">
+<td>11</td>
+<td>1.14</td>
+<td>1.31</td>
+</tr>
+<tr class="odd">
+<td>8</td>
+<td>-1.86</td>
+<td>3.45</td>
+</tr>
+<tr class="even">
+<td>9</td>
+<td>-0.86</td>
+<td>0.73</td>
+</tr>
+<tr class="odd">
+<td>10</td>
+<td>0.14</td>
+<td>0.020</td>
+</tr>
+<tr class="even">
+<td>15</td>
+<td>5.14</td>
+<td>26.45</td>
+</tr>
+<tr class="odd">
+<td>6</td>
+<td>-3.86</td>
+<td>14.88</td>
+</tr>
+<tr class="even">
+<td></td>
+<td><span class="math inline">\(\Sigma(X-M)=0\)</span></td>
+<td><span class="math inline">\(\Sigma(X-M)^{2}=46.86\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Now that we have a sum, we just need to divide by the number of scores that we are working with to calculate a mean. One notable difference is here is that we will be dividing by <span class="math inline">\(n-1\)</span> instead. The reason we do this is a bit nuanced, but we will revisit this later on later on in this course. In doing this, we are calculating a measure of variability called the <strong>variance</strong>. We can also calculate the variance using the function <code>var()</code> that goes through this whole process for us.</p>
+<p><strong>Let’s try calculating our variance of <code>my_numbers</code>, both by calculating the sum of squares and finding the “average”, and by using the <code>var()</code></strong> <strong>function:</strong></p>
+<div class="cell">
+<div>
+<div id="webr-12" class="exercise-cell">
+
+</div>
+<script type="webr-12-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBTcXVhcmUgYWxsIHRoZSB2YWx1ZXMgaW4gZGV2aWF0aW9uIC0tIHRoZSBeIG9wZXJhdG9yIGRlbm90ZXMgYW4gZXhwb25lbnRcbmRldmlhdGlvbnNeMlxuXG4jIFVzZSB0aGUgc3VtIG9mIHNxdWFyZXMgYW5kIGRpdmlkZSBieSBuIC0gMSB0byBjYWxjdWxhdGUgdGhlIHZhcmlhbmNlXG5zdW0oZGV2aWF0aW9uc14yKSAvIChsZW5ndGgobXlfbnVtYmVycykgLSAxKVxuXG4jIEFsdGVybmF0aXZlbHksIHdlIGNhbiB1c2UgdGhlIHZhcigpIGZ1bmN0aW9uIHRvIGNhbGN1bGF0ZSB0aGUgdmFyaWFuY2UgaW5zdGVhZFxudmFyKG15X251bWJlcnMpIn0=
+</script>
+</div>
+</div>
+<p>The variance is a helpful measure of variability, but it is hard to interpret what it actually means since all of the differences are squared. Although this has some nice mathematical properties, descriptive statistics are ultimately meant to describe data! This is where the <strong>standard deviation</strong> comes in. This solves the problem in a rather straightforward way – we take the square root of the variance to put things back into their original units. Just like the variance, we can also calculate the standard deviation with the <code>sd()</code> function.</p>
+<p><strong>Let’s try calculating the standard deviation of <code>my_numbers</code>. We can take the square root of the variance we calculated earlier using the <code>sqrt()</code> function, and compare this to the <code>sd()</code></strong> <strong>function.</strong></p>
+<div class="cell">
+<div>
+<div id="webr-13" class="exercise-cell">
+
+</div>
+<script type="webr-13-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBUYWtlIHRoZSBzcXVhcmUgcm9vdCBvZiB0aGUgdmFyaWFuY2Ugd2UgY2FsY3VsYXRlZCBlYXJsaWVyIHRvIGZpbmQgdGhlIHN0YW5kYXJkIGRldmlhdGlvblxuc3FydChzdW0oZGV2aWF0aW9uc14yKSAvIChsZW5ndGgobXlfbnVtYmVycykgLSAxKSlcblxuIyBMZXQncyBjb21wYXJlIHRoaXMgdG8gdGhlIHNkKCkgZnVuY3Rpb25cbnNkKG15X251bWJlcnMpIn0=
+</script>
+</div>
+</div>
+<p>In practice, we typically just calculate the standard deviation using software, but it is helpful to know what the underlying computations involved are. This whole process that we walked through can be summarized with the standard deviation formula here:</p>
+<p><span class="math display">\[
+SD=\sqrt{\dfrac{\Sigma(X-M)^{2}}{n-1}}
+\]</span></p>
+<p>Although it looks a bit intimidating at first, we are ultimately trying to find the average distance a data point strays from the center:</p>
+<ul>
+<li>First, we calculate all the <strong>deviations</strong> by looking at the difference between each point and the mean (i.e., <span class="math inline">\(X-M\)</span>)</li>
+<li>If we try to add this up, we will <em>always</em> get 0 because the positive and negative deviations will cancel out</li>
+<li>To get around this, we square each of our deviations to make all the numbers positive and sum this up instead, giving us our <strong>sum of squares</strong> (i.e., <span class="math inline">\(\Sigma(X-M)^{2}\)</span>)</li>
+<li>To find an average, we’ll divide by the number of points we’re working with. Due to some properties of working with a sample, we divide by <span class="math inline">\(n-1\)</span> instead. This leaves us with our <strong>variance</strong></li>
+<li>The variance tells us the average squared deviation, which is a bit difficult to interpret. To put everything in the original units, we square root our variance, finally giving us the <strong>standard deviation</strong></li>
+</ul>
+</section>
+</section>
+<section id="reporting-descriptive-statistics" class="level1">
+<h1>Reporting descriptive statistics</h1>
+<p>Measures of central tendency and variance are critical statistical tools used to describe data. However, one of the primary reasons we do this work is to share our results with others. One of the standards used to communicate these statistics in psychology is provided by the <em>American Psychological Association</em> (i.e., <strong>APA style/format</strong>).</p>
+<p>In general, the mean and standard deviation are the most commonly reported descriptive statistics. Typically, these will be reported in parentheses, with the symbols for each statistics being italicized and values rounded to the second decimal point. For example, with <code>my_numbers</code>, we could report this like: “We collected seven numbers (<em>M</em> = 9.86, <em>SD</em> = 2.79).”</p>
+<p>Now that we’ve covered some of the basics, let’s return to the NHANES data we worked with last week to apply this to real data. As a brief reminder, this data includes 500 participants who completed a survey measuring various health and nutrition variables.</p>
+<p><strong>First, load in the NHANES dataset using the <code>read.csv()</code></strong> <strong>function.</strong></p>
+<div class="cell">
+<div>
+<div id="webr-14" class="exercise-cell">
+
+</div>
+<script type="webr-14-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBVc2UgdGhlIHJlYWQuY3N2KCkgZnVuY3Rpb24gdG8gbG9hZCBpbiB0aGUgTkhBTkVTIGRhdGFzZXRcbmRhdGEgPC0gcmVhZC5jc3YoXCJkYXRhL25oYW5lcy01MDAuY3N2XCIpXG5kYXRhIn0=
+</script>
+</div>
+</div>
+<p>Oftentimes, we’ll want to describe the participants in our dataset so that readers have a sense of who is in our sample. To access a specific variable in our data, we can use the <code>$</code> symbol in R. For example, we can use <code>data$Age</code> to access the data in the <code>Age</code> variable.</p>
+<p><strong>Let’s find the mean and standard deviation of the Age in our dataset.</strong></p>
+<div class="cell">
+<div>
+<div id="webr-15" class="exercise-cell">
+
+</div>
+<script type="webr-15-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBGaW5kIHRoZSBtZWFuIGFuZCBzdGFuZGFyZCBkZXZpYXRpb24gb2YgdGhlIEFnZSBpbiBvdXIgZGF0YXNldFxubWVhbihkYXRhJEFnZSlcbnNkKGRhdGEkQWdlKSJ9
+</script>
+</div>
+</div>
+<p>Describing this in APA format, we could report this as “Researchers collected the ages of 500 participants in the NHANES dataset (<em>M</em> = 49.92, <em>SD</em> = 16.81).</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Activity 2
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Now it’s your turn to try this for yourself! Let’s calculate a few descriptive statistics for the <code>AlcoholYear</code> variable in our dataset, which tells us how many alcoholic beverages a participant had in the past year. Specifically, let’s use the <code>mean()</code>, <code>median()</code>, <code>range()</code>, <code>IQR()</code> and <code>sd()</code> functions.</p>
+<p>When working with real data, you will oftentimes run into <strong>missing data</strong> since participants may have missed or opted to not answer a question. There are a few different ways for handling missing data – here, we can add <code>na.rm = TRUE</code> as another <em>argument</em> to your function to tell it to remove missing (NA) values when doing calculations.</p>
+</div>
+</div>
+<div class="cell" data-exercise="ex_2">
+<div>
+<div id="webr-16" class="exercise-cell">
+
+</div>
+<script type="webr-16-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfMiJ9LCJjb2RlIjoiIyBGaW5kIHRoZSBmb2xsb3dpbmcgZGVzY3JpcHRpdmUgc3RhdGlzdGljcyBmb3IgdGhlIEFsY29ob2xZZWFyIHZhcmlhYmxlXG5tZWFuKF9fX19fXywgbmEucm0gPSBUUlVFKVxubWVkaWFuKF9fX19fXywgbmEucm0gPSBUUlVFKVxucmFuZ2UoX19fX19fLCBuYS5ybSA9IFRSVUUpXG5JUVIoX19fX19fLCBuYS5ybSA9IFRSVUUpXG5zZChfX19fX18sIG5hLnJtID0gVFJVRSkifQ==
+</script>
+</div>
+</div>
+</section>
+<section id="thats-all-for-now-great-work" class="level1">
+<h1>That’s all for now, great work!</h1>
+<p><strong>Use what you have learned to answer some questions about this lab in the corresponding Assignment on CourseLink!</strong></p>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<p>Centers for Disease Control and Prevention (CDC). National Center for Health Statistics (NCHS). National Health and Nutrition Examination Survey Data. Hyattsville, MD: U.S. Department of Health and Human Services, Centers for Disease Control and Prevention. <em>Sample data from:</em> <a href="https://www.openintro.org/data/index.php?data=nhanes.samp.adult.500" class="uri">https://www.openintro.org/data/index.php?data=nhanes.samp.adult.500</a></p>
+
+
+<script type="webr-data">
+eyJvcHRpb25zIjp7ImJhc2VVcmwiOiJodHRwczovL3dlYnIuci13YXNtLm9yZy92MC42LjAvIn0sInBhY2thZ2VzIjp7InBrZ3MiOlsiZXZhbHVhdGUiLCJrbml0ciIsImh0bWx0b29scyIsImd0Il0sInJlcG9zIjpbXX0sInJlbmRlcl9kZiI6Imd0LWludGVyYWN0aXZlIn0=
+</script>
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W3siY2VsbE5hbWUiOiJ3ZWJyLXdpZGdldC0xNiIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6IntcbiAgLy8gV2FpdCBmb3Igb3V0cHV0IHRvIGJlIHdyaXR0ZW4gdG8gdGhlIERPTSwgdGhlbiB0cmlnZ2VyIHdpZGdldCByZW5kZXJpbmdcbiAgYXdhaXQgX3dlYnJfdmFsdWVfMTY7XG4gIGlmICh3aW5kb3cuSFRNTFdpZGdldHMpIHtcbiAgICB3aW5kb3cuSFRNTFdpZGdldHMuc3RhdGljUmVuZGVyKCk7XG4gIH1cbiAgaWYgKHdpbmRvdy5QYWdlZFRhYmxlRG9jKSB7XG4gICAgd2luZG93LlBhZ2VkVGFibGVEb2MuaW5pdEFsbCgpO1xuICB9XG59XG4ifSx7ImNlbGxOYW1lIjoid2Vici0xNiIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3dlYnJfZWRpdG9yXzE2ID0ge1xuICBjb25zdCB7IFdlYlJFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcIndlYnItMTYtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICAvLyBEZWZhdWx0IGV4ZXJjaXNlIGNvbmZpZ3VyYXRpb25cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oXG4gICAge1xuICAgICAgaWQ6IFwid2Vici0xNi1jb250ZW50c1wiLFxuICAgICAgZW52aXI6IGBleGVyY2lzZS1lbnYtJHtibG9jay5hdHRyLmV4ZXJjaXNlfWAsXG4gICAgICBlcnJvcjogZmFsc2UsXG4gICAgICBjYXB0aW9uOiAnRXhlcmNpc2UnLFxuICAgIH0sXG4gICAgYmxvY2suYXR0clxuICApO1xuXG4gIGNvbnN0IGVkaXRvciA9IG5ldyBXZWJSRXhlcmNpc2VFZGl0b3Iod2ViUk9qcy53ZWJSUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxudmlld29mIF93ZWJyX3ZhbHVlXzE2ID0gd2ViUk9qcy5wcm9jZXNzKF93ZWJyX2VkaXRvcl8xNiwge30pO1xuX3dlYnJfZmVlZGJhY2tfMTYgPSB7XG4gIGNvbnN0IHsgV2ViUkdyYWRlciB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3QgZW1wdHlGZWVkYmFjayA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2RpdicpO1xuXG4gIGNvbnN0IGdyYWRlciA9IG5ldyBXZWJSR3JhZGVyKF93ZWJyX3ZhbHVlXzE2LmV2YWx1YXRvcik7XG4gIGNvbnN0IGZlZWRiYWNrID0gYXdhaXQgZ3JhZGVyLmdyYWRlRXhlcmNpc2UoKTtcbiAgaWYgKCFmZWVkYmFjaykgcmV0dXJuIGVtcHR5RmVlZGJhY2s7XG4gIHJldHVybiBmZWVkYmFjaztcbn1cbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLXdpZGdldC0xNSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6IntcbiAgLy8gV2FpdCBmb3Igb3V0cHV0IHRvIGJlIHdyaXR0ZW4gdG8gdGhlIERPTSwgdGhlbiB0cmlnZ2VyIHdpZGdldCByZW5kZXJpbmdcbiAgYXdhaXQgX3dlYnJfdmFsdWVfMTU7XG4gIGlmICh3aW5kb3cuSFRNTFdpZGdldHMpIHtcbiAgICB3aW5kb3cuSFRNTFdpZGdldHMuc3RhdGljUmVuZGVyKCk7XG4gIH1cbiAgaWYgKHdpbmRvdy5QYWdlZFRhYmxlRG9jKSB7XG4gICAgd2luZG93LlBhZ2VkVGFibGVEb2MuaW5pdEFsbCgpO1xuICB9XG59XG4ifSx7ImNlbGxOYW1lIjoid2Vici0xNSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3dlYnJfZWRpdG9yXzE1ID0ge1xuICBjb25zdCB7IFdlYlJFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcIndlYnItMTUtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgd2Vici0xNS1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBXZWJSRXhlcmNpc2VFZGl0b3Iod2ViUk9qcy53ZWJSUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fd2Vicl92YWx1ZV8xNSA9IHdlYlJPanMucHJvY2Vzcyhfd2Vicl9lZGl0b3JfMTUsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLXdpZGdldC0xNCIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6IntcbiAgLy8gV2FpdCBmb3Igb3V0cHV0IHRvIGJlIHdyaXR0ZW4gdG8gdGhlIERPTSwgdGhlbiB0cmlnZ2VyIHdpZGdldCByZW5kZXJpbmdcbiAgYXdhaXQgX3dlYnJfdmFsdWVfMTQ7XG4gIGlmICh3aW5kb3cuSFRNTFdpZGdldHMpIHtcbiAgICB3aW5kb3cuSFRNTFdpZGdldHMuc3RhdGljUmVuZGVyKCk7XG4gIH1cbiAgaWYgKHdpbmRvdy5QYWdlZFRhYmxlRG9jKSB7XG4gICAgd2luZG93LlBhZ2VkVGFibGVEb2MuaW5pdEFsbCgpO1xuICB9XG59XG4ifSx7ImNlbGxOYW1lIjoid2Vici0xNCIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3dlYnJfZWRpdG9yXzE0ID0ge1xuICBjb25zdCB7IFdlYlJFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcIndlYnItMTQtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgd2Vici0xNC1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBXZWJSRXhlcmNpc2VFZGl0b3Iod2ViUk9qcy53ZWJSUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fd2Vicl92YWx1ZV8xNCA9IHdlYlJPanMucHJvY2Vzcyhfd2Vicl9lZGl0b3JfMTQsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLXdpZGdldC0xMyIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6IntcbiAgLy8gV2FpdCBmb3Igb3V0cHV0IHRvIGJlIHdyaXR0ZW4gdG8gdGhlIERPTSwgdGhlbiB0cmlnZ2VyIHdpZGdldCByZW5kZXJpbmdcbiAgYXdhaXQgX3dlYnJfdmFsdWVfMTM7XG4gIGlmICh3aW5kb3cuSFRNTFdpZGdldHMpIHtcbiAgICB3aW5kb3cuSFRNTFdpZGdldHMuc3RhdGljUmVuZGVyKCk7XG4gIH1cbiAgaWYgKHdpbmRvdy5QYWdlZFRhYmxlRG9jKSB7XG4gICAgd2luZG93LlBhZ2VkVGFibGVEb2MuaW5pdEFsbCgpO1xuICB9XG59XG4ifSx7ImNlbGxOYW1lIjoid2Vici0xMyIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3dlYnJfZWRpdG9yXzEzID0ge1xuICBjb25zdCB7IFdlYlJFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcIndlYnItMTMtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgd2Vici0xMy1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBXZWJSRXhlcmNpc2VFZGl0b3Iod2ViUk9qcy53ZWJSUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fd2Vicl92YWx1ZV8xMyA9IHdlYlJPanMucHJvY2Vzcyhfd2Vicl9lZGl0b3JfMTMsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLXdpZGdldC0xMiIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6IntcbiAgLy8gV2FpdCBmb3Igb3V0cHV0IHRvIGJlIHdyaXR0ZW4gdG8gdGhlIERPTSwgdGhlbiB0cmlnZ2VyIHdpZGdldCByZW5kZXJpbmdcbiAgYXdhaXQgX3dlYnJfdmFsdWVfMTI7XG4gIGlmICh3aW5kb3cuSFRNTFdpZGdldHMpIHtcbiAgICB3aW5kb3cuSFRNTFdpZGdldHMuc3RhdGljUmVuZGVyKCk7XG4gIH1cbiAgaWYgKHdpbmRvdy5QYWdlZFRhYmxlRG9jKSB7XG4gICAgd2luZG93LlBhZ2VkVGFibGVEb2MuaW5pdEFsbCgpO1xuICB9XG59XG4ifSx7ImNlbGxOYW1lIjoid2Vici0xMiIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3dlYnJfZWRpdG9yXzEyID0ge1xuICBjb25zdCB7IFdlYlJFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcIndlYnItMTItY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgd2Vici0xMi1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBXZWJSRXhlcmNpc2VFZGl0b3Iod2ViUk9qcy53ZWJSUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fd2Vicl92YWx1ZV8xMiA9IHdlYlJPanMucHJvY2Vzcyhfd2Vicl9lZGl0b3JfMTIsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLXdpZGdldC0xMSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6IntcbiAgLy8gV2FpdCBmb3Igb3V0cHV0IHRvIGJlIHdyaXR0ZW4gdG8gdGhlIERPTSwgdGhlbiB0cmlnZ2VyIHdpZGdldCByZW5kZXJpbmdcbiAgYXdhaXQgX3dlYnJfdmFsdWVfMTE7XG4gIGlmICh3aW5kb3cuSFRNTFdpZGdldHMpIHtcbiAgICB3aW5kb3cuSFRNTFdpZGdldHMuc3RhdGljUmVuZGVyKCk7XG4gIH1cbiAgaWYgKHdpbmRvdy5QYWdlZFRhYmxlRG9jKSB7XG4gICAgd2luZG93LlBhZ2VkVGFibGVEb2MuaW5pdEFsbCgpO1xuICB9XG59XG4ifSx7ImNlbGxOYW1lIjoid2Vici0xMSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3dlYnJfZWRpdG9yXzExID0ge1xuICBjb25zdCB7IFdlYlJFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcIndlYnItMTEtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgd2Vici0xMS1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBXZWJSRXhlcmNpc2VFZGl0b3Iod2ViUk9qcy53ZWJSUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fd2Vicl92YWx1ZV8xMSA9IHdlYlJPanMucHJvY2Vzcyhfd2Vicl9lZGl0b3JfMTEsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLXdpZGdldC0xMCIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6IntcbiAgLy8gV2FpdCBmb3Igb3V0cHV0IHRvIGJlIHdyaXR0ZW4gdG8gdGhlIERPTSwgdGhlbiB0cmlnZ2VyIHdpZGdldCByZW5kZXJpbmdcbiAgYXdhaXQgX3dlYnJfdmFsdWVfMTA7XG4gIGlmICh3aW5kb3cuSFRNTFdpZGdldHMpIHtcbiAgICB3aW5kb3cuSFRNTFdpZGdldHMuc3RhdGljUmVuZGVyKCk7XG4gIH1cbiAgaWYgKHdpbmRvdy5QYWdlZFRhYmxlRG9jKSB7XG4gICAgd2luZG93LlBhZ2VkVGFibGVEb2MuaW5pdEFsbCgpO1xuICB9XG59XG4ifSx7ImNlbGxOYW1lIjoid2Vici0xMCIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3dlYnJfZWRpdG9yXzEwID0ge1xuICBjb25zdCB7IFdlYlJFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcIndlYnItMTAtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgd2Vici0xMC1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBXZWJSRXhlcmNpc2VFZGl0b3Iod2ViUk9qcy53ZWJSUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fd2Vicl92YWx1ZV8xMCA9IHdlYlJPanMucHJvY2Vzcyhfd2Vicl9lZGl0b3JfMTAsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLXdpZGdldC05IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoie1xuICAvLyBXYWl0IGZvciBvdXRwdXQgdG8gYmUgd3JpdHRlbiB0byB0aGUgRE9NLCB0aGVuIHRyaWdnZXIgd2lkZ2V0IHJlbmRlcmluZ1xuICBhd2FpdCBfd2Vicl92YWx1ZV85O1xuICBpZiAod2luZG93LkhUTUxXaWRnZXRzKSB7XG4gICAgd2luZG93LkhUTUxXaWRnZXRzLnN0YXRpY1JlbmRlcigpO1xuICB9XG4gIGlmICh3aW5kb3cuUGFnZWRUYWJsZURvYykge1xuICAgIHdpbmRvdy5QYWdlZFRhYmxlRG9jLmluaXRBbGwoKTtcbiAgfVxufVxuIn0seyJjZWxsTmFtZSI6IndlYnItOSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3dlYnJfZWRpdG9yXzkgPSB7XG4gIGNvbnN0IHsgV2ViUkV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwid2Vici05LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHdlYnItOS1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBXZWJSRXhlcmNpc2VFZGl0b3Iod2ViUk9qcy53ZWJSUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fd2Vicl92YWx1ZV85ID0gd2ViUk9qcy5wcm9jZXNzKF93ZWJyX2VkaXRvcl85LCB7fSk7XG4ifSx7ImNlbGxOYW1lIjoid2Vici13aWRnZXQtOCIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6IntcbiAgLy8gV2FpdCBmb3Igb3V0cHV0IHRvIGJlIHdyaXR0ZW4gdG8gdGhlIERPTSwgdGhlbiB0cmlnZ2VyIHdpZGdldCByZW5kZXJpbmdcbiAgYXdhaXQgX3dlYnJfdmFsdWVfODtcbiAgaWYgKHdpbmRvdy5IVE1MV2lkZ2V0cykge1xuICAgIHdpbmRvdy5IVE1MV2lkZ2V0cy5zdGF0aWNSZW5kZXIoKTtcbiAgfVxuICBpZiAod2luZG93LlBhZ2VkVGFibGVEb2MpIHtcbiAgICB3aW5kb3cuUGFnZWRUYWJsZURvYy5pbml0QWxsKCk7XG4gIH1cbn1cbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLTgiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF93ZWJyX2VkaXRvcl84ID0ge1xuICBjb25zdCB7IFdlYlJFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcIndlYnItOC1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHsgaWQ6IGB3ZWJyLTgtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgV2ViUkV4ZXJjaXNlRWRpdG9yKHdlYlJPanMud2ViUlByb21pc2UsIGJsb2NrLmNvZGUsIG9wdGlvbnMpO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3dlYnJfdmFsdWVfOCA9IHdlYlJPanMucHJvY2Vzcyhfd2Vicl9lZGl0b3JfOCwge30pO1xuIn0seyJjZWxsTmFtZSI6IndlYnItd2lkZ2V0LTciLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJ7XG4gIC8vIFdhaXQgZm9yIG91dHB1dCB0byBiZSB3cml0dGVuIHRvIHRoZSBET00sIHRoZW4gdHJpZ2dlciB3aWRnZXQgcmVuZGVyaW5nXG4gIGF3YWl0IF93ZWJyX3ZhbHVlXzc7XG4gIGlmICh3aW5kb3cuSFRNTFdpZGdldHMpIHtcbiAgICB3aW5kb3cuSFRNTFdpZGdldHMuc3RhdGljUmVuZGVyKCk7XG4gIH1cbiAgaWYgKHdpbmRvdy5QYWdlZFRhYmxlRG9jKSB7XG4gICAgd2luZG93LlBhZ2VkVGFibGVEb2MuaW5pdEFsbCgpO1xuICB9XG59XG4ifSx7ImNlbGxOYW1lIjoid2Vici03IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfd2Vicl9lZGl0b3JfNyA9IHtcbiAgY29uc3QgeyBXZWJSRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJ3ZWJyLTctY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICAvLyBEZWZhdWx0IGV4ZXJjaXNlIGNvbmZpZ3VyYXRpb25cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oXG4gICAge1xuICAgICAgaWQ6IFwid2Vici03LWNvbnRlbnRzXCIsXG4gICAgICBlbnZpcjogYGV4ZXJjaXNlLWVudi0ke2Jsb2NrLmF0dHIuZXhlcmNpc2V9YCxcbiAgICAgIGVycm9yOiBmYWxzZSxcbiAgICAgIGNhcHRpb246ICdFeGVyY2lzZScsXG4gICAgfSxcbiAgICBibG9jay5hdHRyXG4gICk7XG5cbiAgY29uc3QgZWRpdG9yID0gbmV3IFdlYlJFeGVyY2lzZUVkaXRvcih3ZWJST2pzLndlYlJQcm9taXNlLCBibG9jay5jb2RlLCBvcHRpb25zKTtcbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG52aWV3b2YgX3dlYnJfdmFsdWVfNyA9IHdlYlJPanMucHJvY2Vzcyhfd2Vicl9lZGl0b3JfNywge30pO1xuX3dlYnJfZmVlZGJhY2tfNyA9IHtcbiAgY29uc3QgeyBXZWJSR3JhZGVyIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBlbXB0eUZlZWRiYWNrID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgnZGl2Jyk7XG5cbiAgY29uc3QgZ3JhZGVyID0gbmV3IFdlYlJHcmFkZXIoX3dlYnJfdmFsdWVfNy5ldmFsdWF0b3IpO1xuICBjb25zdCBmZWVkYmFjayA9IGF3YWl0IGdyYWRlci5ncmFkZUV4ZXJjaXNlKCk7XG4gIGlmICghZmVlZGJhY2spIHJldHVybiBlbXB0eUZlZWRiYWNrO1xuICByZXR1cm4gZmVlZGJhY2s7XG59XG4ifSx7ImNlbGxOYW1lIjoid2Vici13aWRnZXQtNiIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6IntcbiAgLy8gV2FpdCBmb3Igb3V0cHV0IHRvIGJlIHdyaXR0ZW4gdG8gdGhlIERPTSwgdGhlbiB0cmlnZ2VyIHdpZGdldCByZW5kZXJpbmdcbiAgYXdhaXQgX3dlYnJfdmFsdWVfNjtcbiAgaWYgKHdpbmRvdy5IVE1MV2lkZ2V0cykge1xuICAgIHdpbmRvdy5IVE1MV2lkZ2V0cy5zdGF0aWNSZW5kZXIoKTtcbiAgfVxuICBpZiAod2luZG93LlBhZ2VkVGFibGVEb2MpIHtcbiAgICB3aW5kb3cuUGFnZWRUYWJsZURvYy5pbml0QWxsKCk7XG4gIH1cbn1cbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLTYiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF93ZWJyX2VkaXRvcl82ID0ge1xuICBjb25zdCB7IFdlYlJFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcIndlYnItNi1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHsgaWQ6IGB3ZWJyLTYtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgV2ViUkV4ZXJjaXNlRWRpdG9yKHdlYlJPanMud2ViUlByb21pc2UsIGJsb2NrLmNvZGUsIG9wdGlvbnMpO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3dlYnJfdmFsdWVfNiA9IHdlYlJPanMucHJvY2Vzcyhfd2Vicl9lZGl0b3JfNiwge30pO1xuIn0seyJjZWxsTmFtZSI6IndlYnItd2lkZ2V0LTUiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJ7XG4gIC8vIFdhaXQgZm9yIG91dHB1dCB0byBiZSB3cml0dGVuIHRvIHRoZSBET00sIHRoZW4gdHJpZ2dlciB3aWRnZXQgcmVuZGVyaW5nXG4gIGF3YWl0IF93ZWJyX3ZhbHVlXzU7XG4gIGlmICh3aW5kb3cuSFRNTFdpZGdldHMpIHtcbiAgICB3aW5kb3cuSFRNTFdpZGdldHMuc3RhdGljUmVuZGVyKCk7XG4gIH1cbiAgaWYgKHdpbmRvdy5QYWdlZFRhYmxlRG9jKSB7XG4gICAgd2luZG93LlBhZ2VkVGFibGVEb2MuaW5pdEFsbCgpO1xuICB9XG59XG4ifSx7ImNlbGxOYW1lIjoid2Vici01IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfd2Vicl9lZGl0b3JfNSA9IHtcbiAgY29uc3QgeyBXZWJSRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJ3ZWJyLTUtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgd2Vici01LWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFdlYlJFeGVyY2lzZUVkaXRvcih3ZWJST2pzLndlYlJQcm9taXNlLCBibG9jay5jb2RlLCBvcHRpb25zKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl93ZWJyX3ZhbHVlXzUgPSB3ZWJST2pzLnByb2Nlc3MoX3dlYnJfZWRpdG9yXzUsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLXdpZGdldC00IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoie1xuICAvLyBXYWl0IGZvciBvdXRwdXQgdG8gYmUgd3JpdHRlbiB0byB0aGUgRE9NLCB0aGVuIHRyaWdnZXIgd2lkZ2V0IHJlbmRlcmluZ1xuICBhd2FpdCBfd2Vicl92YWx1ZV80O1xuICBpZiAod2luZG93LkhUTUxXaWRnZXRzKSB7XG4gICAgd2luZG93LkhUTUxXaWRnZXRzLnN0YXRpY1JlbmRlcigpO1xuICB9XG4gIGlmICh3aW5kb3cuUGFnZWRUYWJsZURvYykge1xuICAgIHdpbmRvdy5QYWdlZFRhYmxlRG9jLmluaXRBbGwoKTtcbiAgfVxufVxuIn0seyJjZWxsTmFtZSI6IndlYnItNCIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3dlYnJfZWRpdG9yXzQgPSB7XG4gIGNvbnN0IHsgV2ViUkV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwid2Vici00LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHdlYnItNC1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBXZWJSRXhlcmNpc2VFZGl0b3Iod2ViUk9qcy53ZWJSUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fd2Vicl92YWx1ZV80ID0gd2ViUk9qcy5wcm9jZXNzKF93ZWJyX2VkaXRvcl80LCB7fSk7XG4ifSx7ImNlbGxOYW1lIjoid2Vici13aWRnZXQtMyIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6IntcbiAgLy8gV2FpdCBmb3Igb3V0cHV0IHRvIGJlIHdyaXR0ZW4gdG8gdGhlIERPTSwgdGhlbiB0cmlnZ2VyIHdpZGdldCByZW5kZXJpbmdcbiAgYXdhaXQgX3dlYnJfdmFsdWVfMztcbiAgaWYgKHdpbmRvdy5IVE1MV2lkZ2V0cykge1xuICAgIHdpbmRvdy5IVE1MV2lkZ2V0cy5zdGF0aWNSZW5kZXIoKTtcbiAgfVxuICBpZiAod2luZG93LlBhZ2VkVGFibGVEb2MpIHtcbiAgICB3aW5kb3cuUGFnZWRUYWJsZURvYy5pbml0QWxsKCk7XG4gIH1cbn1cbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLTMiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF93ZWJyX2VkaXRvcl8zID0ge1xuICBjb25zdCB7IFdlYlJFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcIndlYnItMy1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHsgaWQ6IGB3ZWJyLTMtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgV2ViUkV4ZXJjaXNlRWRpdG9yKHdlYlJPanMud2ViUlByb21pc2UsIGJsb2NrLmNvZGUsIG9wdGlvbnMpO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3dlYnJfdmFsdWVfMyA9IHdlYlJPanMucHJvY2Vzcyhfd2Vicl9lZGl0b3JfMywge30pO1xuIn0seyJjZWxsTmFtZSI6IndlYnItd2lkZ2V0LTIiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJ7XG4gIC8vIFdhaXQgZm9yIG91dHB1dCB0byBiZSB3cml0dGVuIHRvIHRoZSBET00sIHRoZW4gdHJpZ2dlciB3aWRnZXQgcmVuZGVyaW5nXG4gIGF3YWl0IF93ZWJyX3ZhbHVlXzI7XG4gIGlmICh3aW5kb3cuSFRNTFdpZGdldHMpIHtcbiAgICB3aW5kb3cuSFRNTFdpZGdldHMuc3RhdGljUmVuZGVyKCk7XG4gIH1cbiAgaWYgKHdpbmRvdy5QYWdlZFRhYmxlRG9jKSB7XG4gICAgd2luZG93LlBhZ2VkVGFibGVEb2MuaW5pdEFsbCgpO1xuICB9XG59XG4ifSx7ImNlbGxOYW1lIjoid2Vici0yIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfd2Vicl9lZGl0b3JfMiA9IHtcbiAgY29uc3QgeyBXZWJSRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJ3ZWJyLTItY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgd2Vici0yLWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFdlYlJFeGVyY2lzZUVkaXRvcih3ZWJST2pzLndlYlJQcm9taXNlLCBibG9jay5jb2RlLCBvcHRpb25zKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl93ZWJyX3ZhbHVlXzIgPSB3ZWJST2pzLnByb2Nlc3MoX3dlYnJfZWRpdG9yXzIsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLXdpZGdldC0xIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoie1xuICAvLyBXYWl0IGZvciBvdXRwdXQgdG8gYmUgd3JpdHRlbiB0byB0aGUgRE9NLCB0aGVuIHRyaWdnZXIgd2lkZ2V0IHJlbmRlcmluZ1xuICBhd2FpdCBfd2Vicl92YWx1ZV8xO1xuICBpZiAod2luZG93LkhUTUxXaWRnZXRzKSB7XG4gICAgd2luZG93LkhUTUxXaWRnZXRzLnN0YXRpY1JlbmRlcigpO1xuICB9XG4gIGlmICh3aW5kb3cuUGFnZWRUYWJsZURvYykge1xuICAgIHdpbmRvdy5QYWdlZFRhYmxlRG9jLmluaXRBbGwoKTtcbiAgfVxufVxuIn0seyJjZWxsTmFtZSI6IndlYnItMSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3dlYnJfZWRpdG9yXzEgPSB7XG4gIGNvbnN0IHsgV2ViUkV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwid2Vici0xLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHdlYnItMS1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBXZWJSRXhlcmNpc2VFZGl0b3Iod2ViUk9qcy53ZWJSUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fd2Vicl92YWx1ZV8xID0gd2ViUk9qcy5wcm9jZXNzKF93ZWJyX2VkaXRvcl8xLCB7fSk7XG4ifSx7ImNlbGxOYW1lIjoid2Vici1wcmVsdWRlIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoid2ViUk9qcyA9IHtcbiAgY29uc3QgeyBXZWJSLCBDaGFubmVsVHlwZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZS5XZWJSO1xuICBjb25zdCB7XG4gICAgV2ViUkV2YWx1YXRvcixcbiAgICBXZWJSRW52aXJvbm1lbnRNYW5hZ2VyLFxuICAgIHNldHVwUixcbiAgICBiNjREZWNvZGUsXG4gICAgY29sbGFwc2VQYXRoXG4gIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHN0YXR1c0NvbnRhaW5lciA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKFwiZXhlcmNpc2UtbG9hZGluZy1zdGF0dXNcIik7XG4gIGNvbnN0IGluZGljYXRvckNvbnRhaW5lciA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKFwiZXhlcmNpc2UtbG9hZGluZy1pbmRpY2F0b3JcIik7XG4gIGluZGljYXRvckNvbnRhaW5lci5jbGFzc0xpc3QucmVtb3ZlKFwiZC1ub25lXCIpO1xuXG4gIGxldCBzdGF0dXNUZXh0ID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudChcImRpdlwiKVxuICBzdGF0dXNUZXh0LmNsYXNzTGlzdCA9IFwiZXhlcmNpc2UtbG9hZGluZy1kZXRhaWxzXCI7XG4gIHN0YXR1c1RleHQgPSBzdGF0dXNDb250YWluZXIuYXBwZW5kQ2hpbGQoc3RhdHVzVGV4dCk7XG4gIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgSW5pdGlhbGlzZWA7XG5cbiAgLy8gSG9pc3QgaW5kaWNhdG9yIG91dCBmcm9tIGZpbmFsIHNsaWRlIHdoZW4gcnVubmluZyB1bmRlciByZXZlYWxcbiAgY29uc3QgcmV2ZWFsU3RhdHVzID0gZG9jdW1lbnQucXVlcnlTZWxlY3RvcihcIi5yZXZlYWwgLmV4ZXJjaXNlLWxvYWRpbmctaW5kaWNhdG9yXCIpO1xuICBpZiAocmV2ZWFsU3RhdHVzKSB7XG4gICAgcmV2ZWFsU3RhdHVzLnJlbW92ZSgpO1xuICAgIGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoXCIucmV2ZWFsID4gLnNsaWRlc1wiKS5hcHBlbmRDaGlsZChyZXZlYWxTdGF0dXMpO1xuICB9XG5cbiAgLy8gTWFrZSBhbnkgcmV2ZWFsIHNsaWRlcyB3aXRoIGxpdmUgY2VsbHMgc2Nyb2xsYWJsZVxuICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKFwiLnJldmVhbCAuZXhlcmNpc2UtY2VsbFwiKS5mb3JFYWNoKChlbCkgPT4ge1xuICAgIGVsLmNsb3Nlc3QoJ3NlY3Rpb24uc2xpZGUnKS5jbGFzc0xpc3QuYWRkKFwic2Nyb2xsYWJsZVwiKTtcbiAgfSlcblxuICAvLyB3ZWJSIHN1cHBsZW1lbnRhbCBkYXRhIGFuZCBvcHRpb25zXG4gIGNvbnN0IGRhdGFDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcIndlYnItZGF0YVxcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGRhdGEgPSBKU09OLnBhcnNlKGI2NERlY29kZShkYXRhQ29udGVudCkpO1xuXG4gIC8vIEdyYWIgbGlzdCBvZiByZXNvdXJjZXMgdG8gYmUgZG93bmxvYWRlZFxuICBjb25zdCBmaWxlc0NvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwidmZzLWZpbGVcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBmaWxlcyA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKGZpbGVzQ29udGVudCkpO1xuXG4gIC8vIEluaXRpYWxpc2Ugd2ViUiBhbmQgc2V0dXAgZm9yIFIgY29kZSBldmFsdWF0aW9uXG4gIGxldCB3ZWJSUHJvbWlzZSA9IChhc3luYyAod2ViUikgPT4ge1xuICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgRG93bmxvYWRpbmcgd2ViUmA7XG4gICAgYXdhaXQgd2ViUi5pbml0KCk7XG5cbiAgICAvLyBJbnN0YWxsIHByb3ZpZGVkIGxpc3Qgb2YgcGFja2FnZXNcbiAgICAvLyBFbnN1cmUgd2ViUiBkZWZhdWx0IHJlcG8gaXMgaW5jbHVkZWRcbiAgICBkYXRhLnBhY2thZ2VzLnJlcG9zLnB1c2goXCJodHRwczovL3JlcG8uci13YXNtLm9yZ1wiKVxuICAgIGF3YWl0IGRhdGEucGFja2FnZXMucGtncy5tYXAoKHBrZykgPT4gKCkgPT4ge1xuICAgICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBEb3dubG9hZGluZyBwYWNrYWdlOiAke3BrZ31gO1xuICAgICAgcmV0dXJuIHdlYlIuZXZhbFJWb2lkKGBcbiAgICAgICAgd2Vicjo6aW5zdGFsbChwa2csIHJlcG9zID0gcmVwb3MpXG4gICAgICAgIGxpYnJhcnkocGtnLCBjaGFyYWN0ZXIub25seSA9IFRSVUUpXG4gICAgICBgLCB7IGVudjoge1xuICAgICAgICBwa2c6IHBrZyxcbiAgICAgICAgcmVwb3M6IGRhdGEucGFja2FnZXMucmVwb3MsXG4gICAgICB9fSk7XG4gICAgfSkucmVkdWNlKChjdXIsIG5leHQpID0+IGN1ci50aGVuKG5leHQpLCBQcm9taXNlLnJlc29sdmUoKSk7XG5cbiAgICAvLyBEb3dubG9hZCBhbmQgaW5zdGFsbCByZXNvdXJjZXNcbiAgICBhd2FpdCBmaWxlcy5tYXAoKGZpbGUpID0+IGFzeW5jICgpID0+IHtcbiAgICAgIGNvbnN0IG5hbWUgPSBmaWxlLnN1YnN0cmluZyhmaWxlLmxhc3RJbmRleE9mKCcvJykgKyAxKTtcbiAgICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgRG93bmxvYWRpbmcgcmVzb3VyY2U6ICR7bmFtZX1gO1xuICAgICAgY29uc3QgcmVzcG9uc2UgPSBhd2FpdCBmZXRjaChmaWxlKTtcbiAgICAgIGlmICghcmVzcG9uc2Uub2spIHtcbiAgICAgICAgdGhyb3cgbmV3IEVycm9yKGBDYW4ndCBkb3dubG9hZCBcXGAke2ZpbGV9XFxgLiBFcnJvciAke3Jlc3BvbnNlLnN0YXR1c306IFwiJHtyZXNwb25zZS5zdGF0dXNUZXh0fVwiLmApO1xuICAgICAgfVxuICAgICAgY29uc3QgZGF0YSA9IGF3YWl0IHJlc3BvbnNlLmFycmF5QnVmZmVyKCk7XG5cbiAgICAgIC8vIFN0b3JlIFVSTHMgaW4gdGhlIGN3ZCB3aXRob3V0IGFueSBzdWJkaXJlY3Rvcnkgc3RydWN0dXJlXG4gICAgICBpZiAoZmlsZS5pbmNsdWRlcyhcIjovL1wiKSkge1xuICAgICAgICBmaWxlID0gbmFtZTtcbiAgICAgIH1cblxuICAgICAgLy8gQ29sbGFwc2UgaGlnaGVyIGRpcmVjdG9yeSBzdHJ1Y3R1cmVcbiAgICAgIGZpbGUgPSBjb2xsYXBzZVBhdGgoZmlsZSk7XG5cbiAgICAgIC8vIENyZWF0ZSBkaXJlY3RvcnkgdHJlZSwgaWdub3JpbmcgXCJkaXJlY3RvcnkgZXhpc3RzXCIgVkZTIGVycm9yc1xuICAgICAgY29uc3QgcGFydHMgPSBmaWxlLnNwbGl0KCcvJykuc2xpY2UoMCwgLTEpO1xuICAgICAgbGV0IHBhdGggPSAnJztcbiAgICAgIHdoaWxlIChwYXJ0cy5sZW5ndGggPiAwKSB7XG4gICAgICAgIHBhdGggKz0gcGFydHMuc2hpZnQoKSArICcvJztcbiAgICAgICAgY29uc3QgYW5hbHlzaXMgPSBhd2FpdCB3ZWJSLkZTLmFuYWx5emVQYXRoKHBhdGgpO1xuICAgICAgICBpZiAoIWFuYWx5c2lzLmV4aXN0cykge1xuICAgICAgICAgIHRyeSB7XG4gICAgICAgICAgICBhd2FpdCB3ZWJSLkZTLm1rZGlyKHBhdGgpO1xuICAgICAgICAgIH0gY2F0Y2ggKGUpIHtcbiAgICAgICAgICAgIHRocm93IG5ldyBFcnJvcihgRmlsZXN5c3RlbSBFcnJvcjogXCIke2UubWVzc2FnZX1cIi5gKTtcbiAgICAgICAgICB9XG4gICAgICAgIH1cbiAgICAgIH1cblxuICAgICAgLy8gV3JpdGUgdGhpcyBmaWxlIHRvIHRoZSBWRlNcbiAgICAgIHJldHVybiBhd2FpdCB3ZWJSLkZTLndyaXRlRmlsZShmaWxlLCBuZXcgVWludDhBcnJheShkYXRhKSk7XG4gICAgfSkucmVkdWNlKChjdXIsIG5leHQpID0+IGN1ci50aGVuKG5leHQpLCBQcm9taXNlLnJlc29sdmUoKSk7XG5cbiAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYEluc3RhbGxpbmcgd2ViUiBzaGltc2A7XG4gICAgYXdhaXQgd2ViUi5ldmFsUlZvaWQoYHdlYnI6OnNoaW1faW5zdGFsbCgpYCk7XG5cbiAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYFdlYlIgZW52aXJvbm1lbnQgc2V0dXBgO1xuICAgIGF3YWl0IHNldHVwUih3ZWJSLCBkYXRhKTtcblxuICAgIHN0YXR1c1RleHQucmVtb3ZlKCk7XG4gICAgaWYgKHN0YXR1c0NvbnRhaW5lci5jaGlsZHJlbi5sZW5ndGggPT0gMCkge1xuICAgICAgc3RhdHVzQ29udGFpbmVyLnBhcmVudE5vZGUucmVtb3ZlKCk7XG4gICAgfVxuICAgIHJldHVybiB3ZWJSO1xuICB9KShuZXcgV2ViUihkYXRhLm9wdGlvbnMpKTtcblxuICAvLyBLZWVwIHRyYWNrIG9mIGluaXRpYWwgT0pTIGJsb2NrIHJlbmRlclxuICBjb25zdCByZW5kZXJlZE9qcyA9IHt9O1xuXG4gIGNvbnN0IHByb2Nlc3MgPSBhc3luYyAoY29udGV4dCwgaW5wdXRzKSA9PiB7XG4gICAgY29uc3Qgd2ViUiA9IGF3YWl0IHdlYlJQcm9taXNlO1xuICAgIGNvbnN0IGV2YWx1YXRvciA9IG5ldyBXZWJSRXZhbHVhdG9yKHdlYlIsIGNvbnRleHQpXG4gICAgYXdhaXQgZXZhbHVhdG9yLnByb2Nlc3MoaW5wdXRzKTtcbiAgICByZXR1cm4gZXZhbHVhdG9yLmNvbnRhaW5lcjtcbiAgfVxuXG4gIHJldHVybiB7XG4gICAgcHJvY2VzcyxcbiAgICB3ZWJSUHJvbWlzZSxcbiAgICByZW5kZXJlZE9qcyxcbiAgfTtcbn1cbiJ9XX0=
+</script>
+<div id="exercise-loading-indicator" class="exercise-loading-indicator d-none d-flex align-items-center gap-2">
+<div id="exercise-loading-status" class="d-flex gap-2">
+
+</div>
+<div class="spinner-grow spinner-grow-sm">
+
+</div>
+</div>
+<script type="vfs-file">
+WyJkYXRhL25oYW5lcy01MDAuY3N2Il0=
+</script>
+</section>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>-3.55e-15 is a way of expressing scientific notation, so this number is equivalent to <span class="math inline">\(-3.55\times10^{-15}\)</span> or 0.00000000000000355.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InZpZXdvZiB1c2VyQ2hvaWNlID0gSW5wdXRzLnJhZGlvKFxuICBbXG4gICAgXCJRMVwiLFxuICAgIFwiUTJcIixcbiAgICBcIlEzXCIsXG4gICAgXCJRNFwiXG4gIF0sIFxuICB7XG4gICAgbGFiZWw6IG51bGwsXG4gICAgdmFsdWU6IG51bGxcbiAgfVxuKTtcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMiIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6IntcbiAgaWYgKHVzZXJDaG9pY2UgPT09IG51bGwpIHtcbiAgICByZXR1cm4gaHRtbGA8ZW0+UGxlYXNlIHNlbGVjdCBhbiBhbnN3ZXIgYWJvdmUuPC9lbT5gO1xuICB9IGVsc2UgaWYgKHVzZXJDaG9pY2UgPT09IFwiUTJcIikge1xuICAgIHJldHVybiBodG1sYDxkaXYgc3R5bGU9XCJjb2xvcjogZ3JlZW47IGZvbnQtd2VpZ2h0OiBib2xkO1wiPiBDb3JyZWN0ITwvZGl2PmA7XG4gIH0gZWxzZSB7XG4gICAgcmV0dXJuIGh0bWxgPGRpdiBzdHlsZT1cImNvbG9yOiByZWQ7XCI+IFRyeSBhZ2FpbiE8L2Rpdj5gO1xuICB9XG59XG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6InNoaW55SW5wdXQoJ3VzZXJDaG9pY2UnKSJ9XX0=
+</script>
+<script type="module">
+if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
+window._ojs.paths.runtimeToDoc = "../..";
+window._ojs.paths.runtimeToRoot = "../..";
+window._ojs.paths.docToRoot = "";
+window._ojs.selfContained = false;
+window._ojs.runtime.interpretFromScriptTags();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

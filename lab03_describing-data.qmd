@@ -1,0 +1,377 @@
+---
+title: "Lab 3: Describing Data"
+author: 
+  - name: "Bryan Hong"
+    affiliation: "University of Guelph"
+description: "PSYC*1010: Making Sense of Data in Psychological Research"
+format: live-html
+toc: true
+editor: visual
+engine: knitr
+resources:
+  - data/nhanes-500.csv
+webr:
+  render-df: gt-interactive
+---
+
+{{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
+
+# Getting started
+
+In this lab, we'll be using R to help us describe the data that we are working with. Before starting this lab, make sure to have read **Chapter 3: Middle-ish: Describing the Middle and Spread of Your Data** from your textbook.
+
+::: callout-note
+## Learning objectives
+
+By the end of this lab, you should be able to:
+
+-   Use `R` to calculate different measures of central tendency (mean, median, mode)
+-   Identify scenarios when each measure of central tendency would be most appropriate to use
+-   Use `R` to calculate different measures of variability (range, interquartile range, standard deviation, variance)
+-   Identify scenarios when each measure of variability would be most appropriate to use
+-   Report descriptive statistics using APA formatting
+:::
+
+# Describing data
+
+In the last lab, we had gone over some different ways of visualizing our data. In addition to data visualizations, we will oftentimes want to use **descriptive statistics** to summarize important characteristics of our data such as its middle (or **central tendency**) and spread (or **variability**). In this lab, we'll go over some ways in which we can use `R` to compute these descriptive statistics, in addition to seeing the underlying calculations from which they are derived from.
+
+# Central tendency
+
+After first visualizing your data, the next thing that you will most likely do is calculate a measure of **central tendency**. This is helpful because it gives you a quick idea of what is an "average" or "middle" or "typical" value looks like in your dataset. The three most commonly used measures of central tendency are the **mean**, **median**, and **mode**.
+
+Before we start working with actual data, we will start exploring these different measures of central tendency with some example numbers.
+
+**Here, let's use the `c()` function (short for *combine* or *concatenate*) to assign a list of numbers into an object:**
+
+```{webr}
+# Combine a list of numbers and assign it to my_numbers
+my_numbers = c(10, 11, 8, 9, 10, 15, 6)
+my_numbers
+```
+
+## Mean
+
+Let's start off with the **mean**, which is what we tend to think of when we imagine an "average". This is a popular and commonly used measure of central tendency, which is computed by adding up the value of all of your data points and then dividing by the total number of data points that you are working with. In mathematical notation, this can be expressed as:
+
+$$
+M=\dfrac{\Sigma X}{n}
+$$
+
+Breaking down this formula a bit:
+
+-   $M$typically denotes the mean.
+-   $X$refers to the total set of data that we are working with.
+-   $\Sigma$ is the Greek capital letter sigma, which tells you to calculate the *sum*. Here, when we see $\Sigma X$, this tells us to calculate the sum of $X$, or all of the data points that we are working with.
+-   $n$ refers to the number of data points in the sample that we are working with. In the context of psychology research, this oftentimes refers to the **sample size**, or the total number of people in our sample.
+
+**Let's try it for ourselves! We can use two functions: `sum()`** **to sum the values of a set of data, and `length()`** **to count up the number of values in a set of data. Let's use these to calculate the mean of `my_numbers`** :
+
+```{webr}
+# sum() sums up the values of a set of data
+# length() counts up the number of values in a set of data
+# We can then find the mean by dividing these two
+sum(my_numbers)/length(my_numbers)
+```
+
+Although it's pretty straightforward to calculate the mean like this, there's an even easier way to do so, the `mean()` function!
+
+**Let's use the `mean()`** **function to calculate the mean of `my_numbers`** **instead:**
+
+```{webr}
+# Use the mean() function to calculate the mean
+mean(my_numbers)
+```
+
+## Median
+
+Another common measure of central tendency is the **median**, which corresponds to the *middle* value of your set of data. To compute this, we list the values in order and then find the middle number of the list.
+
+-   If we have an *odd* number of data points, there will be a single middle number that corresponds to our median. For example, the median of the numbers below would be 3: $$1,2,\textbf{3},4,5$$
+
+-   If we have an *even* number of data points, there will be two middle numbers. In this case, we take the mean of those numbers. For example, the median of the numbers below would be 3.5:
+
+    $$1,2,\textbf{3,4},5,6$$
+
+**Let's try it for ourselves! We'll use the `sort()`** **function to sort `my_numbers`** **so that we can then find the median:**
+
+```{webr}
+# Use the sort() function to sort the data in numerical order
+sort(my_numbers)
+```
+
+After sorting the list, it's relatively straightforward to find the median, especially since our data is fairly small. Once we are working with lots of numbers, this gets fairly tedious. Fortunately, there is a `median()` function to help compute this for us.
+
+**Let's use the `median()`** **function to calculate the median of `my_numbers`** **instead:**
+
+```{webr}
+# Use the median() function to calculate the median
+median(my_numbers)
+```
+
+## Mode
+
+The last common measure of central tendency is the **mode**, which tells you the most frequently occurring value in your data. Unlike the mean and median, `R` does not actually have a preset function to calculate the mode for us (there is actually a `mode()` function, but it does something completely different). However, we did learn a tool to quickly glean how frequent each value appears in our dataset: the **frequency table**. As a quick reminder, we used the `dplyr` package to help us make some nice looking frequency tables last time, but we can make a quick-and-dirty version of this using the `table()` function instead.
+
+**Let's use the `table()`** **function to help us identify the mode of `my_numbers`**:
+
+```{webr}
+# Use the table() function to create a quick frequency table
+table(my_numbers)
+```
+
+Note that you can have multiple modes in your dataset if there are multiple values that are most common (sometimes referred to as **bimodal** if there are two modes, or **multimodal** if there are even more). Also note that this means that sometimes the mode may not be informative, such as when all values are equally as common (e.g., a **uniform distribution**).
+
+## Which measure should we use?
+
+The mean, median, and mode all provide a measure of central tendency, but each do so in a different way. Knowing how to calculate each is helpful, but understanding when to use each and what they imply is critical for accurately describing your data. For example, let's look at the scenario below to see how each of these measures can be affected by our data.
+
+::: callout-tip
+## Activity 1
+
+Let's see how the mean and median change when we change our data. `list1` and `list2` below have the same data, except for the last number. Fill in the blank with whatever number you want and see how the corresponding mean and median change. You can try this as many times as you want – just press the `Start Over` button and run the code again. What happens when you put in a very small number? What about a very big number?
+:::
+
+```{webr}
+#| exercise: ex_1
+# Both lists below have the same value, except for the last number
+# Fill in the blank with whatever number you want
+list1 <- c(50, 50, 55, 42, 51, 58, 47, 50, 41)
+list2 <- c(50, 50, 55, 42, 51, 58, 47, 50, ______)
+
+# Let's calculate the mean and median of both lists
+# How do these measures differ?
+mean(list1)
+median(list1)
+
+mean(list2)
+median(list2)
+```
+
+As you'll find with most things in statistics, there aren't necessarily hard and fast rules for when to use each of these different measures. However, you can use the following as a rough guideline as you are deciding what measure of central tendency would be most appropriate for a given set of data:
+
+-   If you are working with **nominal** data, you should be using the mode (e.g., how would you calculate the mean or median for a nominal variable like eye colour?) Even if your nominal data are represented as numbers, both the mean and median assume that the numbers in your data are meaningful, so these will be uninterpretable if the numbers are arbitrarily assigned.
+
+-   If you are working with **ordinal** data, you most likely want to use the median instead of the mean. The median requires that you have some sort of meaningful order to your data, but does not depend on the precise numbers involved – however, this is important when calculating the mean, so it is less appropriate when working with ordinal data.
+
+-   If you are working with **interval** or **ratio** data, the mean is usually a good default since many statistical tools are based on the mean and lots of people know what it is. However, as we saw earlier, the mean is susceptible to **outliers**, or extreme scores in our dataset. This can be particularly noticeable if you have some sort of **skew** in your dataset, where the mean gets pulled in the direction of the extreme scores. In these scenarios, the median likely provides a better definition of where the center of your data is. This is also why it is important to first explore and visualize your data to get a rough idea of the data that you are working with.
+
+# Variability
+
+Knowing the center of our data is tremendously useful, but it does not tell the full story. For example, two distributions can both have a mean of 60, but if one ranges between 50 and 70 while the other ranges from 2 to 200, we would want to characterize this difference. In addition to the measure of central tendency, we also need to think about the **variability**, or how spread out our data are. Just like central tendency, there are a few different measures of variability we can use. Today, we'll be going over the **range**, **interquartile range**, **variance**, and **standard deviation**.
+
+## Range
+
+The most straightforward measure of variability is the range, which is the biggest value minus the smallest value. When looking at `my_numbers`, the biggest (or **maximum**) value is 15 and the smallest (or **minimum**) value is 6, so we can calculate the range by subtracting these two.
+
+**Let's use the `max()`** **and `min()`** **functions to help us calculate the range of `my_numbers`:**
+
+```{webr}
+# Use the max() function to find the biggest value
+max(my_numbers)
+
+# Use the min() function to find the smallest value
+min(my_numbers)
+
+# Take the difference between these two to calculate the range
+max(my_numbers) - min(my_numbers)
+```
+
+**Alternatively, we can use the `range()`** **function:**
+
+```{webr}
+# Use the range() function to calculate the range
+range(my_numbers)
+```
+
+Although the range is straightforward measure of variability, it is oftentimes not the most nuanced. Since it only relies on two data points, it is especially susceptible to outliers in our data. For example, think back to the earlier activity comparing the means and medians for `list1` and `list2` – what are the ranges of these lists?
+
+## Interquartile range
+
+One way to get around some of the issues with the range is using the **interquartile range (IQR)**. This is like the range, except instead of calculating the difference between the biggest and smallest value, we calculate the range of the middle 50% of our data. Because we are only looking at the middle 50%, it is affected less by extreme scores at the ends of your data.
+
+We do this by taking the difference between the *first quartile* ($Q_1$ or the 25th percentile) and the *third quartile* ($Q_3$ or the 75th percentile). What is a **quartile**? Our quartiles correspond to the values that split up our data into four equal parts. For example, if we know that $Q_1=10$, that'd mean that 25% of the scores in our data are smaller than 10. **Percentiles** are a similar concept, where a specific percentage of your data are smaller than a given value. For example, if your score is at the 99th percentile, that means your score is greater or equal to 99% of the rest of the data.
+
+**To find our quartiles, we'll be using the `quantile()`** **function. We can specify specific percentiles, but by default, this function will tell us our different quartile values, in addition to the minimum and maximum values. Similarly to the range, we can also use the `IQR()`** **function to calculate the interquartile range directly.**
+
+```{webr}
+# Use the quantile() function to find the values corresponding to the different quartiles
+quantile(my_numbers)
+
+# Use the IQR() function to find the interquartile range
+IQR(my_numbers)
+```
+
+Note that we already came across this idea a bit when discussing our median, which corresponds to the middle of our data – in other words, 50% of the data fall below the median and 50% of the data fall above the median.
+
+::: callout-caution
+## Recap
+
+Which of the following values is equivalent to the median?
+
+```{ojs}
+//| echo: false
+viewof userChoice = Inputs.radio(
+  [
+    "Q1",
+    "Q2",
+    "Q3",
+    "Q4"
+  ], 
+  {
+    label: null,
+    value: null
+  }
+);
+```
+
+```{ojs}
+//| echo: false
+{
+  if (userChoice === null) {
+    return html`<em>Please select an answer above.</em>`;
+  } else if (userChoice === "Q2") {
+    return html`<div style="color: green; font-weight: bold;"> Correct!</div>`;
+  } else {
+    return html`<div style="color: red;"> Try again!</div>`;
+  }
+}
+```
+:::
+
+## Standard deviation and variance
+
+Another way to think about describing the variability in the data is to calculate the **standard deviation (SD)**. Like how the mean is the most commonly reported measure of central tendency, the standard deviation is the most commonly reported measure of variability. The general premise of the standard deviation is to tell us the average (i.e., *standard*) distance that your points tend to be from the mean (i.e., *deviation*). If this number is large, that means that many of our data points are far away from the middle, so our distribution is spread out. On the other hand, if this number is small, that means that many of our data points are close to the middle, so our distribution is clustered together.
+
+To make this a bit more concrete, let's apply this to our list of `my_numbers`. Previously, we found the mean of our list to be $M=9.86$. We can first see how far each of our scores are from that mean value by taking the difference between the value and the mean ($X-M$):
+
+| X   | Deviation from the Mean (X - M) |
+|-----|---------------------------------|
+| 10  | 0.14                            |
+| 11  | 1.14                            |
+| 8   | -1.86                           |
+| 9   | -0.86                           |
+| 10  | 0.14                            |
+| 15  | 5.14                            |
+| 6   | -3.86                           |
+
+**We can then take the average, or mean, of these deviations to give us a measure of variability. When calculating the mean, the first step is to `sum()`** **up all the values, so let's try this first:**
+
+```{webr}
+# Subtract the mean from all the values in my_numbers
+deviations <- my_numbers - mean(my_numbers)
+deviations
+
+# Let's then try summing up these deviations
+sum(deviations)
+```
+
+Hmm... there seems to be a problem since our sum of deviations is pretty much 0[^1]. This will *always* be the case since positive deviations from the mean will cancel out with negative deviations from the mean. One way in which we can get around this issue is to square all of our deviations, which makes everything a positive number. We can then sum up these squared deviation values to then calculate this average deviation – this sum has its own term: the **sum of squares**. Going back to our `my_numbers`, this would look something like:
+
+[^1]: -3.55e-15 is a way of expressing scientific notation, so this number is equivalent to $-3.55\times10^{-15}$ or 0.00000000000000355.
+
+| X   | Deviations (X - M) | Deviations squared (X - M)^2^ |
+|-----|--------------------|-------------------------------|
+| 10  | 0.14               | 0.020                         |
+| 11  | 1.14               | 1.31                          |
+| 8   | -1.86              | 3.45                          |
+| 9   | -0.86              | 0.73                          |
+| 10  | 0.14               | 0.020                         |
+| 15  | 5.14               | 26.45                         |
+| 6   | -3.86              | 14.88                         |
+|     | $\Sigma(X-M)=0$    | $\Sigma(X-M)^{2}=46.86$       |
+
+Now that we have a sum, we just need to divide by the number of scores that we are working with to calculate a mean. One notable difference is here is that we will be dividing by $n-1$ instead. The reason we do this is a bit nuanced, but we will revisit this later on later on in this course. In doing this, we are calculating a measure of variability called the **variance**. We can also calculate the variance using the function `var()` that goes through this whole process for us.
+
+**Let's try calculating our variance of `my_numbers`, both by calculating the sum of squares and finding the "average", and by using the `var()`** **function:**
+
+```{webr}
+# Square all the values in deviation -- the ^ operator denotes an exponent
+deviations^2
+
+# Use the sum of squares and divide by n - 1 to calculate the variance
+sum(deviations^2) / (length(my_numbers) - 1)
+
+# Alternatively, we can use the var() function to calculate the variance instead
+var(my_numbers)
+```
+
+The variance is a helpful measure of variability, but it is hard to interpret what it actually means since all of the differences are squared. Although this has some nice mathematical properties, descriptive statistics are ultimately meant to describe data! This is where the **standard deviation** comes in. This solves the problem in a rather straightforward way – we take the square root of the variance to put things back into their original units. Just like the variance, we can also calculate the standard deviation with the `sd()` function.
+
+**Let's try calculating the standard deviation of `my_numbers`. We can take the square root of the variance we calculated earlier using the `sqrt()` function, and compare this to the `sd()`** **function.**
+
+```{webr}
+# Take the square root of the variance we calculated earlier to find the standard deviation
+sqrt(sum(deviations^2) / (length(my_numbers) - 1))
+
+# Let's compare this to the sd() function
+sd(my_numbers)
+```
+
+In practice, we typically just calculate the standard deviation using software, but it is helpful to know what the underlying computations involved are. This whole process that we walked through can be summarized with the standard deviation formula here:
+
+$$
+SD=\sqrt{\dfrac{\Sigma(X-M)^{2}}{n-1}}
+$$
+
+Although it looks a bit intimidating at first, we are ultimately trying to find the average distance a data point strays from the center:
+
+-   First, we calculate all the **deviations** by looking at the difference between each point and the mean (i.e., $X-M$)
+-   If we try to add this up, we will *always* get 0 because the positive and negative deviations will cancel out
+-   To get around this, we square each of our deviations to make all the numbers positive and sum this up instead, giving us our **sum of squares** (i.e., $\Sigma(X-M)^{2}$)
+-   To find an average, we'll divide by the number of points we're working with. Due to some properties of working with a sample, we divide by $n-1$ instead. This leaves us with our **variance**
+-   The variance tells us the average squared deviation, which is a bit difficult to interpret. To put everything in the original units, we square root our variance, finally giving us the **standard deviation**
+
+# Reporting descriptive statistics
+
+Measures of central tendency and variance are critical statistical tools used to describe data. However, one of the primary reasons we do this work is to share our results with others. One of the standards used to communicate these statistics in psychology is provided by the *American Psychological Association* (i.e., **APA style/format**).
+
+In general, the mean and standard deviation are the most commonly reported descriptive statistics. Typically, these will be reported in parentheses, with the symbols for each statistics being italicized and values rounded to the second decimal point. For example, with `my_numbers`, we could report this like: "We collected seven numbers (*M* = 9.86, *SD* = 2.79)."
+
+Now that we've covered some of the basics, let's return to the NHANES data we worked with last week to apply this to real data. As a brief reminder, this data includes 500 participants who completed a survey measuring various health and nutrition variables.
+
+**First, load in the NHANES dataset using the `read.csv()`** **function.**
+
+```{webr}
+# Use the read.csv() function to load in the NHANES dataset
+data <- read.csv("data/nhanes-500.csv")
+data
+```
+
+Oftentimes, we'll want to describe the participants in our dataset so that readers have a sense of who is in our sample. To access a specific variable in our data, we can use the `$` symbol in R. For example, we can use `data$Age` to access the data in the `Age` variable.
+
+**Let's find the mean and standard deviation of the Age in our dataset.**
+
+```{webr}
+# Find the mean and standard deviation of the Age in our dataset
+mean(data$Age)
+sd(data$Age)
+```
+
+Describing this in APA format, we could report this as "Researchers collected the ages of 500 participants in the NHANES dataset (*M* = 49.92, *SD* = 16.81).
+
+::: callout-tip
+## Activity 2
+
+Now it's your turn to try this for yourself! Let's calculate a few descriptive statistics for the `AlcoholYear` variable in our dataset, which tells us how many alcoholic beverages a participant had in the past year. Specifically, let's use the `mean()`, `median()`, `range()`, `IQR()` and `sd()` functions.
+
+When working with real data, you will oftentimes run into **missing data** since participants may have missed or opted to not answer a question. There are a few different ways for handling missing data – here, we can add `na.rm = TRUE` as another *argument* to your function to tell it to remove missing (NA) values when doing calculations.
+:::
+
+```{webr}
+#| exercise: ex_2
+# Find the following descriptive statistics for the AlcoholYear variable
+mean(______, na.rm = TRUE)
+median(______, na.rm = TRUE)
+range(______, na.rm = TRUE)
+IQR(______, na.rm = TRUE)
+sd(______, na.rm = TRUE)
+```
+
+# That's all for now, great work!
+
+**Use what you have learned to answer some questions about this lab in the corresponding Assignment on CourseLink!**
+
+## References
+
+Centers for Disease Control and Prevention (CDC). National Center for Health Statistics (NCHS). National Health and Nutrition Examination Survey Data. Hyattsville, MD: U.S. Department of Health and Human Services, Centers for Disease Control and Prevention. *Sample data from:* <https://www.openintro.org/data/index.php?data=nhanes.samp.adult.500>
