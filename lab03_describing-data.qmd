@@ -156,7 +156,7 @@ As you'll find with most things in statistics, there aren't necessarily hard and
 
 -   If you are working with **interval** or **ratio** data, the mean is usually a good default since many statistical tools are based on the mean and lots of people know what it is. However, as we saw earlier, the mean is susceptible to **outliers**, or extreme scores in our dataset. This can be particularly noticeable if you have some sort of **skew** in your dataset, where the mean gets pulled in the direction of the extreme scores. In these scenarios, the median likely provides a better definition of where the center of your data is. This is also why it is important to first explore and visualize your data to get a rough idea of the data that you are working with.
 
-    ![](https://curriculum-content.s3.amazonaws.com/data-science/images/skewness.png){fig-alt="Three distributions with their respective means, medians, and modes. From left to right, there is a positively/right skewed, a symmetrical/normal, and a negatively/left skewed distribution."}
+    ![](images/skewness.png){fig-alt="Three distributions with their respective means, medians, and modes. From left to right, there is a positively/right skewed, a symmetrical/normal, and a negatively/left skewed distribution."}
 
 # Variability
 
