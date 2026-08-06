@@ -36,6 +36,8 @@ In this course, we will be using `R` as a tool to help us gain a better understa
 
 If you are feeling like this is a little (or even very) daunting, do not worry—this is completely normal! **You do not have to have prior coding experience to do well on these labs.** In this course, we will only be scratching the surface for what `R` can do, and each lab is intended to help you build your skills and understanding from the ground up. It will feel challenging at times, and at first, it'll be unlikely that you will understand everything as we are first working through it all. However, you will be surprised at how much you can learn in a short amount of time. By the end of this course, you will not only better understand the statistical concepts that we are learning in this course, but also be able to do things you might not have initially thought that you could do!
 
+![Artwork by Allison Horst.](https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/e684f0da-13b1-4d00-ab25-37814e79ee1e_rw_1920.png?h=2b72c110cfcf02f5cf1f74b558461c06){fig-alt="A digital cartoon with two illustrations: the top shows the R-logo with a scary face, and a small scared little fuzzy monster holding up a white flag in surrender while under a dark storm cloud. The text above says “at first I was like…” The lower cartoon is a friendly, smiling R-logo jumping up to give a happy fuzzy monster a high-five under a smiling sun and next to colorful flowers. The text above the bottom illustration reads “but now it’s like…”"}
+
 # How will we be using `R`?
 
 You can think of `R` as a common language that we and our computers can understand. This means that we will write down instructions (or **code**) in `R`, which our computer can then follow (or **run** or **execute**).

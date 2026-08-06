@@ -374,7 +374,8 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfMSJ9LCJjb2RlIjoi
 <ul>
 <li><p>If you are working with <strong>nominal</strong> data, you should be using the mode (e.g., how would you calculate the mean or median for a nominal variable like eye colour?) Even if your nominal data are represented as numbers, both the mean and median assume that the numbers in your data are meaningful, so these will be uninterpretable if the numbers are arbitrarily assigned.</p></li>
 <li><p>If you are working with <strong>ordinal</strong> data, you most likely want to use the median instead of the mean. The median requires that you have some sort of meaningful order to your data, but does not depend on the precise numbers involved – however, this is important when calculating the mean, so it is less appropriate when working with ordinal data.</p></li>
-<li><p>If you are working with <strong>interval</strong> or <strong>ratio</strong> data, the mean is usually a good default since many statistical tools are based on the mean and lots of people know what it is. However, as we saw earlier, the mean is susceptible to <strong>outliers</strong>, or extreme scores in our dataset. This can be particularly noticeable if you have some sort of <strong>skew</strong> in your dataset, where the mean gets pulled in the direction of the extreme scores. In these scenarios, the median likely provides a better definition of where the center of your data is. This is also why it is important to first explore and visualize your data to get a rough idea of the data that you are working with.</p></li>
+<li><p>If you are working with <strong>interval</strong> or <strong>ratio</strong> data, the mean is usually a good default since many statistical tools are based on the mean and lots of people know what it is. However, as we saw earlier, the mean is susceptible to <strong>outliers</strong>, or extreme scores in our dataset. This can be particularly noticeable if you have some sort of <strong>skew</strong> in your dataset, where the mean gets pulled in the direction of the extreme scores. In these scenarios, the median likely provides a better definition of where the center of your data is. This is also why it is important to first explore and visualize your data to get a rough idea of the data that you are working with.</p>
+<p><img src="https://curriculum-content.s3.amazonaws.com/data-science/images/skewness.png" class="img-fluid" alt="Three distributions with their respective means, medians, and modes. From left to right, there is a positively/right skewed, a symmetrical/normal, and a negatively/left skewed distribution."></p></li>
 </ul>
 </section>
 </section>
@@ -436,18 +437,18 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBVc2UgdGhlIHF1YW50aWxl
 <div class="callout-body-container callout-body">
 <p>Which of the following values is equivalent to the median?</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb1" data-startfrom="213" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 212;"><span id="cb1-213"><a href="#cb1-213" aria-hidden="true" tabindex="-1"></a>viewof userChoice <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">radio</span>(</span>
-<span id="cb1-214"><a href="#cb1-214" aria-hidden="true" tabindex="-1"></a>  [</span>
-<span id="cb1-215"><a href="#cb1-215" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Q1"</span><span class="op">,</span></span>
-<span id="cb1-216"><a href="#cb1-216" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Q2"</span><span class="op">,</span></span>
-<span id="cb1-217"><a href="#cb1-217" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Q3"</span><span class="op">,</span></span>
-<span id="cb1-218"><a href="#cb1-218" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Q4"</span></span>
-<span id="cb1-219"><a href="#cb1-219" aria-hidden="true" tabindex="-1"></a>  ]<span class="op">,</span> </span>
-<span id="cb1-220"><a href="#cb1-220" aria-hidden="true" tabindex="-1"></a>  {</span>
-<span id="cb1-221"><a href="#cb1-221" aria-hidden="true" tabindex="-1"></a>    <span class="dt">label</span><span class="op">:</span> <span class="kw">null</span><span class="op">,</span></span>
-<span id="cb1-222"><a href="#cb1-222" aria-hidden="true" tabindex="-1"></a>    <span class="dt">value</span><span class="op">:</span> <span class="kw">null</span></span>
-<span id="cb1-223"><a href="#cb1-223" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb1-224"><a href="#cb1-224" aria-hidden="true" tabindex="-1"></a>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb1" data-startfrom="215" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 214;"><span id="cb1-215"><a href="#cb1-215" aria-hidden="true" tabindex="-1"></a>viewof userChoice <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">radio</span>(</span>
+<span id="cb1-216"><a href="#cb1-216" aria-hidden="true" tabindex="-1"></a>  [</span>
+<span id="cb1-217"><a href="#cb1-217" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Q1"</span><span class="op">,</span></span>
+<span id="cb1-218"><a href="#cb1-218" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Q2"</span><span class="op">,</span></span>
+<span id="cb1-219"><a href="#cb1-219" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Q3"</span><span class="op">,</span></span>
+<span id="cb1-220"><a href="#cb1-220" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Q4"</span></span>
+<span id="cb1-221"><a href="#cb1-221" aria-hidden="true" tabindex="-1"></a>  ]<span class="op">,</span> </span>
+<span id="cb1-222"><a href="#cb1-222" aria-hidden="true" tabindex="-1"></a>  {</span>
+<span id="cb1-223"><a href="#cb1-223" aria-hidden="true" tabindex="-1"></a>    <span class="dt">label</span><span class="op">:</span> <span class="kw">null</span><span class="op">,</span></span>
+<span id="cb1-224"><a href="#cb1-224" aria-hidden="true" tabindex="-1"></a>    <span class="dt">value</span><span class="op">:</span> <span class="kw">null</span></span>
+<span id="cb1-225"><a href="#cb1-225" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-226"><a href="#cb1-226" aria-hidden="true" tabindex="-1"></a>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-1" data-nodetype="declaration">
 
@@ -455,15 +456,15 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBVc2UgdGhlIHF1YW50aWxl
 </div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb2" data-startfrom="229" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 228;"><span id="cb2-229"><a href="#cb2-229" aria-hidden="true" tabindex="-1"></a>{</span>
-<span id="cb2-230"><a href="#cb2-230" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (userChoice <span class="op">===</span> <span class="kw">null</span>) {</span>
-<span id="cb2-231"><a href="#cb2-231" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">html</span><span class="vs">`&lt;em&gt;Please select an answer above.&lt;/em&gt;`</span><span class="op">;</span></span>
-<span id="cb2-232"><a href="#cb2-232" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (userChoice <span class="op">===</span> <span class="st">"Q2"</span>) {</span>
-<span id="cb2-233"><a href="#cb2-233" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">html</span><span class="vs">`&lt;div style="color: green; font-weight: bold;"&gt; Correct!&lt;/div&gt;`</span><span class="op">;</span></span>
-<span id="cb2-234"><a href="#cb2-234" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
-<span id="cb2-235"><a href="#cb2-235" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">html</span><span class="vs">`&lt;div style="color: red;"&gt; Try again!&lt;/div&gt;`</span><span class="op">;</span></span>
-<span id="cb2-236"><a href="#cb2-236" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb2-237"><a href="#cb2-237" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb2" data-startfrom="231" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 230;"><span id="cb2-231"><a href="#cb2-231" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb2-232"><a href="#cb2-232" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (userChoice <span class="op">===</span> <span class="kw">null</span>) {</span>
+<span id="cb2-233"><a href="#cb2-233" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">html</span><span class="vs">`&lt;em&gt;Please select an answer above.&lt;/em&gt;`</span><span class="op">;</span></span>
+<span id="cb2-234"><a href="#cb2-234" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (userChoice <span class="op">===</span> <span class="st">"Q2"</span>) {</span>
+<span id="cb2-235"><a href="#cb2-235" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">html</span><span class="vs">`&lt;div style="color: green; font-weight: bold;"&gt; Correct!&lt;/div&gt;`</span><span class="op">;</span></span>
+<span id="cb2-236"><a href="#cb2-236" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb2-237"><a href="#cb2-237" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">html</span><span class="vs">`&lt;div style="color: red;"&gt; Try again!&lt;/div&gt;`</span><span class="op">;</span></span>
+<span id="cb2-238"><a href="#cb2-238" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb2-239"><a href="#cb2-239" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-2" data-nodetype="expression">
 
