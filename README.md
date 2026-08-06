@@ -1,6 +1,6 @@
 # PSYC\*1010: Making Sense of Data in Psychological Research Lab Workbooks
 
-This repository contains the source code for the lab workbooks accompanying the \*\*PSYC\*1010: Making Sense of Data in Psychological Research course, taught at the University of Guelph\*\* by Bryan Hong.
+This repository contains the source code for the lab workbooks accompanying the **PSYC\*1010: Making Sense of Data in Psychological Research course, taught at the University of Guelph** by Bryan Hong.
 
 The course site can be accessed at: <https://bryanhong8.github.io/psyc1010-labs/>
 
