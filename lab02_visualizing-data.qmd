@@ -210,7 +210,7 @@ data |>
 
 Great, we just made our first bar graph! Note that we had seen this data being presented both as a frequency table and as a bar graph. Depending on what you are using it for, you may opt to use one or the other. One thing that you might have noticed is that `ggplot` uses a `+` to add on additional layers instead of the pipe (`|>`) we used earlier.
 
-Let's use these additional layers to customize our plot a bit.
+Sometimes, a figure like this is sufficient as we are first exploring data for ourselves. However, when we are sharing figures with others, we want to make it easier to interpret for others. Let's add some additional layers to customize our plot a bit.
 
 -   Firstly, you might notice that our axes labels are a bit uninformative. It's always a good idea to give your graph **informative titles and labels** to help readers better interpret them.
 -   Additionally, when creating data visualizations, it is usually a good idea to **minimize the visual clutter** to help your data better show through.

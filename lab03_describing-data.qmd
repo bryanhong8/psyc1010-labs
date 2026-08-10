@@ -291,6 +291,9 @@ Now that we have a sum, we just need to divide by the number of scores that we a
 # Square all the values in deviation -- the ^ operator denotes an exponent
 deviations^2
 
+# We can then use this to calculate the sum of squares
+sum(deviations^2)
+
 # Use the sum of squares and divide by n - 1 to calculate the variance
 sum(deviations^2) / (length(my_numbers) - 1)
 

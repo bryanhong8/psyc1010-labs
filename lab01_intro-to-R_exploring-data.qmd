@@ -155,7 +155,7 @@ Here, we will try out a new function called `sum()` to add up all the numbers in
 
 ```{webr}
 #| exercise: ex_2 
-# Edit the code below to use the sum() function to add up the numbers 5, 10, and 15. 
+# Edit the code below to use the sum() function to add up the numbers 5, 10, and 15.
 sum(______)
 ```
 

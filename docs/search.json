@@ -1,5 +1,152 @@
 [
   {
+    "objectID": "lab04_z-scores_normal-distributions_probability.html",
+    "href": "lab04_z-scores_normal-distributions_probability.html",
+    "title": "Lab 4: z-scores, Normal Distributions, and Probability",
+    "section": "",
+    "text": "In this lab, we’ll be using R to help us start working with z-scores, normal distributions and probabilities. Before starting this lab, make sure to have read Chapter 4: z Scores: Data Distributions, the Normal Curve, and Probability from your textbook.\n\n\n\n\n\n\nNoteLearning objectives\n\n\n\nBy the end of this lab, you should be able to:\n\nDefine, interpret and use R to calculate z-scores\nUnderstand the basic properties of the normal distribution\nUnderstand how z-scores relate to properties of the normal distribution\nInterpret and use R to compute probabilities of events within the context of a normal distribution"
+  },
+  {
+    "objectID": "lab04_z-scores_normal-distributions_probability.html#calculating-z-scores",
+    "href": "lab04_z-scores_normal-distributions_probability.html#calculating-z-scores",
+    "title": "Lab 4: z-scores, Normal Distributions, and Probability",
+    "section": "Calculating z-scores",
+    "text": "Calculating z-scores\nTo calculate a z-score, we can use the following formula:\n\\[\nz=\\dfrac{X-M}{SD}\n\\]\nIn plain language, we’ll first take the difference of our raw score and the mean (\\(X-M\\)). Afterwards, we’ll divide this results by our standard deviation (\\(SD\\)). The resulting value is the z-score that corresponds to your given raw score.\nFor this example, let’s load in sample-class.csv, a made-up dataset with class test scores in different courses.\n\n\n\n\n\n\n\n\nWe can then use the mean() and sd() functions to help us calculate the z-score corresponding to our grade of 85 relative to the other CogPsych_Exam and the SocPsych_Exam scores:"
+  },
+  {
+    "objectID": "lab04_z-scores_normal-distributions_probability.html#interpreting-z-scores",
+    "href": "lab04_z-scores_normal-distributions_probability.html#interpreting-z-scores",
+    "title": "Lab 4: z-scores, Normal Distributions, and Probability",
+    "section": "Interpreting z-scores",
+    "text": "Interpreting z-scores\nHow should we interpet these z-scores? We can compare the sign and the size of the numbers:\n\nThe sign (i.e., positive or negative) of a z-score tells us whether our score is above or below the mean. In this case, our grade of 85 is above the mean in our Cognitive Psychology course, but below the mean in our Social Psychology course.\nThe size (i.e., absolute value) of a z-score tells us the distance from the mean, in the units of standard deviations. The larger the value, the further away a score is from the mean. In this case, our grade of 85 is over 2 standard deviations above the mean in our Cognitive Psychology course, but close to 0 standard deviations below the mean in our Social Psychology course."
+  },
+  {
+    "objectID": "lab04_z-scores_normal-distributions_probability.html#converting-between-z-scores-and-raw-scores",
+    "href": "lab04_z-scores_normal-distributions_probability.html#converting-between-z-scores-and-raw-scores",
+    "title": "Lab 4: z-scores, Normal Distributions, and Probability",
+    "section": "Converting between z-scores and raw scores",
+    "text": "Converting between z-scores and raw scores\nUsing some algebra to rearrange our z-score formula, we can also derive a formula to calculate a raw score from a z-score:\n\\[ z=\\dfrac{X-M}{SD} \\]\n\\[ z \\times SD={X-M} \\]\n\\[ X = z \\times SD+M \\]\nIn other words, if we know what the z-score is within a given distribution, we can find the original score.\nLet’s find the raw score that corresponds to a z-score of 1.5 on our CogPsych_Exam grades."
+  },
+  {
+    "objectID": "lab04_z-scores_normal-distributions_probability.html#standardizing-scores",
+    "href": "lab04_z-scores_normal-distributions_probability.html#standardizing-scores",
+    "title": "Lab 4: z-scores, Normal Distributions, and Probability",
+    "section": "Standardizing scores",
+    "text": "Standardizing scores\nLastly, we can convert all of our grades to their corresponding z-scores, or standardize our scores, using the scale() function. This is especially helpful when we don’t yet have a good idea of how to interpret a variable and its measurement. In addition, this helps us to identify potential outliers in our data.\nAs a brief aside, we previously used the $ symbol to access variables in our dataset. However, we can also use the $ to create new variables in our data.\nLet’s use the scale() function to convert each of the grades to their corresponding z-score, which we can then store in a new variable.\n\n\n\n\n\n\n\n\nImportantly, when we are standardizing our data, all we are doing is re-labelling our scores, NOT re-positioning them. In doing so, we change some of the characteristics of our dataset:\n\nThe new mean becomes 0, providing a convenient reference point\nThe new standard deviation becomes 1, providing a standard unit of comparison\nThe new shape is the same as it was originally. If the original distribution was normal, the standardized distribution will be normal. Likewise, if the original distribution was skewed, the standardized distribution will still be skewed.\n\n\n\n\n\n\n\nTipActivity 1\n\n\n\nLet’s use ggplot2 to create a few histograms to help us visualize how our original and standardized distributions compare to one another. Fill in the blanks below to first create a histogram of the original scores (e.g., CogPsych_Exam, SocPsych_Exam, or DevPsych_Exam). Then compare this to the histogram of the standardized scores (e.g., CogPsych_Exam_z, SocPsych_Exam_z, or DevPsych_Exam_z). What stays the same? What changes?\n\n\nFirst, install and load in the ggplot2 package to help us make our histograms.\n\n\n\n\n\n\n\n\nNext, let’s use ggplot2 to create a few histograms to compare our original and standardized distributions."
+  },
+  {
+    "objectID": "lab02_visualizing-data.html",
+    "href": "lab02_visualizing-data.html",
+    "title": "Lab 2: Visualizing Data",
+    "section": "",
+    "text": "In this lab, we’ll be using R to help us visualize data. Before starting this lab, make sure to have read Chapter 2: Using Graphs to Visualize Data from your textbook.\n\n\n\n\n\n\nNoteLearning objectives\n\n\n\nBy the end of this lab, you should be able to:\n\nDescribe what packages in R are\nRecognize the initial steps of exploring, preparing, and visualizing data\nUse dplyr() to create frequency tables\nUse ggplot() to create different types of graphs (bar graphs, histograms, and scatterplots)\nApply best practices for creating graphs\nVisually describe the shape of a distribution"
+  },
+  {
+    "objectID": "lab02_visualizing-data.html#packages",
+    "href": "lab02_visualizing-data.html#packages",
+    "title": "Lab 2: Visualizing Data",
+    "section": "Packages",
+    "text": "Packages\nBefore we get started, we will have to learn about packages (or libraries). When you first install R onto your computer, you’ll have access to many basic functions like print() and sum(). However, other users in the R coding community are always writing and distributing new functions for the rest of the world to use. You can kind of think of this like downloading new DLC content to expand what you can do in a video game (except it is freely available!) In R, these collections of functions for download are called packages. Rather than having to re-invent the wheel and re-write code from scratch each time we want to do something new, we can load in functions already contained within these accessible packages instead.\nInstalling new packages into your R environment is a two-step process:\n\nFirst, you need to download and install them onto your computer, typically using the function install.packages().\nSecondly, you need to actually load the package so that you can use it in your current code, using the function library().\n\nToday, we’ll be installing and using two packages. dplyr (pronounced “dee-ply-er”) contains a few different functions that are helpful for preparing and organizing data, and ggplot2 (usually referred to us just “gee-gee-plot”) contains functions that can help us make all sorts of different graphs.\nRun the code in the window below to install and load in the dplyr and ggplot2 packages. Note that you might get some warning messages here, but that should be OK!\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nImportant\n\n\n\nWhen working with R, you will need to load in the packages each time you use them. Since we are using R online, this means that you will need to re-install and re-load these packages each time you refresh the page."
+  },
+  {
+    "objectID": "lab02_visualizing-data.html#frequency-tables-with-dplyr",
+    "href": "lab02_visualizing-data.html#frequency-tables-with-dplyr",
+    "title": "Lab 2: Visualizing Data",
+    "section": "Frequency tables with dplyr",
+    "text": "Frequency tables with dplyr\nLet’s start by making a frequency table. A frequency table organizes our data so that we can see the number of participants (or frequency) that corresponds to a particular response for a given variable.\nWe’ll be using the count() function from the dplyr package to create a frequency table. A handy feature of the dplyr package is the pipe, which looks like |&gt;. The pipe allows us to take the output of one function and send it directly to the next, which helps us to chain together different functions that we might want to apply to the same dataset.\nTo create a frequency table using dplyr, we need to specify both the name of the dataset we are working with and the name of the column that we want to summarize.\nLet’s use the code below to create a frequency table for the Education variable, which captures someone’s highest degree of education obtained.\n\n\n\n\n\n\n\n\nGreat job, you just created a frequency table! Here, the frequency of a given response is denoted by the n column. Oftentimes, it is helpful to also know the relative frequency to tell us the percentage of participants corresponding to a given response. To do so, we’ll use the mutate() function, which allows us to create or modify columns in our dataset.\nLet’s use the mutate() function to create a new column that divides each frequency by the total number of participants we are working with.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCautionRecap\n\n\n\nWhich scale of measurement would best describe the Education variable?\n\nviewof userChoice = Inputs.radio(\n  [\n    \"Nominal\",\n    \"Ordinal\",\n    \"Interval\",\n    \"Ratio\"\n  ], \n  {\n    label: null,\n    value: null\n  }\n);\n\n\n\n\n\n\n\n{\n  if (userChoice === null) {\n    return html`&lt;em&gt;Please select an answer above.&lt;/em&gt;`;\n  } else if (userChoice === \"Ordinal\") {\n    return html`&lt;div style=\"color: green; font-weight: bold;\"&gt; Correct!&lt;/div&gt;`;\n  } else {\n    return html`&lt;div style=\"color: red;\"&gt; Try again!&lt;/div&gt;`;\n  }\n}\n\n\n\n\n\n\n\n\nBy default, R will sort groups by alphabetical order. However, it is oftentimes helpful to provide some sort of order when we are creating frequency tables to make them easier to read. Here, we can first convert Education into a factor, which allows us to specify an order to our groups (or levels), before creating our frequency table.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTipActivity 1\n\n\n\nNow it’s your turn! Create a frequency table to summarize the MaritalStatus variable, which captures someone’s marital status (as either “Married”, “NeverMarried”, “LivePartner”, “Divorced”, “Separated”, or “Widowed”). Remember, R is a bit sensitive so it will have trouble even if you make a little change to the name of a variable you are working with."
+  },
+  {
+    "objectID": "lab02_visualizing-data.html#bar-graphs",
+    "href": "lab02_visualizing-data.html#bar-graphs",
+    "title": "Lab 2: Visualizing Data",
+    "section": "Bar graphs",
+    "text": "Bar graphs\nFor our first graph, let’s compare the frequencies of each Education level and plot it as a bar graph, which helps us compare values across categories. For our bar graph, our key components will be:\n\nData: The NHANES dataset we are working with. Like with our frequency tables, we’ll re-order the levels to make it a bit more intuitive to read.\nAesthetics: We’ll map our different Education levels onto the x-axis (horizontal).\nGeometry: Since we’re creating a bar graph, we will use the geom_bar() function. This will automatically calculate the frequencies and map it onto the y-axis (vertical).\n\nLet’s put this altogether to make our bar graph.\n\n\n\n\n\n\n\n\nGreat, we just made our first bar graph! Note that we had seen this data being presented both as a frequency table and as a bar graph. Depending on what you are using it for, you may opt to use one or the other. One thing that you might have noticed is that ggplot uses a + to add on additional layers instead of the pipe (|&gt;) we used earlier.\nSometimes, a figure like this is sufficient as we are first exploring data for ourselves. However, when we are sharing figures with others, we want to make it easier to interpret for others. Let’s add some additional layers to customize our plot a bit.\n\nFirstly, you might notice that our axes labels are a bit uninformative. It’s always a good idea to give your graph informative titles and labels to help readers better interpret them.\nAdditionally, when creating data visualizations, it is usually a good idea to minimize the visual clutter to help your data better show through.\nThat being said, there’s a lot room for creativity in your figures, as long as you’re communicating your findings effectively, ethically, and efficiently.\n\nHere, we’ll add a title and labels to our graph with the labs() function. We’ll also clean up our graph a bit using the theme_minimal() function. Last, we’ll add a color by adding a fill argument to our geom_bar() function."
+  },
+  {
+    "objectID": "lab02_visualizing-data.html#scatterplots",
+    "href": "lab02_visualizing-data.html#scatterplots",
+    "title": "Lab 2: Visualizing Data",
+    "section": "Scatterplots",
+    "text": "Scatterplots\nNow that we know how ggplot2 works, we can apply this same idea to make other types of graphs. We create a scatterplot to explore the relationship between different continuous variables. In this example, let’s look at the relationship between Weight and Height in our dataset. Many of the steps involved will be the same:\n\nData: Just like before, we’ll use our NHANES dataset. Note that we will not need to re-order our levels because we are working with two continuous variables.\nAesthetics: Here, we need to specify which variable will be on our x-axis and which will be on our y-axis. In this case, we’ll put Weight on our x-axis and Height on our y-axis.\nGeometry: To create a scatterplot, we’ll use the geom_point() function to plot each participant as a datapoint.\nJust like before, we’ll customize our plot a bit to add titles and axes labels, and minimize visual clutter.\n\nLet’s use the code below to make a scatterplot to visualize the relationship between Weight and Height."
+  },
+  {
+    "objectID": "lab02_visualizing-data.html#histograms",
+    "href": "lab02_visualizing-data.html#histograms",
+    "title": "Lab 2: Visualizing Data",
+    "section": "Histograms",
+    "text": "Histograms\nThe last graph that we’ll cover today is a histogram. Although a histogram looks quite a bit like a bar graph, it helps us to visualize continuous, rather than categorical data. This is particularly helpful in showing us the distribution of a given variable. Using the same general idea as before, let’s use a histogram to visualize the distribution of our Height variable.\nThis time, we’ll use the geom_histogram() function to make a histogram for our Height variable.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTipActivity 2\n\n\n\nOne of the variables in the NHANES dataset is called DaysMentHlthBad, which is the number of days that the participant reported that their mental health was not good out of the past 30 days. Use the code below to plot a histogram of the DaysMentHlthBad variable. You can use the link here to pick your own colour for your graph: https://r-charts.com/colors/"
+  },
+  {
+    "objectID": "lab02_visualizing-data.html#other-types-of-graphs",
+    "href": "lab02_visualizing-data.html#other-types-of-graphs",
+    "title": "Lab 2: Visualizing Data",
+    "section": "Other types of graphs",
+    "text": "Other types of graphs\nAlthough we’ve only covered a few of the basic graphs in this lab, you can use the same general principles to create a whole host of different graphs. For example, you can use the geom_violin() function to make violin plots, geom_density() to make density plots, geom_jitter() to make jitter plots, and so on! You can check out the gallery here to get an idea of the wide range of graphs you can make using ggplot2: https://r-graph-gallery.com/"
+  },
+  {
+    "objectID": "lab02_visualizing-data.html#references",
+    "href": "lab02_visualizing-data.html#references",
+    "title": "Lab 2: Visualizing Data",
+    "section": "References",
+    "text": "References\nCenters for Disease Control and Prevention (CDC). National Center for Health Statistics (NCHS). National Health and Nutrition Examination Survey Data. Hyattsville, MD: U.S. Department of Health and Human Services, Centers for Disease Control and Prevention. Sample data from: https://www.openintro.org/data/index.php?data=nhanes.samp.adult.500"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Labs Overview",
+    "section": "",
+    "text": "Welcome! This page is meant to accompany the PSYC*1010: Making Sense of Data in Psychological Research course, taught at the University of Guelph by Bryan Hong.\nYou can access the workbooks for each of the weekly labs below:\n\nLab 1: Introduction to R + Exploring Data\nLab 2: Visualizing Data\nLab 3: Describing Data\nLab 4: z-scores, Normal Distributions, and Probability\n\n\nAcknowledgements\nThis content largely builds and adapts upon materials and resources from other statistics and programming educators, many of which are made publicly available. Many thanks to the following individuals and teams:\n\nDr. Molly Metz, University of Toronto\nDr. Judith Fan, Stanford University\nDr. Shannon Burns, Pomona College\nDr. Matthew Crump, Brooklyn College\nDr. Danielle Navarro’s Learning Statistics with R\npsyTeachR, University of Glasgow\nCourseKata\nOpenIntro\nThe Carpentries"
+  },
+  {
+    "objectID": "lab01_intro-to-R_exploring-data.html",
+    "href": "lab01_intro-to-R_exploring-data.html",
+    "title": "Lab 1: Introduction to R + Exploring Data",
+    "section": "",
+    "text": "In this lab, you’ll be introduced to the basics of the programming language R and how it will be used to help us better understand the concepts we are learning in this course. Before starting this lab, make sure to have read Chapter 1: Statistics are Everywhere from your textbook.\n\n\nBy the end of this lab, you should be able to:\n\nDescribe what R is and what it can be used for\nDescribe and use basic R syntax\nLoad in data and describe how it is structured"
+  },
+  {
+    "objectID": "lab01_intro-to-R_exploring-data.html#learning-objectives",
+    "href": "lab01_intro-to-R_exploring-data.html#learning-objectives",
+    "title": "Lab 1: Introduction to R + Exploring Data",
+    "section": "",
+    "text": "By the end of this lab, you should be able to:\n\nDescribe what R is and what it can be used for\nDescribe and use basic R syntax\nLoad in data and describe how it is structured"
+  },
+  {
+    "objectID": "lab01_intro-to-R_exploring-data.html#comments-and-commands",
+    "href": "lab01_intro-to-R_exploring-data.html#comments-and-commands",
+    "title": "Lab 1: Introduction to R + Exploring Data",
+    "section": "Comments and commands",
+    "text": "Comments and commands\nYou might notice that in each of the code blocks above, the first line did not seem to do anything. These first lines are called comments. Comments are sections of code that we leave to help other humans read and understand the code later on, but are intended to be ignored by computers. In R, we will use the # symbol to denote that something is a comment. In other words, any line that starts with a # will be considered a comment and ignored, and any line that does not start with a # will be considered a command and run.\nIn practice, comments are used all the time to communicate with others who are trying to use the code. This includes describing the purpose of a chunk of code, what options are available to change, etc. You should get in the habit of using comments since oftentimes, the other person you are helping is yourself in the future. If you want to write a longer comment, it is a good idea to put a # at the beginning of multiple lines.\nLet’s try this for ourselves! You can click into the window below and try typing whatever you want after a line that begins with a #. Afterwards, run the code in the window and see what happens.\n\n\n\n\n\n\n\n\nNotice that running this code did not anything since each line began with a # so it was ignored."
+  },
+  {
+    "objectID": "lab01_intro-to-R_exploring-data.html#objects",
+    "href": "lab01_intro-to-R_exploring-data.html#objects",
+    "title": "Lab 1: Introduction to R + Exploring Data",
+    "section": "Objects",
+    "text": "Objects\nOne of the most important things we can do R (or any other programming language) is to store information in an object. You can think of an object like a box that you can store anything in—a number, a message, a dataset, a plot, etc. The value of an object is whatever you put inside this box, and the name is whatever name you end up calling it so that both you and the computer can refer to it later on.\nTo create an object, we will need to use an assignment operator, which allows us to assign a value to an object name. In R, the assignment operator looks like an arrow: &lt;-\nLet’s try it for ourselves! We will go through a simple example to show how this is done.\n\n\n\n\n\n\n\n\nWe can then use this object later on to reference the information stored in it. What do you think the output of the code below will be?\n\n\n\n\n\n\n\n\nA few important things to note about objects! You can name your objects anything you want, but there are a few rules that you need to follow:\n\nR is case-sensitive, so any little change in the name of an object will be considered a separate object (e.g., “favourite_number” is different than “Favourite_number”.\nYou can use letters, numbers, underscores, and periods for your name, but they must always start with a letter.\nNames need to all be in one word (i.e., no spaces).\n\nLastly, it’s important to remember that the order in which you run R code is very important. R code is evaluated in order, from the top of the page to the bottom. Objects created first will be stored for later on, but you can only access it once it has been created. If you are trying to access an object at the bottom of the page before creating it earlier on, this will result in an error. In addition, you can overwrite the value in an object if you assign a new value to an existing object later on.\n\n\n\n\n\n\nTipActivity 1\n\n\n\nLet’s try assigning a new value to the favourite_number object. What do you think will happen when we subtract 2 from favourite_number now?"
+  },
+  {
+    "objectID": "lab01_intro-to-R_exploring-data.html#functions",
+    "href": "lab01_intro-to-R_exploring-data.html#functions",
+    "title": "Lab 1: Introduction to R + Exploring Data",
+    "section": "Functions",
+    "text": "Functions\nSo far, we’ve used simple operators to do basic arithmetic and assign values to objects. Oftentimes, we will want to do more complex things. In these cases, we will use what is called a function. Functions compute an operation, but are not limited to what individual symbols mean (in fact, operators are just special kinds of functions). If we are thinking about R as a language, we can think of functions like verbs and objects like nouns.\nWe’ve already come across a function at the beginning of this lab: print(\"Hello, world!\").\nWe can think of functions as having three basic parts:\n\nThe first part is the name of the function (e.g., print)\nThe second part is what you are putting into the function, or the arguments (e.g., \"Hello, world!\"). Sometimes a function can take more than one argument, separated by commas. Each function is unique in what it can do and what arguments it uses. We will learn about some other useful functions as we progress throughout the course.\nThe last part is the output of the function, which is whatever results from the corresponding operation.\n\n\n\n\n\n\n\nTipActivity 2\n\n\n\nHere, we will try out a new function called sum() to add up all the numbers in it. sum() is an example of a function that takes multiple arguments. Let’s use it to add up the numbers 5, 10, and 15."
+  },
+  {
+    "objectID": "lab01_intro-to-R_exploring-data.html#errors",
+    "href": "lab01_intro-to-R_exploring-data.html#errors",
+    "title": "Lab 1: Introduction to R + Exploring Data",
+    "section": "Errors",
+    "text": "Errors\nR is a very flexible language that allows you to do literally thousands of different things. That being said, it is quite picky, which means that you are going to encounter an error eventually. Get comfortable with seeing errors, because everyone, even the most experienced coders, will have errors with their code at first. When this happens, consider this to be a “first draft” of your code which you can then refine until your code does what you want.\nFiguring out why your code has an error is a big part of programming. You will oftentimes not be the first one to run into a certain error message, so you can usually solve this by:\n\nSearching the internet. You can typically find your answer if you copy and paste your error message into Google. You will usually come across examples where other have encountered the same problem and looked for help. StackOverflow is a website that can be particularly helpful since it collates answers based on how useful others found it.\nAsking somebody in the real-world: You can also show your code to a friend (e.g., someone else in the course, your TA, or Dr. Hong) to see if they have any advice when you get stuck.\nA note on generative AI. It is getting increasingly common for people to use generative AI tools like ChatGPT to get help while coding. You will likely receive some helpful guidance here by asking what you did wrong, but these answers are not always reliable. These tools can generate plausible, but incorrect and/or misleading, information, and it is necessary to build the knowledge and skills to evaluate their responses. Since this course is an introductory course, it is recommended that you avoid getting help from generative AI tools as you are building up your foundations."
+  },
+  {
+    "objectID": "lab01_intro-to-R_exploring-data.html#references",
+    "href": "lab01_intro-to-R_exploring-data.html#references",
+    "title": "Lab 1: Introduction to R + Exploring Data",
+    "section": "References",
+    "text": "References\nKosīte, D., König, L. M., De-Loyde, K., Lee, I., Pechey, E., Clarke, N., … & Hollands, G. J. (2019). Plate size and food consumption: a pre-registered experimental study in a general population sample. International Journal of Behavioral Nutrition and Physical Activity, 16(1), 75. https://doi.org/10.1186/s12966-019-0826-1"
+  },
+  {
     "objectID": "lab03_describing-data.html",
     "href": "lab03_describing-data.html",
     "title": "Lab 3: Describing Data",
@@ -68,117 +215,5 @@
     "title": "Lab 3: Describing Data",
     "section": "Footnotes",
     "text": "Footnotes\n\n\n-3.55e-15 is a way of expressing scientific notation, so this number is equivalent to \\(-3.55\\times10^{-15}\\) or 0.00000000000000355.↩︎"
-  },
-  {
-    "objectID": "lab01_intro-to-R_exploring-data.html",
-    "href": "lab01_intro-to-R_exploring-data.html",
-    "title": "Lab 1: Introduction to R + Exploring Data",
-    "section": "",
-    "text": "In this lab, you’ll be introduced to the basics of the programming language R and how it will be used to help us better understand the concepts we are learning in this course. Before starting this lab, make sure to have read Chapter 1: Statistics are Everywhere from your textbook.\n\n\nBy the end of this lab, you should be able to:\n\nDescribe what R is and what it can be used for\nDescribe and use basic R syntax\nLoad in data and describe how it is structured"
-  },
-  {
-    "objectID": "lab01_intro-to-R_exploring-data.html#learning-objectives",
-    "href": "lab01_intro-to-R_exploring-data.html#learning-objectives",
-    "title": "Lab 1: Introduction to R + Exploring Data",
-    "section": "",
-    "text": "By the end of this lab, you should be able to:\n\nDescribe what R is and what it can be used for\nDescribe and use basic R syntax\nLoad in data and describe how it is structured"
-  },
-  {
-    "objectID": "lab01_intro-to-R_exploring-data.html#comments-and-commands",
-    "href": "lab01_intro-to-R_exploring-data.html#comments-and-commands",
-    "title": "Lab 1: Introduction to R + Exploring Data",
-    "section": "Comments and commands",
-    "text": "Comments and commands\nYou might notice that in each of the code blocks above, the first line did not seem to do anything. These first lines are called comments. Comments are sections of code that we leave to help other humans read and understand the code later on, but are intended to be ignored by computers. In R, we will use the # symbol to denote that something is a comment. In other words, any line that starts with a # will be considered a comment and ignored, and any line that does not start with a # will be considered a command and run.\nIn practice, comments are used all the time to communicate with others who are trying to use the code. This includes describing the purpose of a chunk of code, what options are available to change, etc. You should get in the habit of using comments since oftentimes, the other person you are helping is yourself in the future. If you want to write a longer comment, it is a good idea to put a # at the beginning of multiple lines.\nLet’s try this for ourselves! You can click into the window below and try typing whatever you want after a line that begins with a #. Afterwards, run the code in the window and see what happens.\n\n\n\n\n\n\n\n\nNotice that running this code did not anything since each line began with a # so it was ignored."
-  },
-  {
-    "objectID": "lab01_intro-to-R_exploring-data.html#objects",
-    "href": "lab01_intro-to-R_exploring-data.html#objects",
-    "title": "Lab 1: Introduction to R + Exploring Data",
-    "section": "Objects",
-    "text": "Objects\nOne of the most important things we can do R (or any other programming language) is to store information in an object. You can think of an object like a box that you can store anything in—a number, a message, a dataset, a plot, etc. The value of an object is whatever you put inside this box, and the name is whatever name you end up calling it so that both you and the computer can refer to it later on.\nTo create an object, we will need to use an assignment operator, which allows us to assign a value to an object name. In R, the assignment operator looks like an arrow: &lt;-\nLet’s try it for ourselves! We will go through a simple example to show how this is done.\n\n\n\n\n\n\n\n\nWe can then use this object later on to reference the information stored in it. What do you think the output of the code below will be?\n\n\n\n\n\n\n\n\nA few important things to note about objects! You can name your objects anything you want, but there are a few rules that you need to follow:\n\nR is case-sensitive, so any little change in the name of an object will be considered a separate object (e.g., “favourite_number” is different than “Favourite_number”.\nYou can use letters, numbers, underscores, and periods for your name, but they must always start with a letter.\nNames need to all be in one word (i.e., no spaces).\n\nLastly, it’s important to remember that the order in which you run R code is very important. R code is evaluated in order, from the top of the page to the bottom. Objects created first will be stored for later on, but you can only access it once it has been created. If you are trying to access an object at the bottom of the page before creating it earlier on, this will result in an error. In addition, you can overwrite the value in an object if you assign a new value to an existing object later on.\n\n\n\n\n\n\nTipActivity 1\n\n\n\nLet’s try assigning a new value to the favourite_number object. What do you think will happen when we subtract 2 from favourite_number now?"
-  },
-  {
-    "objectID": "lab01_intro-to-R_exploring-data.html#functions",
-    "href": "lab01_intro-to-R_exploring-data.html#functions",
-    "title": "Lab 1: Introduction to R + Exploring Data",
-    "section": "Functions",
-    "text": "Functions\nSo far, we’ve used simple operators to do basic arithmetic and assign values to objects. Oftentimes, we will want to do more complex things. In these cases, we will use what is called a function. Functions compute an operation, but are not limited to what individual symbols mean (in fact, operators are just special kinds of functions). If we are thinking about R as a language, we can think of functions like verbs and objects like nouns.\nWe’ve already come across a function at the beginning of this lab: print(\"Hello, world!\").\nWe can think of functions as having three basic parts:\n\nThe first part is the name of the function (e.g., print)\nThe second part is what you are putting into the function, or the arguments (e.g., \"Hello, world!\"). Sometimes a function can take more than one argument, separated by commas. Each function is unique in what it can do and what arguments it uses. We will learn about some other useful functions as we progress throughout the course.\nThe last part is the output of the function, which is whatever results from the corresponding operation.\n\n\n\n\n\n\n\nTipActivity 2\n\n\n\nHere, we will try out a new function called sum() to add up all the numbers in it. sum() is an example of a function that takes multiple arguments. Let’s use it to add up the numbers 5, 10, and 15."
-  },
-  {
-    "objectID": "lab01_intro-to-R_exploring-data.html#errors",
-    "href": "lab01_intro-to-R_exploring-data.html#errors",
-    "title": "Lab 1: Introduction to R + Exploring Data",
-    "section": "Errors",
-    "text": "Errors\nR is a very flexible language that allows you to do literally thousands of different things. That being said, it is quite picky, which means that you are going to encounter an error eventually. Get comfortable with seeing errors, because everyone, even the most experienced coders, will have errors with their code at first. When this happens, consider this to be a “first draft” of your code which you can then refine until your code does what you want.\nFiguring out why your code has an error is a big part of programming. You will oftentimes not be the first one to run into a certain error message, so you can usually solve this by:\n\nSearching the internet. You can typically find your answer if you copy and paste your error message into Google. You will usually come across examples where other have encountered the same problem and looked for help. StackOverflow is a website that can be particularly helpful since it collates answers based on how useful others found it.\nAsking somebody in the real-world: You can also show your code to a friend (e.g., someone else in the course, your TA, or Dr. Hong) to see if they have any advice when you get stuck.\nA note on generative AI. It is getting increasingly common for people to use generative AI tools like ChatGPT to get help while coding. You will likely receive some helpful guidance here by asking what you did wrong, but these answers are not always reliable. These tools can generate plausible, but incorrect and/or misleading, information, and it is necessary to build the knowledge and skills to evaluate their responses. Since this course is an introductory course, it is recommended that you avoid getting help from generative AI tools as you are building up your foundations."
-  },
-  {
-    "objectID": "lab01_intro-to-R_exploring-data.html#references",
-    "href": "lab01_intro-to-R_exploring-data.html#references",
-    "title": "Lab 1: Introduction to R + Exploring Data",
-    "section": "References",
-    "text": "References\nKosīte, D., König, L. M., De-Loyde, K., Lee, I., Pechey, E., Clarke, N., … & Hollands, G. J. (2019). Plate size and food consumption: a pre-registered experimental study in a general population sample. International Journal of Behavioral Nutrition and Physical Activity, 16(1), 75. https://doi.org/10.1186/s12966-019-0826-1"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Labs Overview",
-    "section": "",
-    "text": "Welcome! This page is meant to accompany the PSYC*1010: Making Sense of Data in Psychological Research course, taught at the University of Guelph by Bryan Hong.\nYou can access the workbooks for each of the weekly labs below:\n\nLab 1: Introduction to R + Exploring Data\nLab 2: Visualizing Data\nLab 3: Describing Data\n\n\nAcknowledgements\nThis content largely builds and adapts upon materials and resources from other statistics and programming educators, many of which are made publicly available. Many thanks to the following individuals and teams:\n\nDr. Molly Metz, University of Toronto\nDr. Judith Fan, Stanford University\nDr. Shannon Burns, Pomona College\nDr. Matthew Crump, Brooklyn College\nDr. Danielle Navarro’s Learning Statistics with R\npsyTeachR, University of Glasgow\nCourseKata\nOpenIntro\nThe Carpentries"
-  },
-  {
-    "objectID": "lab02_visualizing-data.html",
-    "href": "lab02_visualizing-data.html",
-    "title": "Lab 2: Visualizing Data",
-    "section": "",
-    "text": "In this lab, we’ll be using R to help us visualize data. Before starting this lab, make sure to have read Chapter 2: Using Graphs to Visualize Data from your textbook.\n\n\n\n\n\n\nNoteLearning objectives\n\n\n\nBy the end of this lab, you should be able to:\n\nDescribe what packages in R are\nRecognize the initial steps of exploring, preparing, and visualizing data\nUse dplyr() to create frequency tables\nUse ggplot() to create different types of graphs (bar graphs, histograms, and scatterplots)\nApply best practices for creating graphs\nVisually describe the shape of a distribution"
-  },
-  {
-    "objectID": "lab02_visualizing-data.html#packages",
-    "href": "lab02_visualizing-data.html#packages",
-    "title": "Lab 2: Visualizing Data",
-    "section": "Packages",
-    "text": "Packages\nBefore we get started, we will have to learn about packages (or libraries). When you first install R onto your computer, you’ll have access to many basic functions like print() and sum(). However, other users in the R coding community are always writing and distributing new functions for the rest of the world to use. You can kind of think of this like downloading new DLC content to expand what you can do in a video game (except it is freely available!) In R, these collections of functions for download are called packages. Rather than having to re-invent the wheel and re-write code from scratch each time we want to do something new, we can load in functions already contained within these accessible packages instead.\nInstalling new packages into your R environment is a two-step process:\n\nFirst, you need to download and install them onto your computer, typically using the function install.packages().\nSecondly, you need to actually load the package so that you can use it in your current code, using the function library().\n\nToday, we’ll be installing and using two packages. dplyr (pronounced “dee-ply-er”) contains a few different functions that are helpful for preparing and organizing data, and ggplot2 (usually referred to us just “gee-gee-plot”) contains functions that can help us make all sorts of different graphs.\nRun the code in the window below to install and load in the dplyr and ggplot2 packages. Note that you might get some warning messages here, but that should be OK!\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nImportant\n\n\n\nWhen working with R, you will need to load in the packages each time you use them. Since we are using R online, this means that you will need to re-install and re-load these packages each time you refresh the page."
-  },
-  {
-    "objectID": "lab02_visualizing-data.html#frequency-tables-with-dplyr",
-    "href": "lab02_visualizing-data.html#frequency-tables-with-dplyr",
-    "title": "Lab 2: Visualizing Data",
-    "section": "Frequency tables with dplyr",
-    "text": "Frequency tables with dplyr\nLet’s start by making a frequency table. A frequency table organizes our data so that we can see the number of participants (or frequency) that corresponds to a particular response for a given variable.\nWe’ll be using the count() function from the dplyr package to create a frequency table. A handy feature of the dplyr package is the pipe, which looks like |&gt;. The pipe allows us to take the output of one function and send it directly to the next, which helps us to chain together different functions that we might want to apply to the same dataset.\nTo create a frequency table using dplyr, we need to specify both the name of the dataset we are working with and the name of the column that we want to summarize.\nLet’s use the code below to create a frequency table for the Education variable, which captures someone’s highest degree of education obtained.\n\n\n\n\n\n\n\n\nGreat job, you just created a frequency table! Here, the frequency of a given response is denoted by the n column. Oftentimes, it is helpful to also know the relative frequency to tell us the percentage of participants corresponding to a given response. To do so, we’ll use the mutate() function, which allows us to create or modify columns in our dataset.\nLet’s use the mutate() function to create a new column that divides each frequency by the total number of participants we are working with.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCautionRecap\n\n\n\nWhich scale of measurement would best describe the Education variable?\n\nviewof userChoice = Inputs.radio(\n  [\n    \"Nominal\",\n    \"Ordinal\",\n    \"Interval\",\n    \"Ratio\"\n  ], \n  {\n    label: null,\n    value: null\n  }\n);\n\n\n\n\n\n\n\n{\n  if (userChoice === null) {\n    return html`&lt;em&gt;Please select an answer above.&lt;/em&gt;`;\n  } else if (userChoice === \"Ordinal\") {\n    return html`&lt;div style=\"color: green; font-weight: bold;\"&gt; Correct!&lt;/div&gt;`;\n  } else {\n    return html`&lt;div style=\"color: red;\"&gt; Try again!&lt;/div&gt;`;\n  }\n}\n\n\n\n\n\n\n\n\nBy default, R will sort groups by alphabetical order. However, it is oftentimes helpful to provide some sort of order when we are creating frequency tables to make them easier to read. Here, we can first convert Education into a factor, which allows us to specify an order to our groups (or levels), before creating our frequency table.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTipActivity 1\n\n\n\nNow it’s your turn! Create a frequency table to summarize the MaritalStatus variable, which captures someone’s marital status (as either “Married”, “NeverMarried”, “LivePartner”, “Divorced”, “Separated”, or “Widowed”). Remember, R is a bit sensitive so it will have trouble even if you make a little change to the name of a variable you are working with."
-  },
-  {
-    "objectID": "lab02_visualizing-data.html#bar-graphs",
-    "href": "lab02_visualizing-data.html#bar-graphs",
-    "title": "Lab 2: Visualizing Data",
-    "section": "Bar graphs",
-    "text": "Bar graphs\nFor our first graph, let’s compare the frequencies of each Education level and plot it as a bar graph, which helps us compare values across categories. For our bar graph, our key components will be:\n\nData: The NHANES dataset we are working with. Like with our frequency tables, we’ll re-order the levels to make it a bit more intuitive to read.\nAesthetics: We’ll map our different Education levels onto the x-axis (horizontal).\nGeometry: Since we’re creating a bar graph, we will use the geom_bar() function. This will automatically calculate the frequencies and map it onto the y-axis (vertical).\n\nLet’s put this altogether to make our bar graph.\n\n\n\n\n\n\n\n\nGreat, we just made our first bar graph! Note that we had seen this data being presented both as a frequency table and as a bar graph. Depending on what you are using it for, you may opt to use one or the other. One thing that you might have noticed is that ggplot uses a + to add on additional layers instead of the pipe (|&gt;) we used earlier.\nLet’s use these additional layers to customize our plot a bit.\n\nFirstly, you might notice that our axes labels are a bit uninformative. It’s always a good idea to give your graph informative titles and labels to help readers better interpret them.\nAdditionally, when creating data visualizations, it is usually a good idea to minimize the visual clutter to help your data better show through.\nThat being said, there’s a lot room for creativity in your figures, as long as you’re communicating your findings effectively, ethically, and efficiently.\n\nHere, we’ll add a title and labels to our graph with the labs() function. We’ll also clean up our graph a bit using the theme_minimal() function. Last, we’ll add a color by adding a fill argument to our geom_bar() function."
-  },
-  {
-    "objectID": "lab02_visualizing-data.html#scatterplots",
-    "href": "lab02_visualizing-data.html#scatterplots",
-    "title": "Lab 2: Visualizing Data",
-    "section": "Scatterplots",
-    "text": "Scatterplots\nNow that we know how ggplot2 works, we can apply this same idea to make other types of graphs. We create a scatterplot to explore the relationship between different continuous variables. In this example, let’s look at the relationship between Weight and Height in our dataset. Many of the steps involved will be the same:\n\nData: Just like before, we’ll use our NHANES dataset. Note that we will not need to re-order our levels because we are working with two continuous variables.\nAesthetics: Here, we need to specify which variable will be on our x-axis and which will be on our y-axis. In this case, we’ll put Weight on our x-axis and Height on our y-axis.\nGeometry: To create a scatterplot, we’ll use the geom_point() function to plot each participant as a datapoint.\nJust like before, we’ll customize our plot a bit to add titles and axes labels, and minimize visual clutter.\n\nLet’s use the code below to make a scatterplot to visualize the relationship between Weight and Height."
-  },
-  {
-    "objectID": "lab02_visualizing-data.html#histograms",
-    "href": "lab02_visualizing-data.html#histograms",
-    "title": "Lab 2: Visualizing Data",
-    "section": "Histograms",
-    "text": "Histograms\nThe last graph that we’ll cover today is a histogram. Although a histogram looks quite a bit like a bar graph, it helps us to visualize continuous, rather than categorical data. This is particularly helpful in showing us the distribution of a given variable. Using the same general idea as before, let’s use a histogram to visualize the distribution of our Height variable.\nThis time, we’ll use the geom_histogram() function to make a histogram for our Height variable.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTipActivity 2\n\n\n\nOne of the variables in the NHANES dataset is called DaysMentHlthBad, which is the number of days that the participant reported that their mental health was not good out of the past 30 days. Use the code below to plot a histogram of the DaysMentHlthBad variable. You can use the link here to pick your own colour for your graph: https://r-charts.com/colors/"
-  },
-  {
-    "objectID": "lab02_visualizing-data.html#other-types-of-graphs",
-    "href": "lab02_visualizing-data.html#other-types-of-graphs",
-    "title": "Lab 2: Visualizing Data",
-    "section": "Other types of graphs",
-    "text": "Other types of graphs\nAlthough we’ve only covered a few of the basic graphs in this lab, you can use the same general principles to create a whole host of different graphs. For example, you can use the geom_violin() function to make violin plots, geom_density() to make density plots, geom_jitter() to make jitter plots, and so on! You can check out the gallery here to get an idea of the wide range of graphs you can make using ggplot2: https://r-graph-gallery.com/"
-  },
-  {
-    "objectID": "lab02_visualizing-data.html#references",
-    "href": "lab02_visualizing-data.html#references",
-    "title": "Lab 2: Visualizing Data",
-    "section": "References",
-    "text": "References\nCenters for Disease Control and Prevention (CDC). National Center for Health Statistics (NCHS). National Health and Nutrition Examination Survey Data. Hyattsville, MD: U.S. Department of Health and Human Services, Centers for Disease Control and Prevention. Sample data from: https://www.openintro.org/data/index.php?data=nhanes.samp.adult.500"
   }
 ]
