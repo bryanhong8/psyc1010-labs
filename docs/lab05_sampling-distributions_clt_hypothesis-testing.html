@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Bryan Hong">
+<meta name="description" content="PSYC*1010: Making Sense of Data in Psychological Research">
+
+<title>Lab 5: Sampling Distributions, the Central Limit Theorem, and Hypothesis Testing – PSYC*1010 Labs</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-1d4f84655f446305ac42a8f1abcf7405.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/live-runtime/live-runtime.js" type="module"></script>
+<link href="site_libs/quarto-contrib/live-runtime/live-runtime.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script type="module" src="site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
+<link href="site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-search-results"></div>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link active" data-scroll-target="#getting-started">Getting started</a></li>
+  <li><a href="#from-populations-to-samples" id="toc-from-populations-to-samples" class="nav-link" data-scroll-target="#from-populations-to-samples">From populations to samples</a>
+  <ul class="collapse">
+  <li><a href="#population-parameters-and-sample-statistics" id="toc-population-parameters-and-sample-statistics" class="nav-link" data-scroll-target="#population-parameters-and-sample-statistics">Population parameters and sample statistics</a></li>
+  <li><a href="#sampling-distributions" id="toc-sampling-distributions" class="nav-link" data-scroll-target="#sampling-distributions">Sampling distributions</a></li>
+  </ul></li>
+  <li><a href="#the-central-limit-theorem" id="toc-the-central-limit-theorem" class="nav-link" data-scroll-target="#the-central-limit-theorem">The central limit theorem</a></li>
+  <li><a href="#introduction-to-hypothesis-testing" id="toc-introduction-to-hypothesis-testing" class="nav-link" data-scroll-target="#introduction-to-hypothesis-testing">Introduction to hypothesis testing</a></li>
+  <li><a href="#thats-all-for-now-great-work" id="toc-thats-all-for-now-great-work" class="nav-link" data-scroll-target="#thats-all-for-now-great-work">That’s all for now, great work!</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Lab 5: Sampling Distributions, the Central Limit Theorem, and Hypothesis Testing</h1>
+</div>
+
+<div>
+  <div class="description">
+    PSYC*1010: Making Sense of Data in Psychological Research
+  </div>
+</div>
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Bryan Hong </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            University of Guelph
+          </p>
+      </div>
+  </div>
+
+<div class="quarto-title-meta">
+
+      
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="getting-started" class="level1">
+<h1>Getting started</h1>
+<p>In this lab, we’ll start to explore how we can use data from a sample to make claims about its associated population. Before starting this lab, make sure to have read <strong>Chapter 5: Sampling, the Central Limit Theorem, and Hypothesis Testing</strong> from your textbook.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Learning objectives
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>By the end of this lab, you should be able to:</p>
+<ul>
+<li>Define what a sampling distribution is, particularly the distribution of sample menas</li>
+<li>Define what the central limit theorem is, particularly in reference to the mean, standard deviation, and shape of the distribution of sample means</li>
+<li>Describe how changing the sample size affects the distribution of sample means</li>
+<li>Define, interpret and use <code>R</code> to calculate standard errors</li>
+<li>Describe why the central limit theorem is important in statistics, particularly in null hypothesis significance testing (NHST)</li>
+<li>Use <code>R</code> to conduct and interpret a z-test</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="from-populations-to-samples" class="level1 page-columns page-full">
+<h1>From populations to samples</h1>
+<p>Up to this point, we’ve primarily been working with statistics to describe a given set of data (i.e., <strong>descriptive statistics</strong>). However, one of the most powerful uses of statistics is the ability to make claims, or inferences, about a population of interest based on data from a smaller sample of individuals from that same population (i.e., <strong>inferential statistics</strong>).</p>
+<section id="population-parameters-and-sample-statistics" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="population-parameters-and-sample-statistics">Population parameters and sample statistics</h2>
+<p>As psychologists, we are almost always interested in drawing conclusions about a <strong>population</strong>, or a very large group of people (e.g., all undergraduate students in Canada, all Canadians, all human beings, etc.). Despite this, we are almost always working with a <strong>sample</strong> (e.g., participants in a study) because it would not possible to get data on every single person in our population.</p>
+<p>As an example, let’s imagine that we are working with IQ scores. These are designed so that at the population level, the distribution of scores is normal with a mean IQ score of 100 and a standard deviation of 15. These values are referred to as population <strong>parameters</strong> because these are characteristics of the population. Population parameters are oftentimes denoted by using lowercase Greek letters, with μ (mu) being used for population means and σ (sigma) being used for population standard deviations.</p>
+<p><strong>For our example, let’s imagine that we are interested in IQ scores for the entire population of the fictional city of Springfield. Before we start, let’s first run the code below to prep us for the lab</strong><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a><strong>.</strong></p>
+<div class="cell">
+<div>
+<div id="webr-1" class="exercise-cell">
+
+</div>
+<script type="webr-1-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBEb3dubG9hZCBhbmQgbG9hZCB0aGUgdGlkeXZlcnNlIHBhY2thZ2UgKHRoaXMgbWlnaHQgdGFrZSBhIGZldyBtb21lbnRzKVxuaW5zdGFsbC5wYWNrYWdlcyhcInRpZHl2ZXJzZVwiLCBxdWlldCA9IFRSVUUpXG5saWJyYXJ5KHRpZHl2ZXJzZSlcblxuIyBMYXN0LCB3ZSdsbCBzZXQgYSBzZWVkIHRvIGhlbHAgd2l0aCByZXByb2R1Y2luZyBvdXIgcmVzdWx0c1xuc2V0LnNlZWQoNTE5KSJ9
+</script>
+</div>
+</div>
+<p><strong>Next, let’s set up and visualize the IQ scores for the underlying population of 1,000,000 people in Springfield. Do not worry if you don’t understand all the code below. As an important note, remember that we practically NEVER actually observe this!</strong></p>
+<div class="cell">
+<div>
+<div id="webr-2" class="exercise-cell">
+
+</div>
+<script type="webr-2-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBMZXQncyBmaXJzdCBzcGVjaWZ5IHdoYXQgb3VyIHRydWUgcG9wdWxhdGlvbiBwYXJhbWV0ZXJzIGFyZVxucG9wdWxhdGlvbl9tZWFuIDwtIDEwMFxucG9wdWxhdGlvbl9zZCA8LSAxNVxucG9wdWxhdGlvbl9uIDwtIDEwMDAwMDBcblxuIyBOZXh0LCBjcmVhdGUgYSBkYXRhc2V0IGNvbnNpc3Rpbmcgb2Ygb3VyIHBvcHVsYXRpb24gSVEgc2NvcmVzXG5wb3B1bGF0aW9uX2RhdGEgPC0gdGliYmxlKGlxID0gcm91bmQocm5vcm0obiA9IHBvcHVsYXRpb25fbiwgbWVhbiA9IHBvcHVsYXRpb25fbWVhbiwgc2QgPSBwb3B1bGF0aW9uX3NkKSkpXG5cbiMgTGFzdCwgY3JlYXRlIGEgaGlzdG9ncmFtIHRvIHZpc3VhbGl6ZSBvdXIgcG9wdWxhdGlvbiBkYXRhXG5wb3B1bGF0aW9uX2RhdGEgfD5cbiAgZ2dwbG90KGFlcyh4ID0gaXEpKSArXG4gIGdlb21faGlzdG9ncmFtKGJpbnMgPSA1MCwgZmlsbCA9IFwiZ29sZGVucm9kMVwiKSArXG4gIGxhYnModGl0bGUgPSBcIlBvcHVsYXRpb24gZGlzdHJpYnV0aW9uIG9mIElRIHNjb3JlcyBpbiBTcHJpbmdmaWVsZFwiLFxuICAgIHggPSBcIklRXCIsXG4gICAgeSA9IFwiRnJlcXVlbmN5XCIpICtcbiAgdGhlbWVfbWluaW1hbCgpIn0=
+</script>
+</div>
+</div>
+<p>Let’s then imagine that we are working with Professor Frink, the local scientist in Springfield, to run a study where we are have participants complete an IQ test. Let’s compare the mean IQ scores after we collect two samples, one with 5 and one with 100.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><img src="images/professor-frink.png" class="img-fluid" alt="Professor Frink, a cartoon character from the Simpsons, sitting at his desk."></p>
+</div></div><p><strong>Here, we’ll use the <code>slice_sample()</code></strong> <strong>function, which let’s us randomly select a number of rows from our dataset.</strong></p>
+<div class="cell">
+<div>
+<div id="webr-3" class="exercise-cell">
+
+</div>
+<script type="webr-3-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBGaXJzdCwgbGV0J3MgY29sbGVjdCBhIHNhbXBsZSBvZiBuID0gNSBhbmQgY2FsY3VsYXRlIHRoZSBzYW1wbGUgbWVhblxucG9wdWxhdGlvbl9kYXRhIHw+XG4gIHNsaWNlX3NhbXBsZShuID0gNSkgfD5cbiAgc3VtbWFyaXNlKHNhbXBsZV9tZWFuID0gbWVhbihpcSkpXG4gIFxuIyBUaGVuLCB3ZSdsbCBjb2xsZWN0IGEgc2FtcGxlIG9mIG4gPSAxMDAgYW5kIGNhbGN1bGF0ZSB0aGUgc2FtcGxlIG1lYW4gIFxucG9wdWxhdGlvbl9kYXRhIHw+XG4gIHNsaWNlX3NhbXBsZShuID0gMTAwKSB8PlxuICBzdW1tYXJpc2Uoc2FtcGxlX21lYW4gPSBtZWFuKGlxKSkifQ==
+</script>
+</div>
+</div>
+<p>These mean values that we just calculated are referred to as sample <strong>statistics</strong> since these are properties of our sample data. The first thing to note is that both of these are pretty close to our population mean of 100 – this makes intuitive sense because these samples are collected to approximate our population. The other thing to note is that our second sample is closer to our actual population mean. This is a demonstration of the <strong>law of large numbers</strong>, which says that more observations gives us a better approximation of the true average.</p>
+<p>Regardless, in either case, we don’t get the <em>exact</em> population parameter of 100. In fact, there will always be some degree of imprecision between our sample statistic and our population parameter, which is referred to as <strong>sampling error</strong>. This sampling error can be exacerbated if we have some form of <strong>sampling bias</strong> when we are selecting our participants, but will occur naturally even if we have a perfectly <strong>representative sample</strong>.</p>
+</section>
+<section id="sampling-distributions" class="level2">
+<h2 class="anchored" data-anchor-id="sampling-distributions">Sampling distributions</h2>
+<p>If it’s the case that we will always encounter some form of sampling error, then how do confidently make inferences about our population? To explore how we are able to do so, let’s imagine that we decide to <strong>replicate</strong> our study. In other words, we will obtain a random sample of 5 people and have them complete our IQ test. We will then do this again and again and again, replicating our study 5,000 times.</p>
+<p><strong>Run the code below to see what happens when we replicate our study. Don’t worry about understanding the nuts and bolts of the code. We’ll then look at the first few replications.</strong></p>
+<div class="cell">
+<div>
+<div id="webr-4" class="exercise-cell">
+
+</div>
+<script type="webr-4-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBGb3IgZWFjaCBzdHVkeSwgd2UnbGwgZ2F0aGVyIGEgc2FtcGxlIHNpemUgb2YgNVxuIyBXZSdsbCB0aGVuIHJlcGxpY2F0ZSBvdXIgc3R1ZHkgNTAwMCB0aW1lcyAodGhpcyBtaWdodCB0YWtlIGEgZmV3IG1vbWVudHMpXG5yZXBsaWNhdGVkX2RhdGFfNSA8LSBhc190aWJibGUodChyZXBsaWNhdGUoNTAwMCwgcG9wdWxhdGlvbl9kYXRhIHw+ICAgICAgIFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgc2xpY2Vfc2FtcGxlKG4gPSA1KSB8PiBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHB1bGwoaXEpKSksIFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgLm5hbWVfcmVwYWlyID0gfiBwYXN0ZTAoXCJwYXJ0aWNpcGFudF9cIiwgMTo1KSkgfD4gXG4gICAgICAgICAgICAgICAgICAgIG11dGF0ZShyZXBsaWNhdGlvbiA9IHBhc3RlMChcInJlcGxpY2F0aW9uX1wiLCAxOjUwMDApLCAuYmVmb3JlID0gMSkgfD4gXG4gICAgICAgICAgICAgICAgICAgIG11dGF0ZShzYW1wbGVfbWVhbiA9IHJvd01lYW5zKGFjcm9zcyhzdGFydHNfd2l0aChcInBhcnRpY2lwYW50XCIpKSkpXG5cbiMgV2UnbGwgdGhlbiB1c2UgdGhlIGhlYWQoKSBmdW5jdGlvbiB0byB0YWtlIGEgcGVlayBhdCBvdXIgZmlyc3QgZmV3IHJlcGxpY2F0aW9uc1xuaGVhZChyZXBsaWNhdGVkX2RhdGFfNSkifQ==
+</script>
+</div>
+</div>
+<p>In the table above, we can see that each row corresponds to the results of one of our replications, with each column being the score of a given participant. Each time we run our study, we calculate a new <code>sample_mean</code>. As we noted before, this sample mean will always be a little bit off of our population parameter of μ = 100. However, notice what happens when we plot the results of each of the values in our <code>sample_mean</code> column.</p>
+<p><strong>We’ll make a histogram that visualizes all of the values in our <code>sample_mean</code></strong> <strong>column, which takes the mean of each of our replications.</strong></p>
+<div class="cell">
+<div>
+<div id="webr-5" class="exercise-cell">
+
+</div>
+<script type="webr-5-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBMZXQncyBjcmVhdGUgYSBoaXN0b2dyYW0gdG8gdmlzdWFsaXplIG91ciBwb3B1bGF0aW9uIGRhdGFcbnJlcGxpY2F0ZWRfZGF0YV81IHw+XG4gIGdncGxvdChhZXMoeCA9IHNhbXBsZV9tZWFuKSkgK1xuICBnZW9tX2hpc3RvZ3JhbShiaW5zID0gNTAsIGZpbGwgPSBcImRlZXBza3libHVlXCIpICtcbiAgbGFicyh0aXRsZSA9IFwiRGlzdHJpYnV0aW9uIG9mIHNhbXBsZSBtZWFucyAobiA9IDUpXCIsXG4gICAgeCA9IFwiU2FtcGxlIG1lYW5cIixcbiAgICB5ID0gXCJGcmVxdWVuY3lcIikgK1xuICBjb29yZF9jYXJ0ZXNpYW4oeGxpbSA9IGMoNzAsIDEzMCkpICtcbiAgdGhlbWVfbWluaW1hbCgpIn0=
+</script>
+</div>
+</div>
+<p>What can we take away from this image? What we see is that our <code>sample_mean</code> for a given replication tends to be between 80 and 120. What this means is that sometimes we’ll get a sample that happens to have a lower average IQ score (around 80) and other times, we’ll get a sample that happens to have a high average IQ score (around 120). However, for the most part, we see that the scores form a normal distribution centered around a mean of 100 – in other words, our population mean! As we mentioned earlier, increasing our sample size gives us a better estimate of what our population parameter is.</p>
+<p><strong>Let’s see what happens when we repeat the same process, but this time, we’ll obtain a random sample of 100 people instead of 5.</strong></p>
+<div class="cell">
+<div>
+<div id="webr-6" class="exercise-cell">
+
+</div>
+<script type="webr-6-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBGb3IgZWFjaCBzdHVkeSwgd2UnbGwgZ2F0aGVyIGEgc2FtcGxlIHNpemUgb2YgMTAwXG4jIFdlJ2xsIHRoZW4gcmVwbGljYXRlIG91ciBzdHVkeSA1MDAwIHRpbWVzICh0aGlzIG1pZ2h0IHRha2UgYSBmZXcgbW9tZW50cylcbnJlcGxpY2F0ZWRfZGF0YV8xMDAgPC0gYXNfdGliYmxlKHQocmVwbGljYXRlKDUwMDAsIHBvcHVsYXRpb25fZGF0YSB8PiAgICAgICBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHNsaWNlX3NhbXBsZShuID0gMTAwKSB8PiBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHB1bGwoaXEpKSksIFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgLm5hbWVfcmVwYWlyID0gfiBwYXN0ZTAoXCJwYXJ0aWNpcGFudF9cIiwgMToxMDApKSB8PiBcbiAgICAgICAgICAgICAgICAgICAgbXV0YXRlKHJlcGxpY2F0aW9uID0gcGFzdGUwKFwicmVwbGljYXRpb25fXCIsIDE6NTAwMCksIC5iZWZvcmUgPSAxKSB8PiBcbiAgICAgICAgICAgICAgICAgICAgbXV0YXRlKHNhbXBsZV9tZWFuID0gcm93TWVhbnMoYWNyb3NzKHN0YXJ0c193aXRoKFwicGFydGljaXBhbnRcIikpKSlcbiAgICAgICAgICAgICAgICAgICAgXG4jIExldCdzIGNyZWF0ZSBhIGhpc3RvZ3JhbSB0byB2aXN1YWxpemUgb3VyIHBvcHVsYXRpb24gZGF0YVxucmVwbGljYXRlZF9kYXRhXzEwMCB8PlxuICBnZ3Bsb3QoYWVzKHggPSBzYW1wbGVfbWVhbikpICtcbiAgZ2VvbV9oaXN0b2dyYW0oYmlucyA9IDEwLCBmaWxsID0gXCJkZWVwc2t5Ymx1ZVwiKSArXG4gIGxhYnModGl0bGUgPSBcIkRpc3RyaWJ1dGlvbiBvZiBzYW1wbGUgbWVhbnMgKG4gPSAxMDApXCIsXG4gICAgeCA9IFwiU2FtcGxlIG1lYW5cIixcbiAgICB5ID0gXCJGcmVxdWVuY3lcIikgK1xuICBjb29yZF9jYXJ0ZXNpYW4oeGxpbSA9IGMoNzAsIDEzMCkpICtcbiAgdGhlbWVfbWluaW1hbCgpIn0=
+</script>
+</div>
+</div>
+<p>How does this histogram compare to the one we created earlier? In both cases, we see that our scores again form a normal distribution centered around a mean of 100. However, because we are getting a better estimate, notice that our scores are more tightly clustered around this mean – rather than ranging from 80 and 120, our distribution now ranges between 95 and 105.</p>
+<p>The histograms that we just plotted shows a special kind of distribution, called <strong>the distribution of sample means</strong>. This is a theoretical distribution of our sample means if we were to obtain <em>every single</em> <em>possible</em> sample of a given size<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. The reason this is theoretical is because it would be impossible to obtain every single possible sample. Nonetheless, we can understand what the distribution of sample means will look like due to one of the most important theorems in statistics…</p>
+</section>
+</section>
+<section id="the-central-limit-theorem" class="level1">
+<h1>The central limit theorem</h1>
+<p>Despite how poorly a single small sample can do to approximate a population parameter, we can see that together, <em>many</em> small samples will stack up to create a distribution that is <strong>centered around the true population parameter</strong>.</p>
+<p>In addition, we see that we can decrease the variability of our distribution of sample means by increasing the sample size. Just like we had done previously, we can quantify this variability by calculating the standard deviation of the sampling distribution – in the context of the distribution of sample means, this value has a special name and is referred to as the <strong>standard error (SE)</strong>.</p>
+<p>The last note is that we see that our distribution of sample means is <strong>normally distributed</strong>. Is this just because the IQ scores in the population of Springfield was normally distributed to begin with?</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Activity 1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Let’s try looking at the distribution of sample means for a new variable called <code>special_trait</code>. The important thing here is that you can tweak the distribution shape of <code>special_trait</code> in the population.</p>
+<ul>
+<li>First, set the <code>distribution_shape</code> to be either <code>normal</code>, <code>pos_skew</code>, <code>neg_skew</code>, <code>uniform</code>, or <code>bimodal</code> and run the first code block below to get the population distribution of your <code>special_trait</code></li>
+<li>Next, adjust the <code>sample_size</code> to see how your distribution of sample means changes in response to different sample sizes.</li>
+<li>You can run these more than once to see what happens in each case with different combinations of values. What happens when the population shape is normal vs.&nbsp;non-normal? What happens when you use a small sample size (e.g., n = 1) and slowly make it bigger (e.g., n = 100)?</li>
+</ul>
+</div>
+</div>
+<p><strong>First, choose the <code>distribution_shape</code> of <code>special_trait</code></strong> <strong>in the population of Springfield. This can be either <code>normal</code>, <code>pos_skew</code>, <code>neg_skew</code>, <code>uniform</code>, or <code>bimodal</code>. The dashed black line denotes the population mean (μ).</strong></p>
+<div class="cell" data-exercise="ex_1a" data-envir="ex_1">
+<div>
+<div id="webr-7" class="exercise-cell">
+
+</div>
+<script type="webr-7-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImVudmlyIjoiZXhfMSIsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfMWEifSwiY29kZSI6IiMgQ2hvb3NlIGEgZGlzdHJpYnV0aW9uIHNoYXBlIGZvciB5b3VyIHBvcHVsYXRpb25cbiMgVGhpcyBjYW4gYmUgZWl0aGVyIFwibm9ybWFsXCIsIFwicG9zX3NrZXdcIiwgXCJuZWdfc2tld1wiLCBcInVuaWZvcm1cIiwgb3IgXCJiaW1vZGFsXCJcbmRpc3RyaWJ1dGlvbl9zaGFwZSA8LSBcIl9fX19fX1wiXG4gIFxuIyBET04nVCBXT1JSWSAoT1IgQURKVVNUKSBUSEUgQ09ERSBCRUxPV1xuIyBUaGUgY29kZSBiZWxvdyBtYWtlcyBwb3B1bGF0aW9uIGRpc3RyaWJ1dGlvbiBiYXNlZCBvbiB0aGUgc2hhcGUgeW91IGNob3NlXG4jIEZpcnN0LCBjcmVhdGUgYSBkYXRhc2V0IGNvbnNpc3Rpbmcgb2Ygb3VyIHBvcHVsYXRpb24gZGF0YVxuc3BlY2lhbF90cmFpdF9wb3AgPC0gaWYoZGlzdHJpYnV0aW9uX3NoYXBlID09IFwibm9ybWFsXCIpIHtcbiAgdGliYmxlKHNwZWNpYWxfdHJhaXQgPSBybm9ybSgxMDAwMDAwLCBtZWFuID0gMTUsIHNkID0gMykpXG59IGVsc2UgaWYoZGlzdHJpYnV0aW9uX3NoYXBlID09IFwicG9zX3NrZXdcIikge1xuICB0aWJibGUoc3BlY2lhbF90cmFpdCA9IHJnYW1tYSgxMDAwMDAwLCBzaGFwZSA9IDIsIHNjYWxlID0gMikpXG59IGVsc2UgaWYoZGlzdHJpYnV0aW9uX3NoYXBlID09IFwibmVnX3NrZXdcIikge1xuICB0aWJibGUoc3BlY2lhbF90cmFpdCA9IDMwIC0gcmdhbW1hKDEwMDAwMDAsIHNoYXBlID0gMiwgc2NhbGUgPSAyKSlcbn0gZWxzZSBpZihkaXN0cmlidXRpb25fc2hhcGUgPT0gXCJ1bmlmb3JtXCIpIHtcbiAgdGliYmxlKHNwZWNpYWxfdHJhaXQgPSBydW5pZigxMDAwMDAwLCBtaW4gPSAwLCBtYXggPSAxMCkpXG59IGVsc2UgaWYoZGlzdHJpYnV0aW9uX3NoYXBlID09IFwiYmltb2RhbFwiKSB7XG4gIHRpYmJsZShzcGVjaWFsX3RyYWl0ID0gYyhybm9ybSg1MDAwMDAsIG1lYW4gPSAxMCwgc2QgPSAyLjUpLCBybm9ybSg1MDAwMDAsIG1lYW4gPSAyMCwgc2QgPSAyLjUpKSlcbn1cblxuIyBMYXN0LCBjcmVhdGUgYSBoaXN0b2dyYW0gdG8gdmlzdWFsaXplIG91ciBwb3B1bGF0aW9uIGRhdGFcbnNwZWNpYWxfdHJhaXRfcG9wIHw+XG4gIGdncGxvdChhZXMoeCA9IHNwZWNpYWxfdHJhaXQpKSArXG4gIGdlb21faGlzdG9ncmFtKGJpbnMgPSA1MCwgZmlsbCA9IFwidG9tYXRvXCIpICtcbiAgZ2VvbV92bGluZShhZXMoeGludGVyY2VwdCA9IG1lYW4oc3BlY2lhbF90cmFpdCkpLCBsaW5ldHlwZSA9IFwiZGFzaGVkXCIsXG4gICAgICAgICAgICAgY29sb3IgPSBcImJsYWNrXCIpICtcbiAgbGFicyh0aXRsZSA9IFwiUG9wdWxhdGlvbiBkaXN0cmlidXRpb24gb2YgdGhlIFNwZWNpYWwgVHJhaXQgaW4gU3ByaW5nZmllbGRcIixcbiAgICB4ID0gXCJTcGVjaWFsIFRyYWl0XCIsXG4gICAgeSA9IFwiRnJlcXVlbmN5XCIpICtcbiAgdGhlbWVfbWluaW1hbCgpIn0=
+</script>
+</div>
+</div>
+<p><strong>Next, set the sample size below. Your sample needs to be between 1 and 1,000,000 (the population size of Springfield), but you will likely get errors if you make this number too big! The dashed black line denotes the mean of your distribution of sample means.</strong></p>
+<div class="cell" data-exercise="ex_1b" data-envir="ex_1">
+<div>
+<div id="webr-8" class="exercise-cell">
+
+</div>
+<script type="webr-8-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImVudmlyIjoiZXhfMSIsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfMWIifSwiY29kZSI6IiMgQ2hvb3NlIGEgc2FtcGxlIHNpemUgLS0geW91ciBzYW1wbGUgbmVlZHMgdG8gYmUgYmV0d2VlbiAxIGFuZCAxLDAwMCwwMDBcbiMgTm90ZSB0aGF0IHlvdSB3aWxsIGxpa2VseSBnZXQgZXJyb3JzIGlmIHlvdSBtYWtlIHRoaXMgbnVtYmVyIHRvbyBiaWchXG5zYW1wbGVfc2l6ZSA9IF9fX19fX1xuXG4jIERPTidUIFdPUlJZIChPUiBBREpVU1QpIFRIRSBDT0RFIEJFTE9XXG4jIFRoZSBjb2RlIGJlbG93IG1ha2VzIGEgc2FtcGxpbmcgZGlzdHJpYnV0aW9uIG9mIG1lYW5zIGZyb20geW91ciBwb3B1bGF0aW9uIGRhdGFcbiMgV2UnbGwgcmVwbGljYXRlIG91ciBzdHVkeSA1MDAwIHRpbWVzICh0aGlzIG1pZ2h0IHRha2UgYSBmZXcgbW9tZW50cylcbnJlcGxpY2F0ZWRfZGF0YSA8LSB0aWJibGUoXG4gIHJlcGxpY2F0aW9uID0gcGFzdGUwKFwicmVwbGljYXRpb25fXCIsIDE6NTAwMCksXG4gIHNhbXBsZV9tZWFuID0gcmVwbGljYXRlKDUwMDAsIHtcbiAgICBtZWFuKHNhbXBsZShzcGVjaWFsX3RyYWl0X3BvcCRzcGVjaWFsX3RyYWl0LCBzaXplID0gc2FtcGxlX3NpemUsIHJlcGxhY2UgPSBUUlVFKSlcbiAgfSlcbilcbiAgICAgICAgICAgICAgICAgICAgXG4jIExldCdzIGNyZWF0ZSBhIGhpc3RvZ3JhbSB0byB2aXN1YWxpemUgb3VyIHBvcHVsYXRpb24gZGF0YVxucmVwbGljYXRlZF9kYXRhIHw+XG4gIGdncGxvdChhZXMoeCA9IHNhbXBsZV9tZWFuKSkgK1xuICBnZW9tX2hpc3RvZ3JhbShmaWxsID0gXCJzcHJpbmdncmVlblwiKSArXG4gIGdlb21fdmxpbmUoYWVzKHhpbnRlcmNlcHQgPSBtZWFuKHNhbXBsZV9tZWFuKSksIGxpbmV0eXBlID0gXCJkYXNoZWRcIixcbiAgICAgICAgICAgICBjb2xvciA9IFwiYmxhY2tcIikgK1xuICBsYWJzKHRpdGxlID0gXCJEaXN0cmlidXRpb24gb2Ygc2FtcGxlIG1lYW5zXCIsXG4gICAgeCA9IFwiU2FtcGxlIG1lYW5cIixcbiAgICB5ID0gXCJGcmVxdWVuY3lcIikgK1xuICB0aGVtZV9taW5pbWFsKCkifQ==
+</script>
+</div>
+</div>
+<p>What we just demonstrated are the basis of the <strong>central limit theorem</strong>, which tells us key characteristics of our distribution of sample means – specifically, the shape, mean, and standard deviation:</p>
+<ul>
+<li>The <strong>shape</strong> of the distribution of sample means will be normally distributed if the original population is also normally distributed. It will also be normal for <strong>ANY</strong> population distribution shape, as long as your sample size is sufficiently large, with a sample size of 30 being used as a rough rule of thumb.</li>
+<li>The <strong>mean</strong> of the distribution of sample means will be equal to your population mean, μ.</li>
+<li>The <strong>standard deviation</strong> of the distribution of sample means is the <strong>standard error (SE)</strong>, which is equal to <span class="math inline">\(\dfrac{\sigma}{\sqrt{n}}\)</span> , where <span class="math inline">\(\sigma\)</span> is your population standard deviation and <span class="math inline">\(n\)</span> is your sample size. In general, we want a smaller standard error since this means we have a more precise estimate. This can happen when our variable of interest inherently has a small standard deviation or if we obtain a bigger sample size.</li>
+</ul>
+<p><strong>Think back to the IQ scores in our population, which are normally distributed with a population mean, μ = 100, and a population standard deviation, σ = 15. Let’s find the standard error for our previous examples, using a sample size of n = 5 and n = 100.</strong></p>
+<div class="cell">
+<div>
+<div id="webr-9" class="exercise-cell">
+
+</div>
+<script type="webr-9-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBMZXQncyBjYWxjdWxhdGUgb3VyIHN0YW5kYXJkIGVycm9yIHdoZW4gbiA9IDVcbjE1IC8gc3FydCg1KVxuXG4jIExldCdzIGNhbGN1bGF0ZSBvdXIgc3RhbmRhcmQgZXJyb3Igd2hlbiBuID0gMTAwXG4xNSAvIHNxcnQoMTAwKSJ9
+</script>
+</div>
+</div>
+</section>
+<section id="introduction-to-hypothesis-testing" class="level1 page-columns page-full">
+<h1>Introduction to hypothesis testing</h1>
+<p>As we alluded to previously, the central limit theorem is one of <em>the most important</em> aspects underlying our ability to do inferential statistics. What is so important about it though?</p>
+<p>We practically never have access to our entire population, so as a result, we have to rely on samples. With the central limit theorem, we know that (1) our sample mean can be a trustworthy estimate of the underlying population mean, (2) we can quantify how trustworthy of an estimate our sample provides (i.e., with our standard error), and (3) we can identify situations where our distribution of sample means will be normal (i.e., when our population distribution is normal, or if our sample size is ≳30.</p>
+<p>These form the basis for our ability to make statistical inferences, specifically using <strong>null hypothesis significance testing (NHST)</strong>. NHST is a general framework that encompasses many of the different tests that we will be learning in this course (e.g., t-tests, ANOVAs, etc.) The logic underlying NHST can be a bit tricky, but it allows us to evaluate our hypotheses about a population using sample data.</p>
+<p>As an example, let’s say that we wanted to test out whether our innovative 8-week study program would improve IQ scores in our population of Springfield. We collect a sample of <span class="math inline">\(n=25\)</span> participants, have them go through our program and subsequently complete an IQ test. We find that our sample has a mean IQ score of <span class="math inline">\(M=108\)</span> – IQ scores went up after taking our program!</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><img src="images/bart-simpson.png" class="img-fluid" alt="Bart Simpson, a cartoon character from the Simpsons, raising his hand in class."></p>
+</div></div><p>However, we cannot take any differences at face value. Due to sampling error, we will expect that our sample mean will never be exactly equal to the population mean μ. Rather, what we will do is determine whether the difference is <strong>statistically significant</strong>, or unlikely to happen due to chance given that the null hypothesis was true. We do so by determining the probability of obtaining our sample in relation to the distribution of sample means, which we can do thanks to the central limit theorem!</p>
+<p>Let’s describe the logic behind using NHST to test our hypothesis. This is done through four steps:</p>
+<ol type="1">
+<li><p>First, we <strong>state our hypotheses.</strong> Specifically, we have two mutually exclusive hypotheses. We first start off with the <strong>null hypothesis (</strong><span class="math inline">\(H_0\)</span><strong>)</strong> as our basis, which states that we should expect <em>no difference</em> because whatever we are interested in actually has no effect. Conversely, the <strong>alternative hypothesis (</strong><span class="math inline">\(H_1\)</span> or <span class="math inline">\(H_A\)</span><strong>)</strong> states that <em>there is a difference</em> because whatever we are interested in actually does have an effect.</p>
+<p>When stating our alternative hypothesis, this can either be <strong>directional</strong>, if we state that the direction of the difference (e.g., bigger or smaller), or <strong>non-directional</strong>, if we state that there will simply be a difference. In practice, non-directional alternative hypotheses are much more commonly used than non-directional alternative hypotheses.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Important!
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Null hypothesis significance testing is is a bit counter-intuitive since <em>we begin with the assumption of the null hypothesis</em>, but we are really interested in seeing whether our effect of interest actually exists. Our goal here is to see whether our data provides us with enough evidence to discredit this initial assumption.</p>
+<p>Crucially, we can <strong>never</strong> prove a hypothesis. Rather, we are seeking to find evidence that it is unlikely that our null hypothesis is true. As such, the language we use to describe our findings is important. We never say that we “proved” or “accepted” our null hypothesis – rather, we either “reject” or “fail to reject” our null hypothesis.</p>
+</div>
+</div></li>
+<li><p>Next, we <strong>create our decision rule.</strong> Now that we have our hypotheses, how do we determine whether our data rejects or fails to reject our null hypothesis? What we do is determine the probability of obtaining our given sample if there was no effect. To do so, we use our distribution of sample means to tell us what values are likely or unlikely to be obtained, given that the null hypothesis is true.</p>
+<p>We determine that something is but setting our <strong>α (alpha level)</strong>, which determines the significance level of our hypothesis test. A common convention is to set an α = .05, but this can be any probability value. With an α = .05, we separate the most unlikely 5% of our sample means from the 95% most likely sample means.</p>
+<p>This allows us to identify our <strong>critical value(s)</strong>, which establish the boundaries for our <strong>critical region(s)</strong>. These are the tail(s) of our distribution and contain the sample means that would be very unlikely to occur due to chance if our null hypothesis was true. If we are conducting a non-directional, or <strong>two-tailed</strong>, test, there will be two tails since we are only interested in whether our difference exists. If we are conducting a a directional, or <strong>one-tailed</strong>, test, there will be one tail, either on the left or right, since we expect that the difference will be either smaller or bigger, respectively.</p>
+<p>To establish these values, we can use what we learned previously with our z-scores and normal distributions. We can do this because with the central limit theorem, we can identify scenarios where we can <em>guarantee</em> that our distribution of sample means is normal. As a reminder, it is very helpful to draw the associated curve to help you visualize what values you are looking for!</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/one-vs-two-tailed-tests.png" class="img-fluid figure-img" alt="Diagram showing critical regions on a normal distribution for different types of hypothesis tests. The first panel shows a right-tailed hypothesis, with the critical region in the right tail. The second panel shows a left-tailed hypothesis, with the critical region in the left tail. The third panel shows a two-tailed test, with critical regions in both the left and right tails."></p>
+<figcaption>Image from Allon Korem</figcaption>
+</figure>
+</div></li>
+<li><p>Then, we <strong>compute our observed test statistic.</strong> Next, we need to find how our sample compares to these decision criteria. This is established by a value called the <strong>test statistic</strong> and associated <strong>p-value</strong> (or <strong>probability value</strong>). This test statistic pinpoints our sample on the distribution of sample means, and accordingly, we can find the probability of obtaining said value.</p>
+<p>There are many different test statistics, but we’ll be starting with the <strong>z-test</strong>. We use the z-test when we are comparing our sample to a population where we know the mean, μ and standard deviation, σ. In essence, we are finding the z-score that corresponds to our sample on the distribution of sample means. Because we are working with our distribution of sample means, we use the standard error to calculate this:</p>
+<p><span class="math display">\[
+z=\dfrac{M-\mu}{SE},\ where\  SE=\dfrac{\sigma}{\sqrt{n}}
+\]</span></p>
+<p>We can then find the corresponding probability value associated with the value, or p-value. The p-value tells us the likelihood of obtaining a result at least as extreme as our sample data, given the null hypothesis is true. Remember, this is NOT the probability that our null hypothesis is true!</p></li>
+<li><p>Lastly, we <strong>make a decision.</strong> Now that we have all our pieces in place, the last thing that we need to do is to make a decision regarding our null hypothesis. Here, we have two outcomes. If our test statistic is in the critical region, we <em>reject</em> the null hypothesis (i.e., it would be extremely unlikely that we got our sample solely due to chance if there was actually no effect). If our test statistic is not in the critical region, we <em>fail to reject</em> the null hypothesis (i.e., it is possible that we got our sample due to chance if there was actually no effect).</p></li>
+</ol>
+<p>After making a decision, we need to actually report our results and talk about how it relates back to our initial hypotheses. We will introduce formal APA-style reporting later on in this course, but for the time being, know that it is critical to also know how to communicate what we find in our analyses!</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Activity 2
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Now it’s your turn! Let’s apply these four steps of NHST to test whether our new study program has an effect on IQ scores in our population of Springfield.</p>
+</div>
+</div>
+<ol type="1">
+<li><p>In plain words, what are the statistical hypotheses? What are the null and alternative hypotheses? What would a non-directional, or two-tailed, hypothesis look like? How about a directional, or one-tailed, hypothesis?</p></li>
+<li><p>Using an α = .05, what are the critical value(s)? In essence, what we are trying to find are the z-scores that separate the extreme 5% of our distribution into the tail(s). As a hint, we did this in our last lab using the <code>qnorm()</code> function, but you should be able to do this using the unit normal table too. Don’t forget to draw the associated curve to help you visualize what you are looking for!</p>
+<p><strong>Use the code block below to use the <code>qnorm()</code></strong> <strong>function to identify the critical values. What does this look like for a non-directional, or two-tailed, test? How about a directional, or one-tailed, test?</strong></p>
+<div class="cell" data-exercise="ex_2a">
+<div>
+<div id="webr-10" class="exercise-cell">
+
+</div>
+<script type="webr-10-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfMmEifSwiY29kZSI6IiMgVXNpbmcgYW4gzrEgPSAuMDUsIHdoYXQgYXJlIHRoZSBjcml0aWNhbCB2YWx1ZShzKT9cbiMgV2hhdCBkb2VzIHRoaXMgbG9vayBsaWtlIGZvciBhIHR3by10YWlsZWQgdnMuIGEgb25lLXRhaWxlZCB0ZXN0P1xucW5vcm0oX19fX19fKSJ9
+</script>
+</div>
+</div></li>
+<li><p>What is the observed test statistic? As a reminder, we collected a sample of <span class="math inline">\(n=25\)</span> participants, have them go through our program and subsequently complete an IQ test. We find that our sample has a mean IQ score of <span class="math inline">\(M=108\)</span>. We know that IQ scores are normally distributed in the population with a <span class="math inline">\(\mu=100\)</span> and <span class="math inline">\(\sigma=15\)</span>. Since we know the population mean and standard deviation, we will use our z-test:</p>
+<p><span class="math display">\[
+z=\dfrac{M-\mu}{SE},\ where\  SE=\dfrac{\sigma}{\sqrt{n}}
+\]</span></p>
+<p><strong>Use the code blocks below to calculate the observed test statistic. We need to first calculate the standard error because we are working the distribution of sample means.</strong></p>
+<div class="cell" data-exercise="ex_2b" data-envir="ex_2">
+<div>
+<div id="webr-11" class="exercise-cell">
+
+</div>
+<script type="webr-11-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImVudmlyIjoiZXhfMiIsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfMmIifSwiY29kZSI6IiMgRmlyc3QsIGNhbGN1bGF0ZSB0aGUgc3RhbmRhcmQgZXJyb3JcbnNlIDwtIF9fX19fXyAvIHNxcnQoX19fX19fKVxuc2UifQ==
+</script>
+</div>
+</div>
+<div class="cell" data-exercise="ex_2b" data-check="true">
+<script type="exercise-check-ex_2b-contents">
+eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6ImV4XzJiIn0sImNvZGUiOiJpZiAoaWRlbnRpY2FsKC5yZXN1bHQsICgxNSAvIHNxcnQoMjUpKSkpIHsgICBcbiAgbGlzdChjb3JyZWN0ID0gVFJVRSwgbWVzc2FnZSA9IFwi4pyFIE5pY2Ugd29yayFcIikgXG59IGVsc2UgeyAgIFxuICBsaXN0KGNvcnJlY3QgPSBGQUxTRSwgbWVzc2FnZSA9IFwi4p2MIEhtbS4uLiB0cnkgYWdhaW4hXCIpIFxufSJ9
+</script>
+</div>
+<p><strong>Next, use the <code>se</code> object that you just created to find the observed z-value.</strong></p>
+<div class="cell" data-exercise="ex_2c" data-envir="ex_2">
+<div>
+<div id="webr-13" class="exercise-cell">
+
+</div>
+<script type="webr-13-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImVudmlyIjoiZXhfMiIsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfMmMifSwiY29kZSI6IiMgTmV4dCwgY2FsY3VsYXRlIHRoZSBvYnNlcnZlZCB6LXZhbHVlXG56IDwtIChfX19fX18gLSBfX19fX18pLyBfX19fX19cbnoifQ==
+</script>
+</div>
+</div>
+<div class="cell" data-exercise="ex_2c" data-check="true">
+<script type="exercise-check-ex_2c-contents">
+eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6ImV4XzJjIn0sImNvZGUiOiJpZiAoaWRlbnRpY2FsKC5yZXN1bHQsICgoMTA4IC0gMTAwKSAvIHNlKSkpIHsgICBcbiAgbGlzdChjb3JyZWN0ID0gVFJVRSwgbWVzc2FnZSA9IFwi4pyFIE5pY2Ugd29yayFcIikgXG59IGVsc2UgeyAgIFxuICBsaXN0KGNvcnJlY3QgPSBGQUxTRSwgbWVzc2FnZSA9IFwi4p2MIEhtbS4uLiB0cnkgYWdhaW4hXCIpIFxufSJ9
+</script>
+</div></li>
+<li><p>Based on these results, will you reject or fail to reject the null hypothesis? How does your observed test statistic compare to your decision criteria? Would you consider your results statistically significant? In plain words, how would you describe the results of your analyses?</p></li>
+</ol>
+</section>
+<section id="thats-all-for-now-great-work" class="level1">
+<h1>That’s all for now, great work!</h1>
+<p><strong>Use what you have learned to answer some questions about this lab in the corresponding Assignment on CourseLink!</strong></p>
+
+
+<script type="webr-data">
+eyJvcHRpb25zIjp7ImJhc2VVcmwiOiJodHRwczovL3dlYnIuci13YXNtLm9yZy92MC42LjAvIn0sInBhY2thZ2VzIjp7InBrZ3MiOlsiZXZhbHVhdGUiLCJrbml0ciIsImh0bWx0b29scyIsImd0Il0sInJlcG9zIjpbXX0sInJlbmRlcl9kZiI6Imd0LWludGVyYWN0aXZlIn0=
+</script>
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W3siY2VsbE5hbWUiOiJ3ZWJyLXdpZGdldC0xMyIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6IntcbiAgLy8gV2FpdCBmb3Igb3V0cHV0IHRvIGJlIHdyaXR0ZW4gdG8gdGhlIERPTSwgdGhlbiB0cmlnZ2VyIHdpZGdldCByZW5kZXJpbmdcbiAgYXdhaXQgX3dlYnJfdmFsdWVfMTM7XG4gIGlmICh3aW5kb3cuSFRNTFdpZGdldHMpIHtcbiAgICB3aW5kb3cuSFRNTFdpZGdldHMuc3RhdGljUmVuZGVyKCk7XG4gIH1cbiAgaWYgKHdpbmRvdy5QYWdlZFRhYmxlRG9jKSB7XG4gICAgd2luZG93LlBhZ2VkVGFibGVEb2MuaW5pdEFsbCgpO1xuICB9XG59XG4ifSx7ImNlbGxOYW1lIjoid2Vici0xMyIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3dlYnJfZWRpdG9yXzEzID0ge1xuICBjb25zdCB7IFdlYlJFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcIndlYnItMTMtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICAvLyBEZWZhdWx0IGV4ZXJjaXNlIGNvbmZpZ3VyYXRpb25cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oXG4gICAge1xuICAgICAgaWQ6IFwid2Vici0xMy1jb250ZW50c1wiLFxuICAgICAgZW52aXI6IGBleGVyY2lzZS1lbnYtJHtibG9jay5hdHRyLmV4ZXJjaXNlfWAsXG4gICAgICBlcnJvcjogZmFsc2UsXG4gICAgICBjYXB0aW9uOiAnRXhlcmNpc2UnLFxuICAgIH0sXG4gICAgYmxvY2suYXR0clxuICApO1xuXG4gIGNvbnN0IGVkaXRvciA9IG5ldyBXZWJSRXhlcmNpc2VFZGl0b3Iod2ViUk9qcy53ZWJSUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxudmlld29mIF93ZWJyX3ZhbHVlXzEzID0gd2ViUk9qcy5wcm9jZXNzKF93ZWJyX2VkaXRvcl8xMywge30pO1xuX3dlYnJfZmVlZGJhY2tfMTMgPSB7XG4gIGNvbnN0IHsgV2ViUkdyYWRlciB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3QgZW1wdHlGZWVkYmFjayA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2RpdicpO1xuXG4gIGNvbnN0IGdyYWRlciA9IG5ldyBXZWJSR3JhZGVyKF93ZWJyX3ZhbHVlXzEzLmV2YWx1YXRvcik7XG4gIGNvbnN0IGZlZWRiYWNrID0gYXdhaXQgZ3JhZGVyLmdyYWRlRXhlcmNpc2UoKTtcbiAgaWYgKCFmZWVkYmFjaykgcmV0dXJuIGVtcHR5RmVlZGJhY2s7XG4gIHJldHVybiBmZWVkYmFjaztcbn1cbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLXdpZGdldC0xMSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6IntcbiAgLy8gV2FpdCBmb3Igb3V0cHV0IHRvIGJlIHdyaXR0ZW4gdG8gdGhlIERPTSwgdGhlbiB0cmlnZ2VyIHdpZGdldCByZW5kZXJpbmdcbiAgYXdhaXQgX3dlYnJfdmFsdWVfMTE7XG4gIGlmICh3aW5kb3cuSFRNTFdpZGdldHMpIHtcbiAgICB3aW5kb3cuSFRNTFdpZGdldHMuc3RhdGljUmVuZGVyKCk7XG4gIH1cbiAgaWYgKHdpbmRvdy5QYWdlZFRhYmxlRG9jKSB7XG4gICAgd2luZG93LlBhZ2VkVGFibGVEb2MuaW5pdEFsbCgpO1xuICB9XG59XG4ifSx7ImNlbGxOYW1lIjoid2Vici0xMSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3dlYnJfZWRpdG9yXzExID0ge1xuICBjb25zdCB7IFdlYlJFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcIndlYnItMTEtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICAvLyBEZWZhdWx0IGV4ZXJjaXNlIGNvbmZpZ3VyYXRpb25cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oXG4gICAge1xuICAgICAgaWQ6IFwid2Vici0xMS1jb250ZW50c1wiLFxuICAgICAgZW52aXI6IGBleGVyY2lzZS1lbnYtJHtibG9jay5hdHRyLmV4ZXJjaXNlfWAsXG4gICAgICBlcnJvcjogZmFsc2UsXG4gICAgICBjYXB0aW9uOiAnRXhlcmNpc2UnLFxuICAgIH0sXG4gICAgYmxvY2suYXR0clxuICApO1xuXG4gIGNvbnN0IGVkaXRvciA9IG5ldyBXZWJSRXhlcmNpc2VFZGl0b3Iod2ViUk9qcy53ZWJSUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxudmlld29mIF93ZWJyX3ZhbHVlXzExID0gd2ViUk9qcy5wcm9jZXNzKF93ZWJyX2VkaXRvcl8xMSwge30pO1xuX3dlYnJfZmVlZGJhY2tfMTEgPSB7XG4gIGNvbnN0IHsgV2ViUkdyYWRlciB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3QgZW1wdHlGZWVkYmFjayA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2RpdicpO1xuXG4gIGNvbnN0IGdyYWRlciA9IG5ldyBXZWJSR3JhZGVyKF93ZWJyX3ZhbHVlXzExLmV2YWx1YXRvcik7XG4gIGNvbnN0IGZlZWRiYWNrID0gYXdhaXQgZ3JhZGVyLmdyYWRlRXhlcmNpc2UoKTtcbiAgaWYgKCFmZWVkYmFjaykgcmV0dXJuIGVtcHR5RmVlZGJhY2s7XG4gIHJldHVybiBmZWVkYmFjaztcbn1cbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLXdpZGdldC0xMCIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6IntcbiAgLy8gV2FpdCBmb3Igb3V0cHV0IHRvIGJlIHdyaXR0ZW4gdG8gdGhlIERPTSwgdGhlbiB0cmlnZ2VyIHdpZGdldCByZW5kZXJpbmdcbiAgYXdhaXQgX3dlYnJfdmFsdWVfMTA7XG4gIGlmICh3aW5kb3cuSFRNTFdpZGdldHMpIHtcbiAgICB3aW5kb3cuSFRNTFdpZGdldHMuc3RhdGljUmVuZGVyKCk7XG4gIH1cbiAgaWYgKHdpbmRvdy5QYWdlZFRhYmxlRG9jKSB7XG4gICAgd2luZG93LlBhZ2VkVGFibGVEb2MuaW5pdEFsbCgpO1xuICB9XG59XG4ifSx7ImNlbGxOYW1lIjoid2Vici0xMCIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3dlYnJfZWRpdG9yXzEwID0ge1xuICBjb25zdCB7IFdlYlJFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcIndlYnItMTAtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICAvLyBEZWZhdWx0IGV4ZXJjaXNlIGNvbmZpZ3VyYXRpb25cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oXG4gICAge1xuICAgICAgaWQ6IFwid2Vici0xMC1jb250ZW50c1wiLFxuICAgICAgZW52aXI6IGBleGVyY2lzZS1lbnYtJHtibG9jay5hdHRyLmV4ZXJjaXNlfWAsXG4gICAgICBlcnJvcjogZmFsc2UsXG4gICAgICBjYXB0aW9uOiAnRXhlcmNpc2UnLFxuICAgIH0sXG4gICAgYmxvY2suYXR0clxuICApO1xuXG4gIGNvbnN0IGVkaXRvciA9IG5ldyBXZWJSRXhlcmNpc2VFZGl0b3Iod2ViUk9qcy53ZWJSUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxudmlld29mIF93ZWJyX3ZhbHVlXzEwID0gd2ViUk9qcy5wcm9jZXNzKF93ZWJyX2VkaXRvcl8xMCwge30pO1xuX3dlYnJfZmVlZGJhY2tfMTAgPSB7XG4gIGNvbnN0IHsgV2ViUkdyYWRlciB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3QgZW1wdHlGZWVkYmFjayA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2RpdicpO1xuXG4gIGNvbnN0IGdyYWRlciA9IG5ldyBXZWJSR3JhZGVyKF93ZWJyX3ZhbHVlXzEwLmV2YWx1YXRvcik7XG4gIGNvbnN0IGZlZWRiYWNrID0gYXdhaXQgZ3JhZGVyLmdyYWRlRXhlcmNpc2UoKTtcbiAgaWYgKCFmZWVkYmFjaykgcmV0dXJuIGVtcHR5RmVlZGJhY2s7XG4gIHJldHVybiBmZWVkYmFjaztcbn1cbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLXdpZGdldC05IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoie1xuICAvLyBXYWl0IGZvciBvdXRwdXQgdG8gYmUgd3JpdHRlbiB0byB0aGUgRE9NLCB0aGVuIHRyaWdnZXIgd2lkZ2V0IHJlbmRlcmluZ1xuICBhd2FpdCBfd2Vicl92YWx1ZV85O1xuICBpZiAod2luZG93LkhUTUxXaWRnZXRzKSB7XG4gICAgd2luZG93LkhUTUxXaWRnZXRzLnN0YXRpY1JlbmRlcigpO1xuICB9XG4gIGlmICh3aW5kb3cuUGFnZWRUYWJsZURvYykge1xuICAgIHdpbmRvdy5QYWdlZFRhYmxlRG9jLmluaXRBbGwoKTtcbiAgfVxufVxuIn0seyJjZWxsTmFtZSI6IndlYnItOSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3dlYnJfZWRpdG9yXzkgPSB7XG4gIGNvbnN0IHsgV2ViUkV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwid2Vici05LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHdlYnItOS1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBXZWJSRXhlcmNpc2VFZGl0b3Iod2ViUk9qcy53ZWJSUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fd2Vicl92YWx1ZV85ID0gd2ViUk9qcy5wcm9jZXNzKF93ZWJyX2VkaXRvcl85LCB7fSk7XG4ifSx7ImNlbGxOYW1lIjoid2Vici13aWRnZXQtOCIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6IntcbiAgLy8gV2FpdCBmb3Igb3V0cHV0IHRvIGJlIHdyaXR0ZW4gdG8gdGhlIERPTSwgdGhlbiB0cmlnZ2VyIHdpZGdldCByZW5kZXJpbmdcbiAgYXdhaXQgX3dlYnJfdmFsdWVfODtcbiAgaWYgKHdpbmRvdy5IVE1MV2lkZ2V0cykge1xuICAgIHdpbmRvdy5IVE1MV2lkZ2V0cy5zdGF0aWNSZW5kZXIoKTtcbiAgfVxuICBpZiAod2luZG93LlBhZ2VkVGFibGVEb2MpIHtcbiAgICB3aW5kb3cuUGFnZWRUYWJsZURvYy5pbml0QWxsKCk7XG4gIH1cbn1cbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLTgiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF93ZWJyX2VkaXRvcl84ID0ge1xuICBjb25zdCB7IFdlYlJFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcIndlYnItOC1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIC8vIERlZmF1bHQgZXhlcmNpc2UgY29uZmlndXJhdGlvblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbihcbiAgICB7XG4gICAgICBpZDogXCJ3ZWJyLTgtY29udGVudHNcIixcbiAgICAgIGVudmlyOiBgZXhlcmNpc2UtZW52LSR7YmxvY2suYXR0ci5leGVyY2lzZX1gLFxuICAgICAgZXJyb3I6IGZhbHNlLFxuICAgICAgY2FwdGlvbjogJ0V4ZXJjaXNlJyxcbiAgICB9LFxuICAgIGJsb2NrLmF0dHJcbiAgKTtcblxuICBjb25zdCBlZGl0b3IgPSBuZXcgV2ViUkV4ZXJjaXNlRWRpdG9yKHdlYlJPanMud2ViUlByb21pc2UsIGJsb2NrLmNvZGUsIG9wdGlvbnMpO1xuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbnZpZXdvZiBfd2Vicl92YWx1ZV84ID0gd2ViUk9qcy5wcm9jZXNzKF93ZWJyX2VkaXRvcl84LCB7fSk7XG5fd2Vicl9mZWVkYmFja184ID0ge1xuICBjb25zdCB7IFdlYlJHcmFkZXIgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG4gIGNvbnN0IGVtcHR5RmVlZGJhY2sgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdkaXYnKTtcblxuICBjb25zdCBncmFkZXIgPSBuZXcgV2ViUkdyYWRlcihfd2Vicl92YWx1ZV84LmV2YWx1YXRvcik7XG4gIGNvbnN0IGZlZWRiYWNrID0gYXdhaXQgZ3JhZGVyLmdyYWRlRXhlcmNpc2UoKTtcbiAgaWYgKCFmZWVkYmFjaykgcmV0dXJuIGVtcHR5RmVlZGJhY2s7XG4gIHJldHVybiBmZWVkYmFjaztcbn1cbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLXdpZGdldC03IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoie1xuICAvLyBXYWl0IGZvciBvdXRwdXQgdG8gYmUgd3JpdHRlbiB0byB0aGUgRE9NLCB0aGVuIHRyaWdnZXIgd2lkZ2V0IHJlbmRlcmluZ1xuICBhd2FpdCBfd2Vicl92YWx1ZV83O1xuICBpZiAod2luZG93LkhUTUxXaWRnZXRzKSB7XG4gICAgd2luZG93LkhUTUxXaWRnZXRzLnN0YXRpY1JlbmRlcigpO1xuICB9XG4gIGlmICh3aW5kb3cuUGFnZWRUYWJsZURvYykge1xuICAgIHdpbmRvdy5QYWdlZFRhYmxlRG9jLmluaXRBbGwoKTtcbiAgfVxufVxuIn0seyJjZWxsTmFtZSI6IndlYnItNyIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3dlYnJfZWRpdG9yXzcgPSB7XG4gIGNvbnN0IHsgV2ViUkV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwid2Vici03LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgLy8gRGVmYXVsdCBleGVyY2lzZSBjb25maWd1cmF0aW9uXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKFxuICAgIHtcbiAgICAgIGlkOiBcIndlYnItNy1jb250ZW50c1wiLFxuICAgICAgZW52aXI6IGBleGVyY2lzZS1lbnYtJHtibG9jay5hdHRyLmV4ZXJjaXNlfWAsXG4gICAgICBlcnJvcjogZmFsc2UsXG4gICAgICBjYXB0aW9uOiAnRXhlcmNpc2UnLFxuICAgIH0sXG4gICAgYmxvY2suYXR0clxuICApO1xuXG4gIGNvbnN0IGVkaXRvciA9IG5ldyBXZWJSRXhlcmNpc2VFZGl0b3Iod2ViUk9qcy53ZWJSUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxudmlld29mIF93ZWJyX3ZhbHVlXzcgPSB3ZWJST2pzLnByb2Nlc3MoX3dlYnJfZWRpdG9yXzcsIHt9KTtcbl93ZWJyX2ZlZWRiYWNrXzcgPSB7XG4gIGNvbnN0IHsgV2ViUkdyYWRlciB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3QgZW1wdHlGZWVkYmFjayA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2RpdicpO1xuXG4gIGNvbnN0IGdyYWRlciA9IG5ldyBXZWJSR3JhZGVyKF93ZWJyX3ZhbHVlXzcuZXZhbHVhdG9yKTtcbiAgY29uc3QgZmVlZGJhY2sgPSBhd2FpdCBncmFkZXIuZ3JhZGVFeGVyY2lzZSgpO1xuICBpZiAoIWZlZWRiYWNrKSByZXR1cm4gZW1wdHlGZWVkYmFjaztcbiAgcmV0dXJuIGZlZWRiYWNrO1xufVxuIn0seyJjZWxsTmFtZSI6IndlYnItd2lkZ2V0LTYiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJ7XG4gIC8vIFdhaXQgZm9yIG91dHB1dCB0byBiZSB3cml0dGVuIHRvIHRoZSBET00sIHRoZW4gdHJpZ2dlciB3aWRnZXQgcmVuZGVyaW5nXG4gIGF3YWl0IF93ZWJyX3ZhbHVlXzY7XG4gIGlmICh3aW5kb3cuSFRNTFdpZGdldHMpIHtcbiAgICB3aW5kb3cuSFRNTFdpZGdldHMuc3RhdGljUmVuZGVyKCk7XG4gIH1cbiAgaWYgKHdpbmRvdy5QYWdlZFRhYmxlRG9jKSB7XG4gICAgd2luZG93LlBhZ2VkVGFibGVEb2MuaW5pdEFsbCgpO1xuICB9XG59XG4ifSx7ImNlbGxOYW1lIjoid2Vici02IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfd2Vicl9lZGl0b3JfNiA9IHtcbiAgY29uc3QgeyBXZWJSRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJ3ZWJyLTYtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgd2Vici02LWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFdlYlJFeGVyY2lzZUVkaXRvcih3ZWJST2pzLndlYlJQcm9taXNlLCBibG9jay5jb2RlLCBvcHRpb25zKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl93ZWJyX3ZhbHVlXzYgPSB3ZWJST2pzLnByb2Nlc3MoX3dlYnJfZWRpdG9yXzYsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLXdpZGdldC01IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoie1xuICAvLyBXYWl0IGZvciBvdXRwdXQgdG8gYmUgd3JpdHRlbiB0byB0aGUgRE9NLCB0aGVuIHRyaWdnZXIgd2lkZ2V0IHJlbmRlcmluZ1xuICBhd2FpdCBfd2Vicl92YWx1ZV81O1xuICBpZiAod2luZG93LkhUTUxXaWRnZXRzKSB7XG4gICAgd2luZG93LkhUTUxXaWRnZXRzLnN0YXRpY1JlbmRlcigpO1xuICB9XG4gIGlmICh3aW5kb3cuUGFnZWRUYWJsZURvYykge1xuICAgIHdpbmRvdy5QYWdlZFRhYmxlRG9jLmluaXRBbGwoKTtcbiAgfVxufVxuIn0seyJjZWxsTmFtZSI6IndlYnItNSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3dlYnJfZWRpdG9yXzUgPSB7XG4gIGNvbnN0IHsgV2ViUkV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwid2Vici01LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHdlYnItNS1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBXZWJSRXhlcmNpc2VFZGl0b3Iod2ViUk9qcy53ZWJSUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fd2Vicl92YWx1ZV81ID0gd2ViUk9qcy5wcm9jZXNzKF93ZWJyX2VkaXRvcl81LCB7fSk7XG4ifSx7ImNlbGxOYW1lIjoid2Vici13aWRnZXQtNCIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6IntcbiAgLy8gV2FpdCBmb3Igb3V0cHV0IHRvIGJlIHdyaXR0ZW4gdG8gdGhlIERPTSwgdGhlbiB0cmlnZ2VyIHdpZGdldCByZW5kZXJpbmdcbiAgYXdhaXQgX3dlYnJfdmFsdWVfNDtcbiAgaWYgKHdpbmRvdy5IVE1MV2lkZ2V0cykge1xuICAgIHdpbmRvdy5IVE1MV2lkZ2V0cy5zdGF0aWNSZW5kZXIoKTtcbiAgfVxuICBpZiAod2luZG93LlBhZ2VkVGFibGVEb2MpIHtcbiAgICB3aW5kb3cuUGFnZWRUYWJsZURvYy5pbml0QWxsKCk7XG4gIH1cbn1cbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLTQiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF93ZWJyX2VkaXRvcl80ID0ge1xuICBjb25zdCB7IFdlYlJFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcIndlYnItNC1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHsgaWQ6IGB3ZWJyLTQtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgV2ViUkV4ZXJjaXNlRWRpdG9yKHdlYlJPanMud2ViUlByb21pc2UsIGJsb2NrLmNvZGUsIG9wdGlvbnMpO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3dlYnJfdmFsdWVfNCA9IHdlYlJPanMucHJvY2Vzcyhfd2Vicl9lZGl0b3JfNCwge30pO1xuIn0seyJjZWxsTmFtZSI6IndlYnItd2lkZ2V0LTMiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJ7XG4gIC8vIFdhaXQgZm9yIG91dHB1dCB0byBiZSB3cml0dGVuIHRvIHRoZSBET00sIHRoZW4gdHJpZ2dlciB3aWRnZXQgcmVuZGVyaW5nXG4gIGF3YWl0IF93ZWJyX3ZhbHVlXzM7XG4gIGlmICh3aW5kb3cuSFRNTFdpZGdldHMpIHtcbiAgICB3aW5kb3cuSFRNTFdpZGdldHMuc3RhdGljUmVuZGVyKCk7XG4gIH1cbiAgaWYgKHdpbmRvdy5QYWdlZFRhYmxlRG9jKSB7XG4gICAgd2luZG93LlBhZ2VkVGFibGVEb2MuaW5pdEFsbCgpO1xuICB9XG59XG4ifSx7ImNlbGxOYW1lIjoid2Vici0zIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfd2Vicl9lZGl0b3JfMyA9IHtcbiAgY29uc3QgeyBXZWJSRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJ3ZWJyLTMtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgd2Vici0zLWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFdlYlJFeGVyY2lzZUVkaXRvcih3ZWJST2pzLndlYlJQcm9taXNlLCBibG9jay5jb2RlLCBvcHRpb25zKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl93ZWJyX3ZhbHVlXzMgPSB3ZWJST2pzLnByb2Nlc3MoX3dlYnJfZWRpdG9yXzMsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLXdpZGdldC0yIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoie1xuICAvLyBXYWl0IGZvciBvdXRwdXQgdG8gYmUgd3JpdHRlbiB0byB0aGUgRE9NLCB0aGVuIHRyaWdnZXIgd2lkZ2V0IHJlbmRlcmluZ1xuICBhd2FpdCBfd2Vicl92YWx1ZV8yO1xuICBpZiAod2luZG93LkhUTUxXaWRnZXRzKSB7XG4gICAgd2luZG93LkhUTUxXaWRnZXRzLnN0YXRpY1JlbmRlcigpO1xuICB9XG4gIGlmICh3aW5kb3cuUGFnZWRUYWJsZURvYykge1xuICAgIHdpbmRvdy5QYWdlZFRhYmxlRG9jLmluaXRBbGwoKTtcbiAgfVxufVxuIn0seyJjZWxsTmFtZSI6IndlYnItMiIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3dlYnJfZWRpdG9yXzIgPSB7XG4gIGNvbnN0IHsgV2ViUkV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwid2Vici0yLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHdlYnItMi1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBXZWJSRXhlcmNpc2VFZGl0b3Iod2ViUk9qcy53ZWJSUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fd2Vicl92YWx1ZV8yID0gd2ViUk9qcy5wcm9jZXNzKF93ZWJyX2VkaXRvcl8yLCB7fSk7XG4ifSx7ImNlbGxOYW1lIjoid2Vici13aWRnZXQtMSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6IntcbiAgLy8gV2FpdCBmb3Igb3V0cHV0IHRvIGJlIHdyaXR0ZW4gdG8gdGhlIERPTSwgdGhlbiB0cmlnZ2VyIHdpZGdldCByZW5kZXJpbmdcbiAgYXdhaXQgX3dlYnJfdmFsdWVfMTtcbiAgaWYgKHdpbmRvdy5IVE1MV2lkZ2V0cykge1xuICAgIHdpbmRvdy5IVE1MV2lkZ2V0cy5zdGF0aWNSZW5kZXIoKTtcbiAgfVxuICBpZiAod2luZG93LlBhZ2VkVGFibGVEb2MpIHtcbiAgICB3aW5kb3cuUGFnZWRUYWJsZURvYy5pbml0QWxsKCk7XG4gIH1cbn1cbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLTEiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF93ZWJyX2VkaXRvcl8xID0ge1xuICBjb25zdCB7IFdlYlJFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcIndlYnItMS1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHsgaWQ6IGB3ZWJyLTEtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgV2ViUkV4ZXJjaXNlRWRpdG9yKHdlYlJPanMud2ViUlByb21pc2UsIGJsb2NrLmNvZGUsIG9wdGlvbnMpO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3dlYnJfdmFsdWVfMSA9IHdlYlJPanMucHJvY2Vzcyhfd2Vicl9lZGl0b3JfMSwge30pO1xuIn0seyJjZWxsTmFtZSI6IndlYnItcHJlbHVkZSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6IndlYlJPanMgPSB7XG4gIGNvbnN0IHsgV2ViUiwgQ2hhbm5lbFR5cGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWUuV2ViUjtcbiAgY29uc3Qge1xuICAgIFdlYlJFdmFsdWF0b3IsXG4gICAgV2ViUkVudmlyb25tZW50TWFuYWdlcixcbiAgICBzZXR1cFIsXG4gICAgYjY0RGVjb2RlLFxuICAgIGNvbGxhcHNlUGF0aFxuICB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcblxuICBjb25zdCBzdGF0dXNDb250YWluZXIgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChcImV4ZXJjaXNlLWxvYWRpbmctc3RhdHVzXCIpO1xuICBjb25zdCBpbmRpY2F0b3JDb250YWluZXIgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChcImV4ZXJjaXNlLWxvYWRpbmctaW5kaWNhdG9yXCIpO1xuICBpbmRpY2F0b3JDb250YWluZXIuY2xhc3NMaXN0LnJlbW92ZShcImQtbm9uZVwiKTtcblxuICBsZXQgc3RhdHVzVGV4dCA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoXCJkaXZcIilcbiAgc3RhdHVzVGV4dC5jbGFzc0xpc3QgPSBcImV4ZXJjaXNlLWxvYWRpbmctZGV0YWlsc1wiO1xuICBzdGF0dXNUZXh0ID0gc3RhdHVzQ29udGFpbmVyLmFwcGVuZENoaWxkKHN0YXR1c1RleHQpO1xuICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYEluaXRpYWxpc2VgO1xuXG4gIC8vIEhvaXN0IGluZGljYXRvciBvdXQgZnJvbSBmaW5hbCBzbGlkZSB3aGVuIHJ1bm5pbmcgdW5kZXIgcmV2ZWFsXG4gIGNvbnN0IHJldmVhbFN0YXR1cyA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoXCIucmV2ZWFsIC5leGVyY2lzZS1sb2FkaW5nLWluZGljYXRvclwiKTtcbiAgaWYgKHJldmVhbFN0YXR1cykge1xuICAgIHJldmVhbFN0YXR1cy5yZW1vdmUoKTtcbiAgICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFwiLnJldmVhbCA+IC5zbGlkZXNcIikuYXBwZW5kQ2hpbGQocmV2ZWFsU3RhdHVzKTtcbiAgfVxuXG4gIC8vIE1ha2UgYW55IHJldmVhbCBzbGlkZXMgd2l0aCBsaXZlIGNlbGxzIHNjcm9sbGFibGVcbiAgZG9jdW1lbnQucXVlcnlTZWxlY3RvckFsbChcIi5yZXZlYWwgLmV4ZXJjaXNlLWNlbGxcIikuZm9yRWFjaCgoZWwpID0+IHtcbiAgICBlbC5jbG9zZXN0KCdzZWN0aW9uLnNsaWRlJykuY2xhc3NMaXN0LmFkZChcInNjcm9sbGFibGVcIik7XG4gIH0pXG5cbiAgLy8gd2ViUiBzdXBwbGVtZW50YWwgZGF0YSBhbmQgb3B0aW9uc1xuICBjb25zdCBkYXRhQ29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJ3ZWJyLWRhdGFcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBkYXRhID0gSlNPTi5wYXJzZShiNjREZWNvZGUoZGF0YUNvbnRlbnQpKTtcblxuICAvLyBHcmFiIGxpc3Qgb2YgcmVzb3VyY2VzIHRvIGJlIGRvd25sb2FkZWRcbiAgY29uc3QgZmlsZXNDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInZmcy1maWxlXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgZmlsZXMgPSBKU09OLnBhcnNlKGI2NERlY29kZShmaWxlc0NvbnRlbnQpKTtcblxuICAvLyBJbml0aWFsaXNlIHdlYlIgYW5kIHNldHVwIGZvciBSIGNvZGUgZXZhbHVhdGlvblxuICBsZXQgd2ViUlByb21pc2UgPSAoYXN5bmMgKHdlYlIpID0+IHtcbiAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYERvd25sb2FkaW5nIHdlYlJgO1xuICAgIGF3YWl0IHdlYlIuaW5pdCgpO1xuXG4gICAgLy8gSW5zdGFsbCBwcm92aWRlZCBsaXN0IG9mIHBhY2thZ2VzXG4gICAgLy8gRW5zdXJlIHdlYlIgZGVmYXVsdCByZXBvIGlzIGluY2x1ZGVkXG4gICAgZGF0YS5wYWNrYWdlcy5yZXBvcy5wdXNoKFwiaHR0cHM6Ly9yZXBvLnItd2FzbS5vcmdcIilcbiAgICBhd2FpdCBkYXRhLnBhY2thZ2VzLnBrZ3MubWFwKChwa2cpID0+ICgpID0+IHtcbiAgICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgRG93bmxvYWRpbmcgcGFja2FnZTogJHtwa2d9YDtcbiAgICAgIHJldHVybiB3ZWJSLmV2YWxSVm9pZChgXG4gICAgICAgIHdlYnI6Omluc3RhbGwocGtnLCByZXBvcyA9IHJlcG9zKVxuICAgICAgICBsaWJyYXJ5KHBrZywgY2hhcmFjdGVyLm9ubHkgPSBUUlVFKVxuICAgICAgYCwgeyBlbnY6IHtcbiAgICAgICAgcGtnOiBwa2csXG4gICAgICAgIHJlcG9zOiBkYXRhLnBhY2thZ2VzLnJlcG9zLFxuICAgICAgfX0pO1xuICAgIH0pLnJlZHVjZSgoY3VyLCBuZXh0KSA9PiBjdXIudGhlbihuZXh0KSwgUHJvbWlzZS5yZXNvbHZlKCkpO1xuXG4gICAgLy8gRG93bmxvYWQgYW5kIGluc3RhbGwgcmVzb3VyY2VzXG4gICAgYXdhaXQgZmlsZXMubWFwKChmaWxlKSA9PiBhc3luYyAoKSA9PiB7XG4gICAgICBjb25zdCBuYW1lID0gZmlsZS5zdWJzdHJpbmcoZmlsZS5sYXN0SW5kZXhPZignLycpICsgMSk7XG4gICAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYERvd25sb2FkaW5nIHJlc291cmNlOiAke25hbWV9YDtcbiAgICAgIGNvbnN0IHJlc3BvbnNlID0gYXdhaXQgZmV0Y2goZmlsZSk7XG4gICAgICBpZiAoIXJlc3BvbnNlLm9rKSB7XG4gICAgICAgIHRocm93IG5ldyBFcnJvcihgQ2FuJ3QgZG93bmxvYWQgXFxgJHtmaWxlfVxcYC4gRXJyb3IgJHtyZXNwb25zZS5zdGF0dXN9OiBcIiR7cmVzcG9uc2Uuc3RhdHVzVGV4dH1cIi5gKTtcbiAgICAgIH1cbiAgICAgIGNvbnN0IGRhdGEgPSBhd2FpdCByZXNwb25zZS5hcnJheUJ1ZmZlcigpO1xuXG4gICAgICAvLyBTdG9yZSBVUkxzIGluIHRoZSBjd2Qgd2l0aG91dCBhbnkgc3ViZGlyZWN0b3J5IHN0cnVjdHVyZVxuICAgICAgaWYgKGZpbGUuaW5jbHVkZXMoXCI6Ly9cIikpIHtcbiAgICAgICAgZmlsZSA9IG5hbWU7XG4gICAgICB9XG5cbiAgICAgIC8vIENvbGxhcHNlIGhpZ2hlciBkaXJlY3Rvcnkgc3RydWN0dXJlXG4gICAgICBmaWxlID0gY29sbGFwc2VQYXRoKGZpbGUpO1xuXG4gICAgICAvLyBDcmVhdGUgZGlyZWN0b3J5IHRyZWUsIGlnbm9yaW5nIFwiZGlyZWN0b3J5IGV4aXN0c1wiIFZGUyBlcnJvcnNcbiAgICAgIGNvbnN0IHBhcnRzID0gZmlsZS5zcGxpdCgnLycpLnNsaWNlKDAsIC0xKTtcbiAgICAgIGxldCBwYXRoID0gJyc7XG4gICAgICB3aGlsZSAocGFydHMubGVuZ3RoID4gMCkge1xuICAgICAgICBwYXRoICs9IHBhcnRzLnNoaWZ0KCkgKyAnLyc7XG4gICAgICAgIGNvbnN0IGFuYWx5c2lzID0gYXdhaXQgd2ViUi5GUy5hbmFseXplUGF0aChwYXRoKTtcbiAgICAgICAgaWYgKCFhbmFseXNpcy5leGlzdHMpIHtcbiAgICAgICAgICB0cnkge1xuICAgICAgICAgICAgYXdhaXQgd2ViUi5GUy5ta2RpcihwYXRoKTtcbiAgICAgICAgICB9IGNhdGNoIChlKSB7XG4gICAgICAgICAgICB0aHJvdyBuZXcgRXJyb3IoYEZpbGVzeXN0ZW0gRXJyb3I6IFwiJHtlLm1lc3NhZ2V9XCIuYCk7XG4gICAgICAgICAgfVxuICAgICAgICB9XG4gICAgICB9XG5cbiAgICAgIC8vIFdyaXRlIHRoaXMgZmlsZSB0byB0aGUgVkZTXG4gICAgICByZXR1cm4gYXdhaXQgd2ViUi5GUy53cml0ZUZpbGUoZmlsZSwgbmV3IFVpbnQ4QXJyYXkoZGF0YSkpO1xuICAgIH0pLnJlZHVjZSgoY3VyLCBuZXh0KSA9PiBjdXIudGhlbihuZXh0KSwgUHJvbWlzZS5yZXNvbHZlKCkpO1xuXG4gICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBJbnN0YWxsaW5nIHdlYlIgc2hpbXNgO1xuICAgIGF3YWl0IHdlYlIuZXZhbFJWb2lkKGB3ZWJyOjpzaGltX2luc3RhbGwoKWApO1xuXG4gICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBXZWJSIGVudmlyb25tZW50IHNldHVwYDtcbiAgICBhd2FpdCBzZXR1cFIod2ViUiwgZGF0YSk7XG5cbiAgICBzdGF0dXNUZXh0LnJlbW92ZSgpO1xuICAgIGlmIChzdGF0dXNDb250YWluZXIuY2hpbGRyZW4ubGVuZ3RoID09IDApIHtcbiAgICAgIHN0YXR1c0NvbnRhaW5lci5wYXJlbnROb2RlLnJlbW92ZSgpO1xuICAgIH1cbiAgICByZXR1cm4gd2ViUjtcbiAgfSkobmV3IFdlYlIoZGF0YS5vcHRpb25zKSk7XG5cbiAgLy8gS2VlcCB0cmFjayBvZiBpbml0aWFsIE9KUyBibG9jayByZW5kZXJcbiAgY29uc3QgcmVuZGVyZWRPanMgPSB7fTtcblxuICBjb25zdCBwcm9jZXNzID0gYXN5bmMgKGNvbnRleHQsIGlucHV0cykgPT4ge1xuICAgIGNvbnN0IHdlYlIgPSBhd2FpdCB3ZWJSUHJvbWlzZTtcbiAgICBjb25zdCBldmFsdWF0b3IgPSBuZXcgV2ViUkV2YWx1YXRvcih3ZWJSLCBjb250ZXh0KVxuICAgIGF3YWl0IGV2YWx1YXRvci5wcm9jZXNzKGlucHV0cyk7XG4gICAgcmV0dXJuIGV2YWx1YXRvci5jb250YWluZXI7XG4gIH1cblxuICByZXR1cm4ge1xuICAgIHByb2Nlc3MsXG4gICAgd2ViUlByb21pc2UsXG4gICAgcmVuZGVyZWRPanMsXG4gIH07XG59XG4ifV19
+</script>
+<div id="exercise-loading-indicator" class="exercise-loading-indicator d-none d-flex align-items-center gap-2">
+<div id="exercise-loading-status" class="d-flex gap-2">
+
+</div>
+<div class="spinner-grow spinner-grow-sm">
+
+</div>
+</div>
+<script type="vfs-file">
+W10=
+</script>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>You may notice that we’re just installing one package called <code>tidyverse</code>. The <code>tidyverse</code> is a collection of packages that share a common way of thinking and working with data, which provides a more modern workflow for using <code>R</code>. The <code>tidyverse</code> encompasses many helpful packages including ones that we’ve used before, such as <code>dplyr</code> for data wrangling and and <code>ggplot2</code> for data visualization.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Technically, we can make a <strong>sampling distribution</strong> for any statistic, not just the mean. However, the distribution of sample means is the most common one to talk about since it underlies many of the statistical tests that we are learning about.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W119
+</script>
+<script type="module">
+if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
+window._ojs.paths.runtimeToDoc = "../..";
+window._ojs.paths.runtimeToRoot = "../..";
+window._ojs.paths.docToRoot = "";
+window._ojs.selfContained = false;
+window._ojs.runtime.interpretFromScriptTags();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

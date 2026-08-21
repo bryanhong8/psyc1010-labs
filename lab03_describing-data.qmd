@@ -18,7 +18,7 @@ webr:
 
 # Getting started
 
-In this lab, we'll be using R to help us describe the data that we are working with. Before starting this lab, make sure to have read **Chapter 3: Middle-ish: Describing the Middle and Spread of Your Data** from your textbook.
+In this lab, we'll be using `R` to help us describe the data that we are working with. Before starting this lab, make sure to have read **Chapter 3: Middle-ish: Describing the Middle and Spread of Your Data** from your textbook.
 
 ::: callout-note
 ## Learning objectives

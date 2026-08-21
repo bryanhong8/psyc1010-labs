@@ -18,7 +18,7 @@ webr:
 
 # Getting started
 
-In this lab, we'll be using R to help us visualize data. Before starting this lab, make sure to have read **Chapter 2: Using Graphs to Visualize Data** from your textbook.
+In this lab, we'll be using `R` to help us visualize data. Before starting this lab, make sure to have read **Chapter 2: Using Graphs to Visualize Data** from your textbook.
 
 ::: callout-note
 ## Learning objectives

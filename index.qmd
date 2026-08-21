@@ -15,10 +15,11 @@ You can access the workbooks for each of the weekly labs below:
 -   [Lab 2: Visualizing Data](lab02_visualizing-data.qmd)
 -   [Lab 3: Describing Data](lab03_describing-data.qmd)
 -   [Lab 4: z-scores, Normal Distributions, and Probability](lab04_z-scores_normal-distributions_probability.qmd)
+-   [Lab 5: Sampling Distributions, the Central Limit Theorem, and Hypothesis Testing](lab05_sampling-distributions_clt_hypothesis-testing.qmd)
 
 # Acknowledgements
 
-This content largely builds and adapts upon materials and resources from other statistics and programming educators, many of which are made publicly available. Many thanks to the following individuals and teams:
+These labs are used in tandem with the textbook, [*Psychological Statistics for Everyone (1E)* by Jessica Hartnett](https://wwnorton.com/books/9781324102052). The content largely builds and adapts upon materials and resources from other statistics and programming educators, many of which are made publicly available. Many thanks to the following individuals and teams:
 
 -   [Dr. Molly Metz, University of Toronto](https://www.psych.utoronto.ca/people/directories/all-faculty/molly-metz)
 -   [Dr. Judith Fan, Stanford University](https://psych10.github.io/)
