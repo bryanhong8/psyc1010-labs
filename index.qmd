@@ -16,6 +16,7 @@ You can access the workbooks for each of the weekly labs below:
 -   [Lab 3: Describing Data](lab03_describing-data.qmd)
 -   [Lab 4: z-scores, Normal Distributions, and Probability](lab04_z-scores_normal-distributions_probability.qmd)
 -   [Lab 5: Sampling Distributions, the Central Limit Theorem, and Hypothesis Testing](lab05_sampling-distributions_clt_hypothesis-testing.qmd)
+-   [Lab 6: Effect Sizes and Confidence Intervals](lab06_effect-sizes_confidence-intervals.qmd)
 
 # Acknowledgements
 

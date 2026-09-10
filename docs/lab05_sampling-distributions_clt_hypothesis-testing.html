@@ -331,7 +331,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImVudmlyIjoiZXhfMSIsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoi
 </div>
 <p>What we just demonstrated are the basis of the <strong>central limit theorem</strong>, which tells us key characteristics of our distribution of sample means – specifically, the shape, mean, and standard deviation:</p>
 <ul>
-<li>The <strong>shape</strong> of the distribution of sample means will be normally distributed if the original population is also normally distributed. It will also be normal for <strong>ANY</strong> population distribution shape, as long as your sample size is sufficiently large, with a sample size of 30 being used as a rough rule of thumb.</li>
+<li>The <strong>shape</strong> of the distribution of sample means will be normally distributed if the original population is also normally distributed. It will also be normal for <strong>ANY</strong> population distribution shape, as long as your sample size is sufficiently large, with a sample size of 30 being used as a rough rule of thumb<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>.</li>
 <li>The <strong>mean</strong> of the distribution of sample means will be equal to your population mean, μ.</li>
 <li>The <strong>standard deviation</strong> of the distribution of sample means is the <strong>standard error (SE)</strong>, which is equal to <span class="math inline">\(\dfrac{\sigma}{\sqrt{n}}\)</span> , where <span class="math inline">\(\sigma\)</span> is your population standard deviation and <span class="math inline">\(n\)</span> is your sample size. In general, we want a smaller standard error since this means we have a more precise estimate. This can happen when our variable of interest inherently has a small standard deviation or if we obtain a bigger sample size.</li>
 </ul>
@@ -350,14 +350,14 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBMZXQncyBjYWxjdWxhdGUg
 <section id="introduction-to-hypothesis-testing" class="level1 page-columns page-full">
 <h1>Introduction to hypothesis testing</h1>
 <p>As we alluded to previously, the central limit theorem is one of <em>the most important</em> aspects underlying our ability to do inferential statistics. What is so important about it though?</p>
-<p>We practically never have access to our entire population, so as a result, we have to rely on samples. With the central limit theorem, we know that (1) our sample mean can be a trustworthy estimate of the underlying population mean, (2) we can quantify how trustworthy of an estimate our sample provides (i.e., with our standard error), and (3) we can identify situations where our distribution of sample means will be normal (i.e., when our population distribution is normal, or if our sample size is ≳30.</p>
+<p>We practically never have access to our entire population, so as a result, we have to rely on samples. With the central limit theorem, we know that (1) our sample mean can be a trustworthy estimate of the underlying population mean, (2) we can quantify how trustworthy of an estimate our sample provides (i.e., with our standard error), and (3) we can identify situations where our distribution of sample means will be normal (i.e., when our population distribution is normal, or if our sample size is ≳30).</p>
 <p>These form the basis for our ability to make statistical inferences, specifically using <strong>null hypothesis significance testing (NHST)</strong>. NHST is a general framework that encompasses many of the different tests that we will be learning in this course (e.g., t-tests, ANOVAs, etc.) The logic underlying NHST can be a bit tricky, but it allows us to evaluate our hypotheses about a population using sample data.</p>
 <p>As an example, let’s say that we wanted to test out whether our innovative 8-week study program would improve IQ scores in our population of Springfield. We collect a sample of <span class="math inline">\(n=25\)</span> participants, have them go through our program and subsequently complete an IQ test. We find that our sample has a mean IQ score of <span class="math inline">\(M=108\)</span> – IQ scores went up after taking our program!</p>
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p><img src="images/bart-simpson.png" class="img-fluid" alt="Bart Simpson, a cartoon character from the Simpsons, raising his hand in class."></p>
 </div></div><p>However, we cannot take any differences at face value. Due to sampling error, we will expect that our sample mean will never be exactly equal to the population mean μ. Rather, what we will do is determine whether the difference is <strong>statistically significant</strong>, or unlikely to happen due to chance given that the null hypothesis was true. We do so by determining the probability of obtaining our sample in relation to the distribution of sample means, which we can do thanks to the central limit theorem!</p>
-<p>Let’s describe the logic behind using NHST to test our hypothesis. This is done through four steps:</p>
+<p>Let’s describe the logic behind using NHST to test our hypothesis. This is done through five steps:</p>
 <ol type="1">
 <li><p>First, we <strong>state our hypotheses.</strong> Specifically, we have two mutually exclusive hypotheses. We first start off with the <strong>null hypothesis (</strong><span class="math inline">\(H_0\)</span><strong>)</strong> as our basis, which states that we should expect <em>no difference</em> because whatever we are interested in actually has no effect. Conversely, the <strong>alternative hypothesis (</strong><span class="math inline">\(H_1\)</span> or <span class="math inline">\(H_A\)</span><strong>)</strong> states that <em>there is a difference</em> because whatever we are interested in actually does have an effect.</p>
 <p>When stating our alternative hypothesis, this can either be <strong>directional</strong>, if we state that the direction of the difference (e.g., bigger or smaller), or <strong>non-directional</strong>, if we state that there will simply be a difference. In practice, non-directional alternative hypotheses are much more commonly used than non-directional alternative hypotheses.</p>
@@ -392,8 +392,8 @@ z=\dfrac{M-\mu}{SE},\ where\  SE=\dfrac{\sigma}{\sqrt{n}}
 \]</span></p>
 <p>We can then find the corresponding probability value associated with the value, or p-value. The p-value tells us the likelihood of obtaining a result at least as extreme as our sample data, given the null hypothesis is true. Remember, this is NOT the probability that our null hypothesis is true!</p></li>
 <li><p>Lastly, we <strong>make a decision.</strong> Now that we have all our pieces in place, the last thing that we need to do is to make a decision regarding our null hypothesis. Here, we have two outcomes. If our test statistic is in the critical region, we <em>reject</em> the null hypothesis (i.e., it would be extremely unlikely that we got our sample solely due to chance if there was actually no effect). If our test statistic is not in the critical region, we <em>fail to reject</em> the null hypothesis (i.e., it is possible that we got our sample due to chance if there was actually no effect).</p></li>
+<li><p>After making a decision, we need to actually <strong>report our results</strong> and talk about how it relates back to our initial hypotheses. We will introduce formal APA-style reporting later on in this course, but for the time being, know that it is critical to also know how to communicate what we find in our analyses!</p></li>
 </ol>
-<p>After making a decision, we need to actually report our results and talk about how it relates back to our initial hypotheses. We will introduce formal APA-style reporting later on in this course, but for the time being, know that it is critical to also know how to communicate what we find in our analyses!</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -404,20 +404,20 @@ z=\dfrac{M-\mu}{SE},\ where\  SE=\dfrac{\sigma}{\sqrt{n}}
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Now it’s your turn! Let’s apply these four steps of NHST to test whether our new study program has an effect on IQ scores in our population of Springfield.</p>
+<p>Now it’s your turn! Let’s apply these five steps of NHST to test whether our new study program has an effect on IQ scores in our population of Springfield.</p>
 </div>
 </div>
 <ol type="1">
 <li><p>In plain words, what are the statistical hypotheses? What are the null and alternative hypotheses? What would a non-directional, or two-tailed, hypothesis look like? How about a directional, or one-tailed, hypothesis?</p></li>
 <li><p>Using an α = .05, what are the critical value(s)? In essence, what we are trying to find are the z-scores that separate the extreme 5% of our distribution into the tail(s). As a hint, we did this in our last lab using the <code>qnorm()</code> function, but you should be able to do this using the unit normal table too. Don’t forget to draw the associated curve to help you visualize what you are looking for!</p>
-<p><strong>Use the code block below to use the <code>qnorm()</code></strong> <strong>function to identify the critical values. What does this look like for a non-directional, or two-tailed, test? How about a directional, or one-tailed, test?</strong></p>
+<p><strong>Use the code block below to use the <code>qnorm()</code></strong> <strong>function to identify the critical values. What does this look like for a non-directional, or two-tailed, test? How about a directional, or one-tailed, test? Note that the code block below will not indicate whether you have the correct or incorrect response since you can use it to find multiple answers.</strong></p>
 <div class="cell" data-exercise="ex_2a">
 <div>
 <div id="webr-10" class="exercise-cell">
 
 </div>
 <script type="webr-10-contents">
-eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfMmEifSwiY29kZSI6IiMgVXNpbmcgYW4gzrEgPSAuMDUsIHdoYXQgYXJlIHRoZSBjcml0aWNhbCB2YWx1ZShzKT9cbiMgV2hhdCBkb2VzIHRoaXMgbG9vayBsaWtlIGZvciBhIHR3by10YWlsZWQgdnMuIGEgb25lLXRhaWxlZCB0ZXN0P1xucW5vcm0oX19fX19fKSJ9
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfMmEifSwiY29kZSI6IiMgVXNpbmcgYW4gzrEgPSAuMDUsIHdoYXQgYXJlIHRoZSBjcml0aWNhbCB2YWx1ZShzKT9cbiMgV2hhdCB3b3VsZCB0aGlzIGxvb2sgbGlrZSBmb3IgYSB0d28tdGFpbGVkIHZzLiBhIG9uZS10YWlsZWQgdGVzdD9cbnFub3JtKF9fX19fXykifQ==
 </script>
 </div>
 </div></li>
@@ -490,6 +490,7 @@ W10=
 <ol>
 <li id="fn1"><p>You may notice that we’re just installing one package called <code>tidyverse</code>. The <code>tidyverse</code> is a collection of packages that share a common way of thinking and working with data, which provides a more modern workflow for using <code>R</code>. The <code>tidyverse</code> encompasses many helpful packages including ones that we’ve used before, such as <code>dplyr</code> for data wrangling and and <code>ggplot2</code> for data visualization.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>Technically, we can make a <strong>sampling distribution</strong> for any statistic, not just the mean. However, the distribution of sample means is the most common one to talk about since it underlies many of the statistical tests that we are learning about.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>If you want to try this out with other population distribution shapes, you can visit the demonstration here, where you can draw out any shape you like: <a href="https://onlinestatbook.com/stat_sim/sampling_dist/index.html" class="uri">https://onlinestatbook.com/stat_sim/sampling_dist/index.html</a><a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script type="ojs-module-contents">

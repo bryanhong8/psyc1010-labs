@@ -42,7 +42,9 @@ If you are feeling like this is a little (or even very) daunting, do not worryâ€
 
 You can think of `R` as a common language that we and our computers can understand. This means that we will write down instructions (or **code**) in `R`, which our computer can then follow (or **run** or **execute**).
 
-Typically, you will need to install `R` onto your own device, but in this course, we'll be running all of our code online so you will not need to worry about any setup, aside from internet access.
+Typically, you will need to install `R` onto your own device, but in this course, we'll be running all of our code online so you will not need to worry about any setup, aside from internet access[^1].
+
+[^1]: If you are interested in setting up `R` on your own device, you can visit the page here for instructions: <https://rstudio-education.github.io/hopr/starting.html> In addition to installing the `R` language itself, this page provides instructions for downloading RStudio, which is a free and open-source program that provides a more user-friendly and intuitive environment for using `R`.
 
 ::: callout-important
 Since this code is being accessed online, any edits or changes that you make will **NOT be saved**. I suggest setting aside a block of time (e.g., lecture) so that you can complete the activities in a single session. As you are working through activities, be mindful of refreshing your page since this will reset your progress.
@@ -132,7 +134,8 @@ Let's try assigning a new value to the `favourite_number` object. What do you th
 # Put in a new value for favourite_number 
 favourite_number <- ______  
 
-# What will happen when we subtract 2 from favourite_number? favourite_number - 2
+# What will happen when we subtract 2 from favourite_number? 
+favourite_number - 2
 ```
 
 ## Functions
@@ -177,7 +180,7 @@ Figuring out why your code has an error is a big part of programming. You will o
 
 -   *Searching the internet*. You can typically find your answer if you copy and paste your error message into Google. You will usually come across examples where other have encountered the same problem and looked for help. *StackOverflow* is a website that can be particularly helpful since it collates answers based on how useful others found it.
 -   *Asking somebody in the real-world*: You can also show your code to a friend (e.g., someone else in the course, your TA, or Dr. Hong) to see if they have any advice when you get stuck.
--   *A note on generative AI*. It is getting increasingly common for people to use generative AI tools like ChatGPT to get help while coding. You will likely receive some helpful guidance here by asking what you did wrong, but these answers **are not always reliable**. These tools can generate plausible, but incorrect and/or misleading, information, and it is necessary to build the knowledge and skills to evaluate their responses. **Since this course is an introductory course, it is recommended that you avoid getting help from generative AI tools as you are building up your foundations.**
+-   *A note on generative AI*. It is getting increasingly common for people to use generative AI tools (e.g., ChatGPT, Gemini, Claude, Copilot) to get help while coding. You will likely receive some helpful guidance here by asking what you did wrong, but these answers **are not always reliable**. These tools can generate plausible, but incorrect and/or misleading, information, and it is necessary to build the knowledge and skills to evaluate their responses. **Since this course is an introductory course, it is recommended that you avoid getting help from generative AI tools as you are building up your foundations.**
 
 # Exploring data
 

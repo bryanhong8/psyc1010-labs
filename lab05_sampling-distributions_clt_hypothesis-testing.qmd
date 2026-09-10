@@ -253,9 +253,11 @@ replicated_data |>
 
 What we just demonstrated are the basis of the **central limit theorem**, which tells us key characteristics of our distribution of sample means – specifically, the shape, mean, and standard deviation:
 
--   The **shape** of the distribution of sample means will be normally distributed if the original population is also normally distributed. It will also be normal for **ANY** population distribution shape, as long as your sample size is sufficiently large, with a sample size of 30 being used as a rough rule of thumb.
+-   The **shape** of the distribution of sample means will be normally distributed if the original population is also normally distributed. It will also be normal for **ANY** population distribution shape, as long as your sample size is sufficiently large, with a sample size of 30 being used as a rough rule of thumb[^3].
 -   The **mean** of the distribution of sample means will be equal to your population mean, μ.
 -   The **standard deviation** of the distribution of sample means is the **standard error (SE)**, which is equal to $\dfrac{\sigma}{\sqrt{n}}$ , where $\sigma$ is your population standard deviation and $n$ is your sample size. In general, we want a smaller standard error since this means we have a more precise estimate. This can happen when our variable of interest inherently has a small standard deviation or if we obtain a bigger sample size.
+
+[^3]: If you want to try this out with other population distribution shapes, you can visit the demonstration here, where you can draw out any shape you like: <https://onlinestatbook.com/stat_sim/sampling_dist/index.html>
 
 **Think back to the IQ scores in our population, which are normally distributed with a population mean, μ = 100, and a population standard deviation, σ = 15. Let's find the standard error for our previous examples, using a sample size of n = 5 and n = 100.**
 
@@ -271,7 +273,7 @@ What we just demonstrated are the basis of the **central limit theorem**, which 
 
 As we alluded to previously, the central limit theorem is one of *the most important* aspects underlying our ability to do inferential statistics. What is so important about it though?
 
-We practically never have access to our entire population, so as a result, we have to rely on samples. With the central limit theorem, we know that (1) our sample mean can be a trustworthy estimate of the underlying population mean, (2) we can quantify how trustworthy of an estimate our sample provides (i.e., with our standard error), and (3) we can identify situations where our distribution of sample means will be normal (i.e., when our population distribution is normal, or if our sample size is ≳30.
+We practically never have access to our entire population, so as a result, we have to rely on samples. With the central limit theorem, we know that (1) our sample mean can be a trustworthy estimate of the underlying population mean, (2) we can quantify how trustworthy of an estimate our sample provides (i.e., with our standard error), and (3) we can identify situations where our distribution of sample means will be normal (i.e., when our population distribution is normal, or if our sample size is ≳30).
 
 These form the basis for our ability to make statistical inferences, specifically using **null hypothesis significance testing (NHST)**. NHST is a general framework that encompasses many of the different tests that we will be learning in this course (e.g., t-tests, ANOVAs, etc.) The logic underlying NHST can be a bit tricky, but it allows us to evaluate our hypotheses about a population using sample data.
 
@@ -283,7 +285,7 @@ As an example, let's say that we wanted to test out whether our innovative 8-wee
 
 However, we cannot take any differences at face value. Due to sampling error, we will expect that our sample mean will never be exactly equal to the population mean μ. Rather, what we will do is determine whether the difference is **statistically significant**, or unlikely to happen due to chance given that the null hypothesis was true. We do so by determining the probability of obtaining our sample in relation to the distribution of sample means, which we can do thanks to the central limit theorem!
 
-Let's describe the logic behind using NHST to test our hypothesis. This is done through four steps:
+Let's describe the logic behind using NHST to test our hypothesis. This is done through five steps:
 
 1.  First, we **state our hypotheses.** Specifically, we have two mutually exclusive hypotheses. We first start off with the **null hypothesis (**$H_0$**)** as our basis, which states that we should expect *no difference* because whatever we are interested in actually has no effect. Conversely, the **alternative hypothesis (**$H_1$ or $H_A$**)** states that *there is a difference* because whatever we are interested in actually does have an effect.
 
@@ -319,24 +321,24 @@ Let's describe the logic behind using NHST to test our hypothesis. This is done 
 
 4.  Lastly, we **make a decision.** Now that we have all our pieces in place, the last thing that we need to do is to make a decision regarding our null hypothesis. Here, we have two outcomes. If our test statistic is in the critical region, we *reject* the null hypothesis (i.e., it would be extremely unlikely that we got our sample solely due to chance if there was actually no effect). If our test statistic is not in the critical region, we *fail to reject* the null hypothesis (i.e., it is possible that we got our sample due to chance if there was actually no effect).
 
-After making a decision, we need to actually report our results and talk about how it relates back to our initial hypotheses. We will introduce formal APA-style reporting later on in this course, but for the time being, know that it is critical to also know how to communicate what we find in our analyses!
+5.  After making a decision, we need to actually **report our results** and talk about how it relates back to our initial hypotheses. We will introduce formal APA-style reporting later on in this course, but for the time being, know that it is critical to also know how to communicate what we find in our analyses!
 
 ::: callout-tip
 ## Activity 2
 
-Now it's your turn! Let's apply these four steps of NHST to test whether our new study program has an effect on IQ scores in our population of Springfield.
+Now it's your turn! Let's apply these five steps of NHST to test whether our new study program has an effect on IQ scores in our population of Springfield.
 :::
 
 1.  In plain words, what are the statistical hypotheses? What are the null and alternative hypotheses? What would a non-directional, or two-tailed, hypothesis look like? How about a directional, or one-tailed, hypothesis?
 
 2.  Using an α = .05, what are the critical value(s)? In essence, what we are trying to find are the z-scores that separate the extreme 5% of our distribution into the tail(s). As a hint, we did this in our last lab using the `qnorm()` function, but you should be able to do this using the unit normal table too. Don't forget to draw the associated curve to help you visualize what you are looking for!
 
-    **Use the code block below to use the `qnorm()`** **function to identify the critical values. What does this look like for a non-directional, or two-tailed, test? How about a directional, or one-tailed, test?**
+    **Use the code block below to use the `qnorm()`** **function to identify the critical values. What does this look like for a non-directional, or two-tailed, test? How about a directional, or one-tailed, test? Note that the code block below will not indicate whether you have the correct or incorrect response since you can use it to find multiple answers.**
 
     ```{webr}
     #| exercise: ex_2a
     # Using an α = .05, what are the critical value(s)?
-    # What does this look like for a two-tailed vs. a one-tailed test?
+    # What would this look like for a two-tailed vs. a one-tailed test?
     qnorm(______)
     ```
 
