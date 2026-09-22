@@ -17,6 +17,7 @@ You can access the workbooks for each of the weekly labs below:
 -   [Lab 4: z-scores, Normal Distributions, and Probability](lab04_z-scores_normal-distributions_probability.qmd)
 -   [Lab 5: Sampling Distributions, the Central Limit Theorem, and Hypothesis Testing](lab05_sampling-distributions_clt_hypothesis-testing.qmd)
 -   [Lab 6: Effect Sizes and Confidence Intervals](lab06_effect-sizes_confidence-intervals.qmd)
+-   [Lab 7: Introducing the t-statistic](lab07_introducing-t-statistic.qmd)
 
 # Acknowledgements
 
@@ -26,6 +27,7 @@ These labs are used in tandem with the textbook, [*Psychological Statistics for 
 -   [Dr. Judith Fan, Stanford University](https://psych10.github.io/)
 -   [Dr. Shannon Burns, Pomona College](https://www.shannonmburns.com/Psyc158/intro.html)
 -   [Dr. Matthew Crump, Brooklyn College](https://www.crumplab.com/statisticsLab/)
+-   [Dr. Kevin McIntyre, Trinity University](https://sites.google.com/view/openstatslab/)
 -   [Dr. Danielle Navarro's Learning Statistics with R](https://learningstatisticswithr.com/)
 -   [psyTeachR, University of Glasgow](https://psyteachr.github.io/)
 -   [CourseKata](https://www.coursekata.org/)
