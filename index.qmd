@@ -18,6 +18,7 @@ You can access the workbooks for each of the weekly labs below:
 -   [Lab 5: Sampling Distributions, the Central Limit Theorem, and Hypothesis Testing](lab05_sampling-distributions_clt_hypothesis-testing.qmd)
 -   [Lab 6: Effect Sizes and Confidence Intervals](lab06_effect-sizes_confidence-intervals.qmd)
 -   [Lab 7: Introducing the t-statistic](lab07_introducing-t-statistic.qmd)
+-   [Lab 8: More About t-tests (Independent + Paired)](lab08_more-about-t-tests.qmd)
 
 # Acknowledgements
 
@@ -30,6 +31,7 @@ These labs are used in tandem with the textbook, [*Psychological Statistics for 
 -   [Dr. Kevin McIntyre, Trinity University](https://sites.google.com/view/openstatslab/)
 -   [Dr. Danielle Navarro's Learning Statistics with R](https://learningstatisticswithr.com/)
 -   [psyTeachR, University of Glasgow](https://psyteachr.github.io/)
+-   [Department of Statistics, The Pennsylvania State University](https://online.stat.psu.edu/stat200/)
 -   [CourseKata](https://www.coursekata.org/)
 -   [OpenIntro](https://www.openintro.org/)
 -   [The Carpentries](https://carpentries.org/)

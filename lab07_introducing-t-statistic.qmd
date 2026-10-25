@@ -100,7 +100,7 @@ library(tidyverse)
 # Use the read.csv() function to load in the dataset from Mehr, Song, & Spelke (2016)
 data <- read.csv("data/lullabies.csv")
 
-# Let's return the value from our data object by typing it's name 
+# Let's return the value from our data object by typing its name 
 data
 ```
 
@@ -211,9 +211,7 @@ viewof userChoice = Inputs.radio(
     To conduct a one-sample t-test using the `t.test()` function, we will specify a few different parameters:
 
     -   The first parameter will be the data column that we are working with. In this case, we will use the `pref1` scores from our `data` object.
-
     -   The second parameter is `mu`, which is the population value that we want to compare to.
-
     -   The last parameter is `alternative`, which tells us what type of alternative test we want to use. This can be either "two.sided", "less", or "greater". By default, this will be set to "two.sided", meaning a two-tailed hypothesis test.
 
     **Fill in the code block below to conduct a one-sample t-test on our `pref1`** **data. As a hint, we use the `$` symbol to access specific variables within our data.**
@@ -250,7 +248,7 @@ Now that we have loaded in the `effectsize` package, we can use a function calle
 
 ```{webr}
 #| exercise: ex_4
-# Use the code below to conduct a one-sample t-test for the gaze proportion scores
+# Use the code below to calculate Cohen's d for the gaze proportion scores
 cohens_d(______, mu = ______)
 ```
 
@@ -258,8 +256,7 @@ How should we interpret this Cohen's *d* value? What does this tell us about the
 
 ## Confidence intervals
 
-One other thing that you might have noticed is that the output our `t.test()` above also produces a **confidence interval**. This gives us an interval that is likely to contain the population mean, μ, with an associated level of confidence. Previously, we calculated our confidence interval by using the corresponding critical z-value:
-$$
+One other thing that you might have noticed is that the output our `t.test()` above also produces a **confidence interval**. This gives us an interval that is likely to contain the population mean, μ, with an associated level of confidence. Previously, we calculated our confidence interval by using the corresponding critical z-value: $$
 CI=M \pm z_{crit}\times SE,\ where\  SE=\dfrac{\sigma}{\sqrt{n}}
 $$
 
@@ -291,7 +288,7 @@ The last important step in our NHST procedure is to actually report our results.
 
 Oftentimes, the calculated test statistic, degrees of freedom, *p*-value, and effect size are reported together at the end of the sentence, with values reported to two or three decimal places. As an example, we could report the findings of our analysis like:
 
-> "A one-sample t-test was used to determine whether the the proportion of gaze to the singer of the familiar song at the baseline phase differed from that expected by chance (0.5). There was no significant difference in the proportion of time spent looking at the person singing the familiar song at baseline (M = 0.52, SD = 0.18, 95% CI \[0.46, 0.58\]) from chance, *t*(31) = 0.67, *p* = 0.51, *d* = 0.12. This was a very small effect."
+> "A one-sample t-test was used to determine whether the proportion of gaze to the singer of the familiar song at the baseline phase differed from that expected by chance (0.5). There was no significant difference in the proportion of time spent looking at the person singing the familiar song at baseline (M = 0.52, SD = 0.18, 95% CI \[0.46, 0.58\]) from chance, *t*(31) = 0.67, *p* = .51, *d* = 0.12. This was a very small effect."
 
 ::: callout-tip
 ## Activity 2

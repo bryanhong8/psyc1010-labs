@@ -303,7 +303,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBEb3dubG9hZCBhbmQgbG9h
 
 </div>
 <script type="webr-2-contents">
-eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBVc2UgdGhlIHJlYWQuY3N2KCkgZnVuY3Rpb24gdG8gbG9hZCBpbiB0aGUgZGF0YXNldCBmcm9tIE1laHIsIFNvbmcsICYgU3BlbGtlICgyMDE2KVxuZGF0YSA8LSByZWFkLmNzdihcImRhdGEvbHVsbGFiaWVzLmNzdlwiKVxuXG4jIExldCdzIHJldHVybiB0aGUgdmFsdWUgZnJvbSBvdXIgZGF0YSBvYmplY3QgYnkgdHlwaW5nIGl0J3MgbmFtZSBcbmRhdGEifQ==
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBVc2UgdGhlIHJlYWQuY3N2KCkgZnVuY3Rpb24gdG8gbG9hZCBpbiB0aGUgZGF0YXNldCBmcm9tIE1laHIsIFNvbmcsICYgU3BlbGtlICgyMDE2KVxuZGF0YSA8LSByZWFkLmNzdihcImRhdGEvbHVsbGFiaWVzLmNzdlwiKVxuXG4jIExldCdzIHJldHVybiB0aGUgdmFsdWUgZnJvbSBvdXIgZGF0YSBvYmplY3QgYnkgdHlwaW5nIGl0cyBuYW1lIFxuZGF0YSJ9
 </script>
 </div>
 </div>
@@ -446,9 +446,9 @@ t=\dfrac{M-\mu}{SE},\ where\  SE=\dfrac{SD}{\sqrt{n}}
 \]</span></p>
 <p>To conduct a one-sample t-test using the <code>t.test()</code> function, we will specify a few different parameters:</p>
 <ul>
-<li><p>The first parameter will be the data column that we are working with. In this case, we will use the <code>pref1</code> scores from our <code>data</code> object.</p></li>
-<li><p>The second parameter is <code>mu</code>, which is the population value that we want to compare to.</p></li>
-<li><p>The last parameter is <code>alternative</code>, which tells us what type of alternative test we want to use. This can be either “two.sided”, “less”, or “greater”. By default, this will be set to “two.sided”, meaning a two-tailed hypothesis test.</p></li>
+<li>The first parameter will be the data column that we are working with. In this case, we will use the <code>pref1</code> scores from our <code>data</code> object.</li>
+<li>The second parameter is <code>mu</code>, which is the population value that we want to compare to.</li>
+<li>The last parameter is <code>alternative</code>, which tells us what type of alternative test we want to use. This can be either “two.sided”, “less”, or “greater”. By default, this will be set to “two.sided”, meaning a two-tailed hypothesis test.</li>
 </ul>
 <p><strong>Fill in the code block below to conduct a one-sample t-test on our <code>pref1</code></strong> <strong>data. As a hint, we use the <code>$</code> symbol to access specific variables within our data.</strong></p>
 <div class="cell" data-exercise="ex_3">
@@ -490,7 +490,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBEb3dubG9hZCBhbmQgbG9h
 
 </div>
 <script type="webr-7-contents">
-eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfNCJ9LCJjb2RlIjoiIyBVc2UgdGhlIGNvZGUgYmVsb3cgdG8gY29uZHVjdCBhIG9uZS1zYW1wbGUgdC10ZXN0IGZvciB0aGUgZ2F6ZSBwcm9wb3J0aW9uIHNjb3Jlc1xuY29oZW5zX2QoX19fX19fLCBtdSA9IF9fX19fXykifQ==
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfNCJ9LCJjb2RlIjoiIyBVc2UgdGhlIGNvZGUgYmVsb3cgdG8gY2FsY3VsYXRlIENvaGVuJ3MgZCBmb3IgdGhlIGdhemUgcHJvcG9ydGlvbiBzY29yZXNcbmNvaGVuc19kKF9fX19fXywgbXUgPSBfX19fX18pIn0=
 </script>
 </div>
 </div>
@@ -530,7 +530,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfNSJ9LCJjb2RlIjoi
 </ul>
 <p>Oftentimes, the calculated test statistic, degrees of freedom, <em>p</em>-value, and effect size are reported together at the end of the sentence, with values reported to two or three decimal places. As an example, we could report the findings of our analysis like:</p>
 <blockquote class="blockquote">
-<p>“A one-sample t-test was used to determine whether the the proportion of gaze to the singer of the familiar song at the baseline phase differed from that expected by chance (0.5). There was no significant difference in the proportion of time spent looking at the person singing the familiar song at baseline (M = 0.52, SD = 0.18, 95% CI [0.46, 0.58]) from chance, <em>t</em>(31) = 0.67, <em>p</em> = 0.51, <em>d</em> = 0.12. This was a very small effect.”</p>
+<p>“A one-sample t-test was used to determine whether the proportion of gaze to the singer of the familiar song at the baseline phase differed from that expected by chance (0.5). There was no significant difference in the proportion of time spent looking at the person singing the familiar song at baseline (M = 0.52, SD = 0.18, 95% CI [0.46, 0.58]) from chance, <em>t</em>(31) = 0.67, <em>p</em> = .51, <em>d</em> = 0.12. This was a very small effect.”</p>
 </blockquote>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
