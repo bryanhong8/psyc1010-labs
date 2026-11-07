@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Bryan Hong">
+<meta name="description" content="PSYC*1010: Making Sense of Data in Psychological Research">
+
+<title>Lab 9: Introducing the ANOVA – PSYC*1010 Labs</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-1d4f84655f446305ac42a8f1abcf7405.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/live-runtime/live-runtime.js" type="module"></script>
+<link href="site_libs/quarto-contrib/live-runtime/live-runtime.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script type="module" src="site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
+<link href="site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-search-results"></div>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link active" data-scroll-target="#getting-started">Getting started</a></li>
+  <li><a href="#logic-behind-the-anova" id="toc-logic-behind-the-anova" class="nav-link" data-scroll-target="#logic-behind-the-anova">Logic behind the ANOVA</a></li>
+  <li><a href="#can-playing-tetris-reduce-the-occurrence-of-intrusive-memories" id="toc-can-playing-tetris-reduce-the-occurrence-of-intrusive-memories" class="nav-link" data-scroll-target="#can-playing-tetris-reduce-the-occurrence-of-intrusive-memories">Can playing Tetris reduce the occurrence of intrusive memories?</a>
+  <ul class="collapse">
+  <li><a href="#exploring-the-data" id="toc-exploring-the-data" class="nav-link" data-scroll-target="#exploring-the-data">Exploring the data</a></li>
+  <li><a href="#conducting-an-independent-measures-one-way-anova" id="toc-conducting-an-independent-measures-one-way-anova" class="nav-link" data-scroll-target="#conducting-an-independent-measures-one-way-anova">Conducting an independent measures one-way ANOVA</a></li>
+  <li><a href="#post-hoc-tests" id="toc-post-hoc-tests" class="nav-link" data-scroll-target="#post-hoc-tests">Post-hoc tests</a></li>
+  <li><a href="#effect-sizes" id="toc-effect-sizes" class="nav-link" data-scroll-target="#effect-sizes">Effect sizes</a></li>
+  <li><a href="#reporting-our-results" id="toc-reporting-our-results" class="nav-link" data-scroll-target="#reporting-our-results">Reporting our results</a></li>
+  </ul></li>
+  <li><a href="#thats-all-for-now-great-work" id="toc-thats-all-for-now-great-work" class="nav-link" data-scroll-target="#thats-all-for-now-great-work">That’s all for now, great work!</a>
+  <ul class="collapse">
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Lab 9: Introducing the ANOVA</h1>
+</div>
+
+<div>
+  <div class="description">
+    PSYC*1010: Making Sense of Data in Psychological Research
+  </div>
+</div>
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Bryan Hong </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            University of Guelph
+          </p>
+      </div>
+  </div>
+
+<div class="quarto-title-meta">
+
+      
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="getting-started" class="level1">
+<h1>Getting started</h1>
+<p>In this lab, we’ll learn about a frequently used tool in statistics called the analysis of variance, or ANOVA. More specifically, we will be learning about the independent measures one-way ANOVA. Before starting this lab, make sure to have read <strong>Chapter 9: ANOVA: Comparing More Than Two Conditions</strong> from your textbook – you are only responsible for sections 9.1 to 9.10.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Learning objectives
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>By the end of this lab, you should be able to:</p>
+<ul>
+<li>Describe the logic underlying an analysis of variance</li>
+<li>Distinguish between within-group and between-group variance</li>
+<li>Identify situations in which it is appropriate to use an independent measure one-way ANOVA</li>
+<li>Use <code>R</code> to conduct and interpret the output of an independent measures one-way ANOVA, including effect sizes and post-hoc comparisons</li>
+<li>Report the output of an independent measures one-way ANOVA APA using formatting</li>
+</ul>
+</div>
+</div>
+<p>So far, we’ve learned about different tests that allow us to compare two values, whether that is a single sample to a known population value (i.e., z-test or one-sample t-test) or two samples to one another (i.e., independent measures t-test or paired samples t-test). Although the name of the technique refers to variances, an <strong>analysis of variance (ANOVA)</strong> grants us the ability to compare more than two values.</p>
+</section>
+<section id="logic-behind-the-anova" class="level1">
+<h1>Logic behind the ANOVA</h1>
+<p>To illustrate the logic behind an ANOVA, let’s imagine a scenario<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> where you are testing a new antidepressant drug called <em>Joyzepam</em>. To fairly evaluate the effectiveness of this new drug, you compare it to both a placebo and <em>Anxifree</em>, an existing antidepressant drug. You recruit a group of 18 participants with moderate to severe depression and randomly assign them to take one of the three drugs, and after 3 months, a psychologist assesses the change in mood on a scale from -5 to 5. To visualize your data, you create a bar graph, with error bars depicting the standard errors:</p>
+<p><img src="images/clinical-trial_anova.png" class="img-fluid" alt="Bar chart showing the results of a fictional study, comparing average mood gains after being administered a placebo, Anxifree, or Joyzepam. Error bars depict +/- 1 standard error."></p>
+<p>Based on these results, it looks like we have a larger improvement in mood for participants in the <em>Joyzepam</em> group relative to either the <em>Anxifree</em> or placebo group – what we want to figure out is whether these reflect actual differences or whether these can be attributed to chance.</p>
+<p>Previously, we’ve learned about different t-tests that we can use to compare different means, so we could compare this using separate t-tests. Specifically, we could compare:</p>
+<ul>
+<li>Placebo vs.&nbsp;<em>Anxifree</em></li>
+<li>Placebo vs.&nbsp;<em>Joyzepam</em></li>
+<li><em>Anxifree</em> vs.&nbsp;<em>Joyzepam</em></li>
+</ul>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Caution</span>Recap
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Based on this research design, which of the following would be most appropriate if were to conduct a series of separate t-tests?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb1" data-startfrom="59" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 58;"><span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>viewof userChoice1 <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">radio</span>(</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>  [     </span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>    <span class="st">"One sample t-test"</span><span class="op">,</span>     </span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Independent measures t-test"</span><span class="op">,</span>     </span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Paired samples t-test"</span><span class="op">,</span></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>  ]<span class="op">,</span>    </span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>  {     </span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>    <span class="dt">label</span><span class="op">:</span> <span class="kw">null</span><span class="op">,</span>     </span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>    <span class="dt">value</span><span class="op">:</span> <span class="kw">null</span>   </span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>  } </span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb2" data-startfrom="74" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 73;"><span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>{   <span class="cf">if</span> (userChoice1 <span class="op">===</span> <span class="kw">null</span>) {</span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> <span class="fu">html</span><span class="vs">`&lt;em&gt;Please select an answer above.&lt;/em&gt;`</span><span class="op">;</span>   </span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (userChoice1 <span class="op">===</span> <span class="st">"Independent measures t-test"</span>) {     </span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> <span class="fu">html</span><span class="vs">`&lt;div style="color: green; font-weight: bold;"&gt; Correct!&lt;/div&gt;`</span><span class="op">;</span>   </span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {     </span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">html</span><span class="vs">`&lt;div style="color: red;"&gt; Try again!&lt;/div&gt;`</span><span class="op">;</span>   </span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a>  } </span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-2" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>The problem here is that we will inflate our likelihood of making a false positive, or Type I, error. Specifically, when conducting a hypothesis test, we set our <strong>test-wise alpha level</strong> to determine our likelihood of Type I errors for a <em>single</em> hypothesis test. When we conduct multiple comparisons, these likelihoods compound, resulting in a higher <strong>experiment-wise alpha level</strong> (or <strong>family-wise alpha level</strong>). This is determined by the following formula:</p>
+<p><span class="math display">\[
+Experiment{\text -}wise \ \alpha=1-(1-\alpha)^c
+\]</span><strong>Use the code block below to see how your experiment-wise α level changes with the number of comparisons by changing the value of <code>c</code>. The code below assumes that you are working with a test-wise of α = .05.</strong></p>
+<div class="cell" data-exercise="ex_1">
+<div>
+<div id="webr-1" class="exercise-cell">
+
+</div>
+<script type="webr-1-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfMSJ9LCJjb2RlIjoiIyBIb3cgZG9lcyB0aGUgZXhwZXJpbWVudC13aXNlIM6xIGNoYW5nZSB3aXRoIHRoZSBudW1iZXIgb2YgY29tcGFyaXNvbnM/XG4jIENoYW5nZSB0aGUgdmFsdWUgb2YgYyB0byBzZXQgdGhlIG51bWJlciBvZiBjb21wYXJpc29ucyB0aGF0IHlvdSBhcmUgbWFraW5nXG5jIDwtIF9fX19fX1xuXG4jIFRoZSBjb2RlIGJlbG93IGNhbGN1bGF0ZXMgdGhlIGV4cGVyaW1lbnQtd2lzZSDOsSwgdXNpbmcgYSB0ZXN0LXdpc2UgzrEgPSAuMDVcbjEgLSAoMSAtIC4wNSleYyJ9
+</script>
+</div>
+</div>
+<p>One way to mitigate this inflation in our experiment-wise alpha level is to use a single test to compare all of our values at once, the ANOVA! Specifically, we will learn about the <strong>independent measures one-way ANOVA</strong>. Breaking this down, “independent measures” is the same term that we have seen previously with our t-tests, with each participant contributing data only to a single level of our independent variable. “One-way” refers to the number of independent variables what we are working with. In this case, a one-way ANOVA means that we are working with one independent variable, whereas a two-way ANOVA would mean that we would be working with two different independent variables. ANOVAs that have more than one independent variable can also be referred to as <strong>factorial ANOVAs</strong>. Factorial ANOVAs will be beyond the scope of this course, but the ideas that we are learning will be the same for any ANOVA.</p>
+<p>As alluded to in its name, an ANOVA works by analyzing the different sources of variance in our dataset. Specifically, it breaks down the total variance observed into two separate components:</p>
+<ol type="1">
+<li><strong>Between-groups variance</strong>, which refers to the variability between each of our different groups of comparison. Any differences we see between our groups can arise from either systematic factors (i.e., caused by our groups) or chance factors (i.e., caused by random factors, such as individual differences, sampling error, measurement error, etc.)</li>
+<li><strong>Within-groups variance</strong>, which refers to the variability within each of our different groups of comparison. Any differences we see within our groups can only arise from chance factors (i.e., caused by random factors, such as individual differences, sampling error, measurement error, etc.)</li>
+</ol>
+<p>The figure below highlights these two sources of variance in our example comparing mood gains across our different drug conditions:</p>
+<p><img src="images/between-within-groups-variance.png" class="img-fluid" alt="Figure contrasting between-groups variance and within-groups variance."></p>
+<p>Although it does so using a slightly different approach, the intuition behind the ANOVA is the same as our z-test or t-test—we are comparing the actual differences we observe across our different groups (i.e., between-groups variance) to the expected differences due to chance (i.e., within-groups variance). To do so, we must calculate a new test statistic, the <strong>F-ratio</strong>. Conceptually, the F ratio compares these two sources of variance:</p>
+<p><span class="math display">\[
+F=\dfrac{Between{\text -}groups\ variance \ (i.e.,Systematic+Chance)}{Within{\text -}groups\ variance\ (i.e., Chance)}
+\]</span></p>
+<p>If our groups are not having any systematic effect (i.e., our null hypothesis is <em>true</em>), we will essentially be dividing two of the same numbers, resulting in an <span class="math inline">\(F\approx1\)</span>. Conversely, if our groups are having a systematic effect (i.e., our null hypothesis is <em>false</em>), we will get an <span class="math inline">\(F&gt;1\)</span>.</p>
+<p>To quantify these different sources of variance in an ANOVA, we will undergo a similar process as when we were first learning to calculate the variance of a set of data.</p>
+<ol type="1">
+<li>First, we will compute the <strong>sum of squares</strong> to capture the variability we observe in our data. This total variation (<span class="math inline">\(SS_{Total}\)</span>) can then be partitioned to be either between groups (<span class="math inline">\(SS_{Between}\)</span>) or within groups (<span class="math inline">\(SS_{Within}\)</span>) — these two sources need to sum up to our total, so that <span class="math inline">\(SS_{Total}=SS_{Between}+SS_{Within}\)</span></li>
+<li>Second, we will compute the corresponding <strong>degrees of freedom</strong>, just as we had done when calculating our variance. We will do this both for our between-groups variance and our within-groups variance. The formula for our between-groups degrees of freedom is <span class="math inline">\(df_{Between}=k-1\)</span>, where k represents the number of groups we are comparing. The formula for our within-groups degrees of freedom is <span class="math inline">\(df_{Within}=N-k\)</span>, where N is the total sample size and k is the number of groups. In our example, we have 18 participants randomly assigned to one of 3 drug conditions, so our <span class="math inline">\(df_{Between}=3-1=2\)</span> and our <span class="math inline">\(df_{Within}=18-3=15\)</span>.</li>
+<li>Next, we calculate our <strong>mean squares</strong> by dividing our between-groups and within-groups sum of squares by their corresponding degrees of freedom so that <span class="math inline">\(MS_{Between}=\dfrac{SS_{Between}}{df_{Between}}\)</span> and a <span class="math inline">\(MS_{Within}=\dfrac{SS_{Within}}{df_{Within}}\)</span> — effectively, these are the same as our variances!</li>
+<li>Lastly, we calculate our <strong>F-ratio</strong> by dividing these two mean squares together, <span class="math inline">\(F=\dfrac{MS_{Between}}{MS_{Within}}\)</span></li>
+</ol>
+<p>We then treat this F-ratio just like the test statistics that we had used previously – we will compare this to the decision criteria for our hypothesis test, as defined in our <strong>sampling distribution of F</strong>. Just like the t-distribution, the F-distribution is a family of distributions that differ on <em>pairs</em> of degrees of freedom. Specifically, these are our <span class="math inline">\(df_{Between}\)</span> and <span class="math inline">\(df_{Within}\)</span>, sometimes referred to as the <span class="math inline">\(df_{Numerator}\)</span> and <span class="math inline">\(df_{Denominator}\)</span>. Below are some examples of F-distributions with various pairs of degrees of freedom. These are often presented in brackets, with the <span class="math inline">\(df_{Numerator}\)</span> first and the <span class="math inline">\(df_{Denominator}\)</span> second.</p>
+<p><img src="images/f-distributions.png" class="img-fluid" alt="Illustration showing different F-distributions at various degrees of freedom."></p>
+<p>You can also explore the demo here <a href="https://stats.cpm.org/fdist/" class="uri">https://stats.cpm.org/fdist/</a> to see how the F-distribution changes according to different pairs of degrees of freedom. How does the F-distribution differ that the other test distributions we had worked with previously? What is the expected value of F? How does the F-distribution change as you increase or decrease the degrees of freedom? One important note is that all of our values are necessarily going to be positive since we are computing a ratio of two variances. This means that when we are determining our decision criteria, we will be evaluating whether our computed F-ratio exceeds a single value.</p>
+<p>What statistical testing are we specifically testing? ANOVAs are a type of <strong>omnibus test</strong>, meaning that we test the differences across all of our mean values simultaneously. For our null hypothesis, that means that we expect no differences across our groups – in other words, all of our population means should be identical:</p>
+<p><span class="math display">\[
+H_0:\mu_1=\mu2=...\mu_k
+\]</span></p>
+<p>What about our alternative hypothesis? At first glance, this seems relatively straightforward, stated as:</p>
+<p><span class="math display">\[
+H_1:\mu_1\ne\mu_2\ne...\mu_k
+\]</span></p>
+<p>However, this would <em>NOT</em> be correct since the ANOVA only tells us that there is at least one group that is different than the others – as such, the alternative hypothesis for an ANOVA is oftentimes stated in words. This also means that we do not need to differentiate between non-directional and directional test when conducting an ANOVA.</p>
+<p>The way in which an ANOVA assesses mean differences is slightly different than the statistical tests we had learned previously, but it still follows the same null hypothesis significance testing (NHST) procedure:</p>
+<ol type="1">
+<li>State our hypotheses</li>
+<li>Create our decision rule</li>
+<li>Compute our observed test statistic</li>
+<li>Make a decision</li>
+<li>Report our results</li>
+</ol>
+</section>
+<section id="can-playing-tetris-reduce-the-occurrence-of-intrusive-memories" class="level1">
+<h1>Can playing Tetris reduce the occurrence of intrusive memories?</h1>
+<p>To make what we learned earlier a bit more concrete, we will use an independent measures one-way ANOVA to analyze data from a study by James et al.&nbsp;(2015).<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> Following traumatic experiences, some people have flashbacks, which are also called “intrusive memories”” and are characterized by involuntary images of aspects of the traumatic event. Although people often try to simply forget traumatic memories, this approach is not very effective. Instead, previous research suggests that a better approach may be to try to change aspects of the memory after it is formed. For example, some research shows that traumatic memories can be altered and weakened to the point that they are no longer intrusive.</p>
+<p>Because intrusive memories of trauma are often visual in nature, James and colleagues (2015) sought to explore whether completing a visuospatial task (e.g., Tetris) after a memory was formed would interfere with the storage of that memory, and thereby reduce the frequency of subsequent intrusions. They hypothesized that <em>only participants who complete a visuo-spatial task after reactivation of the traumatic memories would experience a reduction in intrusive memories</em>. In comparison, simply completing a visuo-spatial task (without reactivation) or reactivation (without a visuo-spatial task), would not reduce the occurrence intrusive memories. In other words, if you play Tetris shortly after you were remembering bad memories, playing Tetris might weaken those memories, which could cause you experience those kinds of intrusive memories less often in the future.</p>
+<p>To test their hypothesis, the authors conducted an experiment (N = 72, n = 18 per condition). The procedure is summarized as follows:</p>
+<ol type="1">
+<li><strong>Trauma Film</strong>: All participants viewed a series of video clips of graphic violence (e.g., a person getting hit by a van while using his phone as he crosses the road) as a way to create memories that should become intrusive memories. Participants then went home and recorded the number of intrusive memories they experienced over the next 24 hours. Because this is before the experimental manipulations, all groups were predicted to have an equal occurrence of intrusive memories during the first 24-hours (called Day 0).</li>
+<li><strong>Experimental Task</strong>: After this 24-hour period, the participants returned to the lab and completed the experimental task. The experimenters randomly assigned participants to ONE of the following conditions:
+<ol type="a">
+<li>No-task control: These participants completed a 10-minute music filler task.</li>
+<li>Reactivation + Tetris: These participants were shown a series of images from the trauma film to reactivate the traumatic memories (i.e., reactivation task). After a 10-minute music filler task, participants played the video game Tetris for 12 minutes.</li>
+<li>Tetris Only: These participants played Tetris for 12 minutes, but did not complete the reactivation task.</li>
+<li>Reactivation Only: These participants completed the reactivation task, but did not play Tetris.</li>
+</ol></li>
+<li><strong>Intrusive Memories</strong>: All participants were asked to record the number of intrusive memories that they experienced over the next seven days (Days 1 to 7).</li>
+</ol>
+<p>After the seven days had passed, participants completed an Intrusion-Provocation Task, in which they were shown blurred images from the trauma film and asked to indicate whether the blurred image triggered an intrusive memory. For more details on the experiment’s methods, please refer to James et al.&nbsp;(2015) Experiment 2.</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Caution</span>Check your understanding
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Based on this research design, what is the independent variable? What are the levels of the independent variable? What is the dependent variable? Is this a between- or within-subjects design?</p>
+</div>
+</div>
+<section id="exploring-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="exploring-the-data">Exploring the data</h2>
+<p>As always, it is extremely helpful to first look and explore the data that you are looking at!</p>
+<p><strong>Before we start, let’s load in the packages that we’ll need for this lab.</strong></p>
+<div class="cell">
+<div>
+<div id="webr-2" class="exercise-cell">
+
+</div>
+<script type="webr-2-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBEb3dubG9hZCBhbmQgbG9hZCB0aGUgdGlkeXZlcnNlIHBhY2thZ2UgKHRoaXMgbWlnaHQgdGFrZSBhIGZldyBtb21lbnRzKSAgXG5pbnN0YWxsLnBhY2thZ2VzKFwidGlkeXZlcnNlXCIsIHF1aWV0ID0gVFJVRSkgIFxubGlicmFyeSh0aWR5dmVyc2UpIn0=
+</script>
+</div>
+</div>
+<p><strong>Let’s use the <code>read.csv()</code> function to load in the data for us to use. To help with interpretation, we will also convert our <code>Condition</code></strong> <strong>column to a factor and order our levels to match those reported in the James et al.&nbsp;(2015) paper</strong></p>
+<div class="cell">
+<div>
+<div id="webr-3" class="exercise-cell">
+
+</div>
+<script type="webr-3-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBVc2UgdGhlIHJlYWQuY3N2KCkgZnVuY3Rpb24gdG8gbG9hZCBpbiB0aGUgZGF0YXNldCBmcm9tIEphbWVzIGV0IGFsLiAoMjAxNSkgXG50ZXRyaXNfZGF0YSA8LSByZWFkLmNzdihcImRhdGEvdGV0cmlzLmNzdlwiKSB8PlxuICBtdXRhdGUoQ29uZGl0aW9uID0gZmFjdG9yKENvbmRpdGlvbiwgbGV2ZWxzID0gYyhcIkNvbnRyb2xcIiwgXCJSZWFjdGl2YXRpb24gKyBUZXRyaXNcIiwgXCJUZXRyaXMgT25seVwiLCBcIlJlYWN0aXZhdGlvbiBPbmx5XCIpKSlcblxuIyBMZXQncyByZXR1cm4gdGhlIHZhbHVlIGZyb20gb3VyIGludGVsbGVjdF9kYXRhIG9iamVjdCBieSB0eXBpbmcgaXRzIG5hbWUgICBcbnRldHJpc19kYXRhIn0=
+</script>
+</div>
+</div>
+<p>Here, our <code>Condition</code> column refers to the different experimental conditions in the study. For the first part of this activity, we will be working with the data in the <code>Days_One_to_Seven_Number_of_Intrusions</code>, which refers to the mean intrusive memory frequency recorded in the week after watching the trauma film.</p>
+<p>As usual, let’s first calculate our descriptive statistics of the mean intrusive memory frequency, grouped by our different conditions. As we had done last week, we will calculate our mean, standard deviation, and standard error (<span class="math inline">\(SE=\dfrac{SD}{\sqrt{n}}\)</span>).</p>
+<p><strong>Let’s use the code below to calculate our mean, standard deviation, and standard error for <code>Days_One_to_Seven_Number_of_Intrusions</code> scores across the different levels in our <code>Condition</code> column.</strong></p>
+<div class="cell" data-exercise="ex_2" data-envir="global">
+<div>
+<div id="webr-4" class="exercise-cell">
+
+</div>
+<script type="webr-4-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImVudmlyIjoiZ2xvYmFsIiwiZXZhbCI6dHJ1ZSwiZXhlcmNpc2UiOiJleF8yIn0sImNvZGUiOiIjIFVzZSB0aGUgY29kZSBiZWxvdyB0byBjYWxjdWxhdGUgZGVzY3JpcHRpdmUgc3RhdGlzdGljcyBmb3IgaW50cnVzaXZlIG1lbW9yeSBmcmVxdWVuY3kgYWNyb3NzIGNvbmRpdGlvbnMgXG5pbnRydXNpb25zX2Rlc2NyaXB0aXZlcyA8LSB0ZXRyaXNfZGF0YSB8PlxuICBncm91cF9ieShDb25kaXRpb24pIHw+XG4gIHN1bW1hcmlzZShtZWFuID0gbWVhbihfX19fX18pLCAgICAgICAgICAgICBcbiAgICAgICAgICAgIHNkID0gc2QoX19fX19fKSwgICAgICAgICAgICAgXG4gICAgICAgICAgICBzZSA9IHNkKF9fX19fXykgLyBzcXJ0KGxlbmd0aChfX19fX18pKSkgICAgICAgICAgICAgIFxuICAgICAgICAgICAgXG4jIExldCdzIHRha2UgYSBsb29rIGF0IG91ciBkZXNjcmlwdGl2ZSBzdGF0aXN0aWNzIFxuaW50cnVzaW9uc19kZXNjcmlwdGl2ZXMgICAgICAgICAgICAifQ==
+</script>
+</div>
+</div>
+<p>Since we are comparing continuous data across groups, we can visualize this using a bar graph, with error bars depicting our standard errors.</p>
+<p><strong>Let’s use the code below to create a bar graph to compare <code>Days_One_to_Seven_Number_of_Intrusions</code> scores across the different levels in our <code>Condition</code></strong> <strong>column.</strong></p>
+<div class="cell">
+<div>
+<div id="webr-5" class="exercise-cell">
+
+</div>
+<script type="webr-5-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBVc2UgdGhlIGNvZGUgYmVsb3cgdG8gdmlzdWFsaXplIHRoZSBpbnRlbGxlY3QgcmF0aW5ncyBhY3Jvc3MgY29uZGl0aW9ucyBhcyBhIGJhciBncmFwaCBcbmludHJ1c2lvbnNfZGVzY3JpcHRpdmVzIHw+ICAgXG4gIGdncGxvdChhZXMoeCA9IENvbmRpdGlvbiwgeSA9IG1lYW4pKSArICAgXG4gIGdlb21fYmFyKHN0YXQ9XCJpZGVudGl0eVwiLCBhZXMoZmlsbCA9IENvbmRpdGlvbikpICsgICAgXG4gIGdlb21fZXJyb3JiYXIoYWVzKHltaW4gPSBtZWFuIC0gc2UsIHltYXggPSBtZWFuICsgc2UpLCB3aWR0aCA9IDAuMSkgKyAgIFxuICBsYWJzKHggPSBcIkV4cGVyaW1lbnRhbCBDb25kaXRpb25cIiwgICAgICAgIFxuICAgICAgIHkgPSBcIkF2ZXJhZ2UgSW50cnVzaXZlIE1lbW9yeSBGcmVxdWVuY3lcIikgKyAgIFxuICBzY2FsZV9maWxsX2dyZXkoKSArICAgXG4gIHRoZW1lX21pbmltYWwoKSJ9
+</script>
+</div>
+</div>
+<p>Based on this plot, how do you think the resulting hypothesis test will turn out? How do the means compare to one another? What do the error bars tell us? Do we expect to see a big F-ratio or a small F-ratio? Do we expect to see a big p-value or a small p-value?</p>
+</section>
+<section id="conducting-an-independent-measures-one-way-anova" class="level2">
+<h2 class="anchored" data-anchor-id="conducting-an-independent-measures-one-way-anova">Conducting an independent measures one-way ANOVA</h2>
+<p>Now, let’s go through the five steps of the NHST procedure using the independent measures one-way ANOVA.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Activity 1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Let’s use our independent measures one-way ANOVA to evaluate whether the number of intrusive memories reported over the week (i.e., <code>Days_One_to_Seven_Number_of_Intrusions</code> differ depending on the different experimental conditions (i.e., <code>Condition</code>). Use an α = .05.</p>
+</div>
+</div>
+<ol type="1">
+<li><p>In plain words, what are the statistical hypotheses? What are the null and alternative hypotheses?</p></li>
+<li><p>The next step that we usually undergo in our NHST procedure is to find the critical values. Since we are computing this using <code>R</code>, we can compare our calculated <em>p-</em>value to the α level directly. As a reminder, our α Ievel sets our criteria for determining whether a difference is statistically significant.</p></li>
+<li><p>To conduct our independent measures one-way ANOVA, we’ll be using a new function, <code>aov()</code> function. For an independent-measures one-way ANOVA, the syntax will look quite comparable to the independent measures t-test we had learned last week. Specifically, we will compare our groups using this format: <em>dv</em> ~ <em>iv</em>, where <em>dv</em> is the name of your dependent variable and <em>iv</em> is the name of your independent variable. Note that we do not specify an <code>alternative</code> parameter because the hypothesis test for an ANOVA is inherently non-directional.</p>
+<p>As you may have noticed above, there are quite a few calculations that go into finding out F-ratio. Oftentimes, this will be summarized in the form of an <strong>ANOVA table</strong>. To help with interpretation, we will save the output of our <code>aov()</code> function and use the <code>summary()</code> function to see our results as an ANOVA table.</p>
+<p><strong>Use the code below to conduct an independent measures one-way ANOVA comparing</strong> <strong>the number of intrusive memories reported over the week</strong> <strong>across the different experimental conditions. As a reminder, we use the <code>$</code> symbol to access specific variables within our data.</strong></p>
+<div class="cell" data-exercise="ex_3" data-envir="global">
+<div>
+<div id="webr-6" class="exercise-cell">
+
+</div>
+<script type="webr-6-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImVudmlyIjoiZ2xvYmFsIiwiZXZhbCI6dHJ1ZSwiZXhlcmNpc2UiOiJleF8zIn0sImNvZGUiOiIjIFVzZSB0aGUgY29kZSBiZWxvdyB0byBjb21wYXJlIHRoZSBudW1iZXIgb2YgaW50cnVzaXZlIG1lbW9yaWVzIGFjcm9zcyBjb25kaXRpb25zIHVzaW5nIGFuIGluZGVwZW5kZW50IG1lYXN1cmVzIG9uZS13YXkgQU5PVkFcbmFub3ZhX3Jlc3VsdHMgPC0gYW92KF9fX19fXyB+IF9fX19fXylcblxuIyBVc2UgdGhlIHN1bW1hcnkoKSBmdW5jdGlvbiB0byB2aWV3IHRoZSBvdXRwdXQgb2Ygb3VyIGFuYWx5c2lzXG5zdW1tYXJ5KGFub3ZhX3Jlc3VsdHMpIn0=
+</script>
+</div>
+</div></li>
+<li><p>Based on these results, will you reject or fail to reject the null hypothesis? How does your observed test statistic compare to your decision criteria? Would you consider your results statistically significant? In plain words, how would you describe the results of your analyses?</p></li>
+</ol>
+</section>
+<section id="post-hoc-tests" class="level2">
+<h2 class="anchored" data-anchor-id="post-hoc-tests">Post-hoc tests</h2>
+<p>As a reminder, our ANOVA is an example of an omnibus test—in other words, it determines whether a difference exists or not amongst our groups. However, it does not tell us where those differences might be. If we find that the results of our ANOVA are significant, we can subsequently conduct a <strong>post-hoc test</strong>, which is comparable to a series of separate t-tests comparing the difference between each pair of our groups. In our example, this would be comparing:</p>
+<ul>
+<li>Control vs.&nbsp;Reactivation + Tetris</li>
+<li>Control vs.&nbsp;Tetris Only</li>
+<li>Control vs.&nbsp;Reactivation Only</li>
+<li>Reactivation + Tetris vs.&nbsp;Tetris Only</li>
+<li>Reactivation + Tetris vs.&nbsp;Reactivation Only</li>
+<li>Tetris Only vs.&nbsp;Reactivation Only</li>
+</ul>
+<p>There are many different types of post-hoc tests that we can use, but we will be learning how to use a commonly used version called <strong>Tukey’s Honestly Significant Difference (HSD)</strong> which evaluates whether our observed differences exceed a certain threshold for significance (i.e., an honestly significant difference). Although there are quite a few comparisons, we can compare all of our differences by inputting the <code>anova_results</code> we found earlier into a function called <code>TukeyHSD()</code>.</p>
+<p><strong>Use the code below to conduct a post-hoc test using Tukey’s HSD to compare</strong> <strong>the number of intrusive memories reported over the week</strong> <strong>across the different experimental conditions.</strong></p>
+<div class="cell">
+<div>
+<div id="webr-7" class="exercise-cell">
+
+</div>
+<script type="webr-7-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBVc2UgdGhlIGNvZGUgYmVsb3cgdG8gY29uZHVjdCBhIHBvc3QtaG9jIHRlc3QgdXNpbmcgVHVrZXkncyBIU0RcblR1a2V5SFNEKGFub3ZhX3Jlc3VsdHMpIn0=
+</script>
+</div>
+</div>
+<p>One note here is that the results here will differ a bit from those reported in the James et al.&nbsp;(2015) paper. In the original paper, the author specified a series of <strong>planned comparisons</strong>. These are used when researchers have specified in advance which groups they expect to differ, typically motivated by previous theory or evidence. If planned comparisons are being used, it is best practice to document and declare these in a <strong>pre-registration</strong> prior to data collection and analysis.</p>
+</section>
+<section id="effect-sizes" class="level2">
+<h2 class="anchored" data-anchor-id="effect-sizes">Effect sizes</h2>
+<p>To evaluate the practical significance of our results, we will need a measure of effect size. There are a few different ways to evaluate the effect size for an ANOVA, but the most commonly used measure for an ANOVA is called <strong>eta-squared (η<sup>2</sup>)</strong>, which tells use the proportion the total variability that can be explained by our effect:</p>
+<p><span class="math display">\[
+\eta^2=\dfrac{SS_{Between}}{SS_{Total}}
+\]</span></p>
+<p>Since we are comparing <span class="math inline">\(SS_{Between}\)</span> to <span class="math inline">\(SS_{Total}\)</span>, η<sup>2</sup> can range between 0 (i.e., our groups explain 0% of the total variance) and 1 (i.e., our groups explain 100% of the total variance). The following table provides a rough rule of thumb for interpreting an η<sup>2</sup> value:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Magnitude of η<sup>2</sup></th>
+<th>Evaluation of effect size</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0.01 – 0.059</td>
+<td>Small effect</td>
+</tr>
+<tr class="even">
+<td>0.06 – 0.13</td>
+<td>Medium effect</td>
+</tr>
+<tr class="odd">
+<td>&gt; 0.13</td>
+<td>Large effect</td>
+</tr>
+</tbody>
+</table>
+<p>To calculate η<sup>2</sup>, we’ll be using the <code>effectsize</code> package again to help do this for us.</p>
+<p><strong>Let’s first install and load in the <code>effectsize</code></strong> <strong>package.</strong></p>
+<div class="cell">
+<div>
+<div id="webr-8" class="exercise-cell">
+
+</div>
+<script type="webr-8-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBEb3dubG9hZCBhbmQgbG9hZCB0aGUgZWZmZWN0c2l6ZSBwYWNrYWdlICh0aGlzIG1pZ2h0IHRha2UgYSBmZXcgbW9tZW50cykgXG5pbnN0YWxsLnBhY2thZ2VzKFwiZWZmZWN0c2l6ZVwiLCBxdWlldCA9IFRSVUUpIFxubGlicmFyeShlZmZlY3RzaXplKSJ9
+</script>
+</div>
+</div>
+<p>To calculate η<sup>2</sup>, we will input the <code>anova_results</code> we found earlier into a function called <code>eta_squared()</code>.</p>
+<p><strong>Use the code below to find the η<sup>2</sup> as a measure of effect size for our ANOVA</strong></p>
+<div class="cell">
+<div>
+<div id="webr-9" class="exercise-cell">
+
+</div>
+<script type="webr-9-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBVc2UgdGhlIGNvZGUgYmVsb3cgdG8gZmluZCB0aGUgZXRhIHNxdWFyZWQgYXMgYSBtZWFzdXJlIG9mIGVmZmVjdCBzaXplIGZvciBvdXIgQU5PVkFcbmV0YV9zcXVhcmVkKGFub3ZhX3Jlc3VsdHMpIn0=
+</script>
+</div>
+</div>
+<p>How should we interpret this η<sup>2</sup> value? What does this tell us about the practical significance of our result?</p>
+</section>
+<section id="reporting-our-results" class="level2">
+<h2 class="anchored" data-anchor-id="reporting-our-results">Reporting our results</h2>
+<p>Lastly, we need to report the results from our analyses using APA formatting. As a general format, we will need to include the following elements when reporting our results:</p>
+<ul>
+<li>What statistical test we used</li>
+<li>Descriptive statistics for our data (e.g., mean, standard deviation)</li>
+<li>The calculated test statistic (<em>F</em>), pair of degrees of freedom (<em>df<sub>Between</sub></em>, <em>df<sub>Within</sub></em>), and <em>p</em>-value</li>
+<li>The effect size (η<sup>2</sup>) and interpretation.</li>
+<li>If the results of our ANOVA is significant, we also want to summarize the output of our post-hoc test</li>
+</ul>
+<p>There are many components to keep in mind when writing up the results of an ANOVA, but as an example, we could report the findings of our analysis like:</p>
+<blockquote class="blockquote">
+<p>“An independent measures one-way ANOVA found that there was a significant difference in the average number of intrusive memories recorded in the week after watching the trauma film across experimental conditions, <em>F</em>(3, 68) = 3.795, <em>p</em> = .0141, η<sup>2</sup> = .143. This is a large effect – the experimental groups explained 14.3% of the total variance observed in average intrusive memories. Post-hoc tests using Tukey’s HSD found that those who were in the Reactivation Plus Tetris condition (M = 1.89, SD = 1.75) reported significantly fewer intrusive memories than those in the Control condition (M = 5.11, SD = 4.23), <em>p</em> = .018, or the Reactivation Only condition (M = 4.83, SD = 3.33), <em>p</em> = .034, but not the Tetris Only condition (M = 3.89, SD = 2.89), <em>p</em> = .24. There were no other significant differences across the other conditions (all other <em>p</em>’s &gt; .05).”</p>
+</blockquote>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Activity 2
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In the above analysis, we found a significant difference in the average number of intrusive memories recorded in the week after watching the trauma film across experimental conditions. To confirm that these were not a result of differences arising at sampling, we can compare the number of intrusions reported after watching the film, but before the intervention begins. This data can be found in the <code>Day_Zero_Number_of_Intrusions</code> column. Adapt the code above to use the independent-measures one-way ANOVA to see whether there are any differences in these data across conditions. Use an α = .05. Calculate the associated effect size and make sure to report your findings using APA style.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="thats-all-for-now-great-work" class="level1">
+<h1>That’s all for now, great work!</h1>
+<p><strong>Use what you have learned to answer some questions about this lab in the corresponding Assignment on CourseLink!</strong></p>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<p>James, E. L., Bonsall, M. B., Hoppitt, L., Tunbridge, E. M., Geddes, J. R., Milton, A. L., &amp; Holmes, E. A. (2015). Computer game play reduces intrusive memories of experimental trauma via reconsolidation-update mechanisms. <em>Psychological Science</em>, <em>26</em>(8), 1201-1215. <a href="https://doi.org/10.1177/0956797615583071" class="uri">https://doi.org/10.1177/0956797615583071</a></p>
+
+
+<script type="webr-data">
+eyJvcHRpb25zIjp7ImJhc2VVcmwiOiJodHRwczovL3dlYnIuci13YXNtLm9yZy92MC42LjAvIn0sInBhY2thZ2VzIjp7InBrZ3MiOlsiZXZhbHVhdGUiLCJrbml0ciIsImh0bWx0b29scyIsImd0Il0sInJlcG9zIjpbXX0sInJlbmRlcl9kZiI6Imd0LWludGVyYWN0aXZlIn0=
+</script>
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W3siY2VsbE5hbWUiOiJ3ZWJyLXdpZGdldC05IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoie1xuICAvLyBXYWl0IGZvciBvdXRwdXQgdG8gYmUgd3JpdHRlbiB0byB0aGUgRE9NLCB0aGVuIHRyaWdnZXIgd2lkZ2V0IHJlbmRlcmluZ1xuICBhd2FpdCBfd2Vicl92YWx1ZV85O1xuICBpZiAod2luZG93LkhUTUxXaWRnZXRzKSB7XG4gICAgd2luZG93LkhUTUxXaWRnZXRzLnN0YXRpY1JlbmRlcigpO1xuICB9XG4gIGlmICh3aW5kb3cuUGFnZWRUYWJsZURvYykge1xuICAgIHdpbmRvdy5QYWdlZFRhYmxlRG9jLmluaXRBbGwoKTtcbiAgfVxufVxuIn0seyJjZWxsTmFtZSI6IndlYnItOSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3dlYnJfZWRpdG9yXzkgPSB7XG4gIGNvbnN0IHsgV2ViUkV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwid2Vici05LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHdlYnItOS1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBXZWJSRXhlcmNpc2VFZGl0b3Iod2ViUk9qcy53ZWJSUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fd2Vicl92YWx1ZV85ID0gd2ViUk9qcy5wcm9jZXNzKF93ZWJyX2VkaXRvcl85LCB7fSk7XG4ifSx7ImNlbGxOYW1lIjoid2Vici13aWRnZXQtOCIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6IntcbiAgLy8gV2FpdCBmb3Igb3V0cHV0IHRvIGJlIHdyaXR0ZW4gdG8gdGhlIERPTSwgdGhlbiB0cmlnZ2VyIHdpZGdldCByZW5kZXJpbmdcbiAgYXdhaXQgX3dlYnJfdmFsdWVfODtcbiAgaWYgKHdpbmRvdy5IVE1MV2lkZ2V0cykge1xuICAgIHdpbmRvdy5IVE1MV2lkZ2V0cy5zdGF0aWNSZW5kZXIoKTtcbiAgfVxuICBpZiAod2luZG93LlBhZ2VkVGFibGVEb2MpIHtcbiAgICB3aW5kb3cuUGFnZWRUYWJsZURvYy5pbml0QWxsKCk7XG4gIH1cbn1cbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLTgiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF93ZWJyX2VkaXRvcl84ID0ge1xuICBjb25zdCB7IFdlYlJFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcIndlYnItOC1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHsgaWQ6IGB3ZWJyLTgtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgV2ViUkV4ZXJjaXNlRWRpdG9yKHdlYlJPanMud2ViUlByb21pc2UsIGJsb2NrLmNvZGUsIG9wdGlvbnMpO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3dlYnJfdmFsdWVfOCA9IHdlYlJPanMucHJvY2Vzcyhfd2Vicl9lZGl0b3JfOCwge30pO1xuIn0seyJjZWxsTmFtZSI6IndlYnItd2lkZ2V0LTciLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJ7XG4gIC8vIFdhaXQgZm9yIG91dHB1dCB0byBiZSB3cml0dGVuIHRvIHRoZSBET00sIHRoZW4gdHJpZ2dlciB3aWRnZXQgcmVuZGVyaW5nXG4gIGF3YWl0IF93ZWJyX3ZhbHVlXzc7XG4gIGlmICh3aW5kb3cuSFRNTFdpZGdldHMpIHtcbiAgICB3aW5kb3cuSFRNTFdpZGdldHMuc3RhdGljUmVuZGVyKCk7XG4gIH1cbiAgaWYgKHdpbmRvdy5QYWdlZFRhYmxlRG9jKSB7XG4gICAgd2luZG93LlBhZ2VkVGFibGVEb2MuaW5pdEFsbCgpO1xuICB9XG59XG4ifSx7ImNlbGxOYW1lIjoid2Vici03IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfd2Vicl9lZGl0b3JfNyA9IHtcbiAgY29uc3QgeyBXZWJSRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJ3ZWJyLTctY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgd2Vici03LWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFdlYlJFeGVyY2lzZUVkaXRvcih3ZWJST2pzLndlYlJQcm9taXNlLCBibG9jay5jb2RlLCBvcHRpb25zKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl93ZWJyX3ZhbHVlXzcgPSB3ZWJST2pzLnByb2Nlc3MoX3dlYnJfZWRpdG9yXzcsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLXdpZGdldC02IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoie1xuICAvLyBXYWl0IGZvciBvdXRwdXQgdG8gYmUgd3JpdHRlbiB0byB0aGUgRE9NLCB0aGVuIHRyaWdnZXIgd2lkZ2V0IHJlbmRlcmluZ1xuICBhd2FpdCBfd2Vicl92YWx1ZV82O1xuICBpZiAod2luZG93LkhUTUxXaWRnZXRzKSB7XG4gICAgd2luZG93LkhUTUxXaWRnZXRzLnN0YXRpY1JlbmRlcigpO1xuICB9XG4gIGlmICh3aW5kb3cuUGFnZWRUYWJsZURvYykge1xuICAgIHdpbmRvdy5QYWdlZFRhYmxlRG9jLmluaXRBbGwoKTtcbiAgfVxufVxuIn0seyJjZWxsTmFtZSI6IndlYnItNiIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3dlYnJfZWRpdG9yXzYgPSB7XG4gIGNvbnN0IHsgV2ViUkV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwid2Vici02LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgLy8gRGVmYXVsdCBleGVyY2lzZSBjb25maWd1cmF0aW9uXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKFxuICAgIHtcbiAgICAgIGlkOiBcIndlYnItNi1jb250ZW50c1wiLFxuICAgICAgZW52aXI6IGBleGVyY2lzZS1lbnYtJHtibG9jay5hdHRyLmV4ZXJjaXNlfWAsXG4gICAgICBlcnJvcjogZmFsc2UsXG4gICAgICBjYXB0aW9uOiAnRXhlcmNpc2UnLFxuICAgIH0sXG4gICAgYmxvY2suYXR0clxuICApO1xuXG4gIGNvbnN0IGVkaXRvciA9IG5ldyBXZWJSRXhlcmNpc2VFZGl0b3Iod2ViUk9qcy53ZWJSUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxudmlld29mIF93ZWJyX3ZhbHVlXzYgPSB3ZWJST2pzLnByb2Nlc3MoX3dlYnJfZWRpdG9yXzYsIHt9KTtcbl93ZWJyX2ZlZWRiYWNrXzYgPSB7XG4gIGNvbnN0IHsgV2ViUkdyYWRlciB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3QgZW1wdHlGZWVkYmFjayA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2RpdicpO1xuXG4gIGNvbnN0IGdyYWRlciA9IG5ldyBXZWJSR3JhZGVyKF93ZWJyX3ZhbHVlXzYuZXZhbHVhdG9yKTtcbiAgY29uc3QgZmVlZGJhY2sgPSBhd2FpdCBncmFkZXIuZ3JhZGVFeGVyY2lzZSgpO1xuICBpZiAoIWZlZWRiYWNrKSByZXR1cm4gZW1wdHlGZWVkYmFjaztcbiAgcmV0dXJuIGZlZWRiYWNrO1xufVxuIn0seyJjZWxsTmFtZSI6IndlYnItd2lkZ2V0LTUiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJ7XG4gIC8vIFdhaXQgZm9yIG91dHB1dCB0byBiZSB3cml0dGVuIHRvIHRoZSBET00sIHRoZW4gdHJpZ2dlciB3aWRnZXQgcmVuZGVyaW5nXG4gIGF3YWl0IF93ZWJyX3ZhbHVlXzU7XG4gIGlmICh3aW5kb3cuSFRNTFdpZGdldHMpIHtcbiAgICB3aW5kb3cuSFRNTFdpZGdldHMuc3RhdGljUmVuZGVyKCk7XG4gIH1cbiAgaWYgKHdpbmRvdy5QYWdlZFRhYmxlRG9jKSB7XG4gICAgd2luZG93LlBhZ2VkVGFibGVEb2MuaW5pdEFsbCgpO1xuICB9XG59XG4ifSx7ImNlbGxOYW1lIjoid2Vici01IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfd2Vicl9lZGl0b3JfNSA9IHtcbiAgY29uc3QgeyBXZWJSRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJ3ZWJyLTUtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgd2Vici01LWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFdlYlJFeGVyY2lzZUVkaXRvcih3ZWJST2pzLndlYlJQcm9taXNlLCBibG9jay5jb2RlLCBvcHRpb25zKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl93ZWJyX3ZhbHVlXzUgPSB3ZWJST2pzLnByb2Nlc3MoX3dlYnJfZWRpdG9yXzUsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLXdpZGdldC00IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoie1xuICAvLyBXYWl0IGZvciBvdXRwdXQgdG8gYmUgd3JpdHRlbiB0byB0aGUgRE9NLCB0aGVuIHRyaWdnZXIgd2lkZ2V0IHJlbmRlcmluZ1xuICBhd2FpdCBfd2Vicl92YWx1ZV80O1xuICBpZiAod2luZG93LkhUTUxXaWRnZXRzKSB7XG4gICAgd2luZG93LkhUTUxXaWRnZXRzLnN0YXRpY1JlbmRlcigpO1xuICB9XG4gIGlmICh3aW5kb3cuUGFnZWRUYWJsZURvYykge1xuICAgIHdpbmRvdy5QYWdlZFRhYmxlRG9jLmluaXRBbGwoKTtcbiAgfVxufVxuIn0seyJjZWxsTmFtZSI6IndlYnItNCIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3dlYnJfZWRpdG9yXzQgPSB7XG4gIGNvbnN0IHsgV2ViUkV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwid2Vici00LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgLy8gRGVmYXVsdCBleGVyY2lzZSBjb25maWd1cmF0aW9uXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKFxuICAgIHtcbiAgICAgIGlkOiBcIndlYnItNC1jb250ZW50c1wiLFxuICAgICAgZW52aXI6IGBleGVyY2lzZS1lbnYtJHtibG9jay5hdHRyLmV4ZXJjaXNlfWAsXG4gICAgICBlcnJvcjogZmFsc2UsXG4gICAgICBjYXB0aW9uOiAnRXhlcmNpc2UnLFxuICAgIH0sXG4gICAgYmxvY2suYXR0clxuICApO1xuXG4gIGNvbnN0IGVkaXRvciA9IG5ldyBXZWJSRXhlcmNpc2VFZGl0b3Iod2ViUk9qcy53ZWJSUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxudmlld29mIF93ZWJyX3ZhbHVlXzQgPSB3ZWJST2pzLnByb2Nlc3MoX3dlYnJfZWRpdG9yXzQsIHt9KTtcbl93ZWJyX2ZlZWRiYWNrXzQgPSB7XG4gIGNvbnN0IHsgV2ViUkdyYWRlciB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3QgZW1wdHlGZWVkYmFjayA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2RpdicpO1xuXG4gIGNvbnN0IGdyYWRlciA9IG5ldyBXZWJSR3JhZGVyKF93ZWJyX3ZhbHVlXzQuZXZhbHVhdG9yKTtcbiAgY29uc3QgZmVlZGJhY2sgPSBhd2FpdCBncmFkZXIuZ3JhZGVFeGVyY2lzZSgpO1xuICBpZiAoIWZlZWRiYWNrKSByZXR1cm4gZW1wdHlGZWVkYmFjaztcbiAgcmV0dXJuIGZlZWRiYWNrO1xufVxuIn0seyJjZWxsTmFtZSI6IndlYnItd2lkZ2V0LTMiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJ7XG4gIC8vIFdhaXQgZm9yIG91dHB1dCB0byBiZSB3cml0dGVuIHRvIHRoZSBET00sIHRoZW4gdHJpZ2dlciB3aWRnZXQgcmVuZGVyaW5nXG4gIGF3YWl0IF93ZWJyX3ZhbHVlXzM7XG4gIGlmICh3aW5kb3cuSFRNTFdpZGdldHMpIHtcbiAgICB3aW5kb3cuSFRNTFdpZGdldHMuc3RhdGljUmVuZGVyKCk7XG4gIH1cbiAgaWYgKHdpbmRvdy5QYWdlZFRhYmxlRG9jKSB7XG4gICAgd2luZG93LlBhZ2VkVGFibGVEb2MuaW5pdEFsbCgpO1xuICB9XG59XG4ifSx7ImNlbGxOYW1lIjoid2Vici0zIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfd2Vicl9lZGl0b3JfMyA9IHtcbiAgY29uc3QgeyBXZWJSRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJ3ZWJyLTMtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgd2Vici0zLWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFdlYlJFeGVyY2lzZUVkaXRvcih3ZWJST2pzLndlYlJQcm9taXNlLCBibG9jay5jb2RlLCBvcHRpb25zKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl93ZWJyX3ZhbHVlXzMgPSB3ZWJST2pzLnByb2Nlc3MoX3dlYnJfZWRpdG9yXzMsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLXdpZGdldC0yIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoie1xuICAvLyBXYWl0IGZvciBvdXRwdXQgdG8gYmUgd3JpdHRlbiB0byB0aGUgRE9NLCB0aGVuIHRyaWdnZXIgd2lkZ2V0IHJlbmRlcmluZ1xuICBhd2FpdCBfd2Vicl92YWx1ZV8yO1xuICBpZiAod2luZG93LkhUTUxXaWRnZXRzKSB7XG4gICAgd2luZG93LkhUTUxXaWRnZXRzLnN0YXRpY1JlbmRlcigpO1xuICB9XG4gIGlmICh3aW5kb3cuUGFnZWRUYWJsZURvYykge1xuICAgIHdpbmRvdy5QYWdlZFRhYmxlRG9jLmluaXRBbGwoKTtcbiAgfVxufVxuIn0seyJjZWxsTmFtZSI6IndlYnItMiIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3dlYnJfZWRpdG9yXzIgPSB7XG4gIGNvbnN0IHsgV2ViUkV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwid2Vici0yLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHdlYnItMi1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBXZWJSRXhlcmNpc2VFZGl0b3Iod2ViUk9qcy53ZWJSUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fd2Vicl92YWx1ZV8yID0gd2ViUk9qcy5wcm9jZXNzKF93ZWJyX2VkaXRvcl8yLCB7fSk7XG4ifSx7ImNlbGxOYW1lIjoid2Vici13aWRnZXQtMSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6IntcbiAgLy8gV2FpdCBmb3Igb3V0cHV0IHRvIGJlIHdyaXR0ZW4gdG8gdGhlIERPTSwgdGhlbiB0cmlnZ2VyIHdpZGdldCByZW5kZXJpbmdcbiAgYXdhaXQgX3dlYnJfdmFsdWVfMTtcbiAgaWYgKHdpbmRvdy5IVE1MV2lkZ2V0cykge1xuICAgIHdpbmRvdy5IVE1MV2lkZ2V0cy5zdGF0aWNSZW5kZXIoKTtcbiAgfVxuICBpZiAod2luZG93LlBhZ2VkVGFibGVEb2MpIHtcbiAgICB3aW5kb3cuUGFnZWRUYWJsZURvYy5pbml0QWxsKCk7XG4gIH1cbn1cbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLTEiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF93ZWJyX2VkaXRvcl8xID0ge1xuICBjb25zdCB7IFdlYlJFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcIndlYnItMS1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIC8vIERlZmF1bHQgZXhlcmNpc2UgY29uZmlndXJhdGlvblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbihcbiAgICB7XG4gICAgICBpZDogXCJ3ZWJyLTEtY29udGVudHNcIixcbiAgICAgIGVudmlyOiBgZXhlcmNpc2UtZW52LSR7YmxvY2suYXR0ci5leGVyY2lzZX1gLFxuICAgICAgZXJyb3I6IGZhbHNlLFxuICAgICAgY2FwdGlvbjogJ0V4ZXJjaXNlJyxcbiAgICB9LFxuICAgIGJsb2NrLmF0dHJcbiAgKTtcblxuICBjb25zdCBlZGl0b3IgPSBuZXcgV2ViUkV4ZXJjaXNlRWRpdG9yKHdlYlJPanMud2ViUlByb21pc2UsIGJsb2NrLmNvZGUsIG9wdGlvbnMpO1xuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbnZpZXdvZiBfd2Vicl92YWx1ZV8xID0gd2ViUk9qcy5wcm9jZXNzKF93ZWJyX2VkaXRvcl8xLCB7fSk7XG5fd2Vicl9mZWVkYmFja18xID0ge1xuICBjb25zdCB7IFdlYlJHcmFkZXIgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG4gIGNvbnN0IGVtcHR5RmVlZGJhY2sgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdkaXYnKTtcblxuICBjb25zdCBncmFkZXIgPSBuZXcgV2ViUkdyYWRlcihfd2Vicl92YWx1ZV8xLmV2YWx1YXRvcik7XG4gIGNvbnN0IGZlZWRiYWNrID0gYXdhaXQgZ3JhZGVyLmdyYWRlRXhlcmNpc2UoKTtcbiAgaWYgKCFmZWVkYmFjaykgcmV0dXJuIGVtcHR5RmVlZGJhY2s7XG4gIHJldHVybiBmZWVkYmFjaztcbn1cbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLXByZWx1ZGUiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJ3ZWJST2pzID0ge1xuICBjb25zdCB7IFdlYlIsIENoYW5uZWxUeXBlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lLldlYlI7XG4gIGNvbnN0IHtcbiAgICBXZWJSRXZhbHVhdG9yLFxuICAgIFdlYlJFbnZpcm9ubWVudE1hbmFnZXIsXG4gICAgc2V0dXBSLFxuICAgIGI2NERlY29kZSxcbiAgICBjb2xsYXBzZVBhdGhcbiAgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc3RhdHVzQ29udGFpbmVyID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoXCJleGVyY2lzZS1sb2FkaW5nLXN0YXR1c1wiKTtcbiAgY29uc3QgaW5kaWNhdG9yQ29udGFpbmVyID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoXCJleGVyY2lzZS1sb2FkaW5nLWluZGljYXRvclwiKTtcbiAgaW5kaWNhdG9yQ29udGFpbmVyLmNsYXNzTGlzdC5yZW1vdmUoXCJkLW5vbmVcIik7XG5cbiAgbGV0IHN0YXR1c1RleHQgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KFwiZGl2XCIpXG4gIHN0YXR1c1RleHQuY2xhc3NMaXN0ID0gXCJleGVyY2lzZS1sb2FkaW5nLWRldGFpbHNcIjtcbiAgc3RhdHVzVGV4dCA9IHN0YXR1c0NvbnRhaW5lci5hcHBlbmRDaGlsZChzdGF0dXNUZXh0KTtcbiAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBJbml0aWFsaXNlYDtcblxuICAvLyBIb2lzdCBpbmRpY2F0b3Igb3V0IGZyb20gZmluYWwgc2xpZGUgd2hlbiBydW5uaW5nIHVuZGVyIHJldmVhbFxuICBjb25zdCByZXZlYWxTdGF0dXMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFwiLnJldmVhbCAuZXhlcmNpc2UtbG9hZGluZy1pbmRpY2F0b3JcIik7XG4gIGlmIChyZXZlYWxTdGF0dXMpIHtcbiAgICByZXZlYWxTdGF0dXMucmVtb3ZlKCk7XG4gICAgZG9jdW1lbnQucXVlcnlTZWxlY3RvcihcIi5yZXZlYWwgPiAuc2xpZGVzXCIpLmFwcGVuZENoaWxkKHJldmVhbFN0YXR1cyk7XG4gIH1cblxuICAvLyBNYWtlIGFueSByZXZlYWwgc2xpZGVzIHdpdGggbGl2ZSBjZWxscyBzY3JvbGxhYmxlXG4gIGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3JBbGwoXCIucmV2ZWFsIC5leGVyY2lzZS1jZWxsXCIpLmZvckVhY2goKGVsKSA9PiB7XG4gICAgZWwuY2xvc2VzdCgnc2VjdGlvbi5zbGlkZScpLmNsYXNzTGlzdC5hZGQoXCJzY3JvbGxhYmxlXCIpO1xuICB9KVxuXG4gIC8vIHdlYlIgc3VwcGxlbWVudGFsIGRhdGEgYW5kIG9wdGlvbnNcbiAgY29uc3QgZGF0YUNvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwid2Vici1kYXRhXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgZGF0YSA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKGRhdGFDb250ZW50KSk7XG5cbiAgLy8gR3JhYiBsaXN0IG9mIHJlc291cmNlcyB0byBiZSBkb3dubG9hZGVkXG4gIGNvbnN0IGZpbGVzQ29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJ2ZnMtZmlsZVxcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGZpbGVzID0gSlNPTi5wYXJzZShiNjREZWNvZGUoZmlsZXNDb250ZW50KSk7XG5cbiAgLy8gSW5pdGlhbGlzZSB3ZWJSIGFuZCBzZXR1cCBmb3IgUiBjb2RlIGV2YWx1YXRpb25cbiAgbGV0IHdlYlJQcm9taXNlID0gKGFzeW5jICh3ZWJSKSA9PiB7XG4gICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBEb3dubG9hZGluZyB3ZWJSYDtcbiAgICBhd2FpdCB3ZWJSLmluaXQoKTtcblxuICAgIC8vIEluc3RhbGwgcHJvdmlkZWQgbGlzdCBvZiBwYWNrYWdlc1xuICAgIC8vIEVuc3VyZSB3ZWJSIGRlZmF1bHQgcmVwbyBpcyBpbmNsdWRlZFxuICAgIGRhdGEucGFja2FnZXMucmVwb3MucHVzaChcImh0dHBzOi8vcmVwby5yLXdhc20ub3JnXCIpXG4gICAgYXdhaXQgZGF0YS5wYWNrYWdlcy5wa2dzLm1hcCgocGtnKSA9PiAoKSA9PiB7XG4gICAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYERvd25sb2FkaW5nIHBhY2thZ2U6ICR7cGtnfWA7XG4gICAgICByZXR1cm4gd2ViUi5ldmFsUlZvaWQoYFxuICAgICAgICB3ZWJyOjppbnN0YWxsKHBrZywgcmVwb3MgPSByZXBvcylcbiAgICAgICAgbGlicmFyeShwa2csIGNoYXJhY3Rlci5vbmx5ID0gVFJVRSlcbiAgICAgIGAsIHsgZW52OiB7XG4gICAgICAgIHBrZzogcGtnLFxuICAgICAgICByZXBvczogZGF0YS5wYWNrYWdlcy5yZXBvcyxcbiAgICAgIH19KTtcbiAgICB9KS5yZWR1Y2UoKGN1ciwgbmV4dCkgPT4gY3VyLnRoZW4obmV4dCksIFByb21pc2UucmVzb2x2ZSgpKTtcblxuICAgIC8vIERvd25sb2FkIGFuZCBpbnN0YWxsIHJlc291cmNlc1xuICAgIGF3YWl0IGZpbGVzLm1hcCgoZmlsZSkgPT4gYXN5bmMgKCkgPT4ge1xuICAgICAgY29uc3QgbmFtZSA9IGZpbGUuc3Vic3RyaW5nKGZpbGUubGFzdEluZGV4T2YoJy8nKSArIDEpO1xuICAgICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBEb3dubG9hZGluZyByZXNvdXJjZTogJHtuYW1lfWA7XG4gICAgICBjb25zdCByZXNwb25zZSA9IGF3YWl0IGZldGNoKGZpbGUpO1xuICAgICAgaWYgKCFyZXNwb25zZS5vaykge1xuICAgICAgICB0aHJvdyBuZXcgRXJyb3IoYENhbid0IGRvd25sb2FkIFxcYCR7ZmlsZX1cXGAuIEVycm9yICR7cmVzcG9uc2Uuc3RhdHVzfTogXCIke3Jlc3BvbnNlLnN0YXR1c1RleHR9XCIuYCk7XG4gICAgICB9XG4gICAgICBjb25zdCBkYXRhID0gYXdhaXQgcmVzcG9uc2UuYXJyYXlCdWZmZXIoKTtcblxuICAgICAgLy8gU3RvcmUgVVJMcyBpbiB0aGUgY3dkIHdpdGhvdXQgYW55IHN1YmRpcmVjdG9yeSBzdHJ1Y3R1cmVcbiAgICAgIGlmIChmaWxlLmluY2x1ZGVzKFwiOi8vXCIpKSB7XG4gICAgICAgIGZpbGUgPSBuYW1lO1xuICAgICAgfVxuXG4gICAgICAvLyBDb2xsYXBzZSBoaWdoZXIgZGlyZWN0b3J5IHN0cnVjdHVyZVxuICAgICAgZmlsZSA9IGNvbGxhcHNlUGF0aChmaWxlKTtcblxuICAgICAgLy8gQ3JlYXRlIGRpcmVjdG9yeSB0cmVlLCBpZ25vcmluZyBcImRpcmVjdG9yeSBleGlzdHNcIiBWRlMgZXJyb3JzXG4gICAgICBjb25zdCBwYXJ0cyA9IGZpbGUuc3BsaXQoJy8nKS5zbGljZSgwLCAtMSk7XG4gICAgICBsZXQgcGF0aCA9ICcnO1xuICAgICAgd2hpbGUgKHBhcnRzLmxlbmd0aCA+IDApIHtcbiAgICAgICAgcGF0aCArPSBwYXJ0cy5zaGlmdCgpICsgJy8nO1xuICAgICAgICBjb25zdCBhbmFseXNpcyA9IGF3YWl0IHdlYlIuRlMuYW5hbHl6ZVBhdGgocGF0aCk7XG4gICAgICAgIGlmICghYW5hbHlzaXMuZXhpc3RzKSB7XG4gICAgICAgICAgdHJ5IHtcbiAgICAgICAgICAgIGF3YWl0IHdlYlIuRlMubWtkaXIocGF0aCk7XG4gICAgICAgICAgfSBjYXRjaCAoZSkge1xuICAgICAgICAgICAgdGhyb3cgbmV3IEVycm9yKGBGaWxlc3lzdGVtIEVycm9yOiBcIiR7ZS5tZXNzYWdlfVwiLmApO1xuICAgICAgICAgIH1cbiAgICAgICAgfVxuICAgICAgfVxuXG4gICAgICAvLyBXcml0ZSB0aGlzIGZpbGUgdG8gdGhlIFZGU1xuICAgICAgcmV0dXJuIGF3YWl0IHdlYlIuRlMud3JpdGVGaWxlKGZpbGUsIG5ldyBVaW50OEFycmF5KGRhdGEpKTtcbiAgICB9KS5yZWR1Y2UoKGN1ciwgbmV4dCkgPT4gY3VyLnRoZW4obmV4dCksIFByb21pc2UucmVzb2x2ZSgpKTtcblxuICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgSW5zdGFsbGluZyB3ZWJSIHNoaW1zYDtcbiAgICBhd2FpdCB3ZWJSLmV2YWxSVm9pZChgd2Vicjo6c2hpbV9pbnN0YWxsKClgKTtcblxuICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgV2ViUiBlbnZpcm9ubWVudCBzZXR1cGA7XG4gICAgYXdhaXQgc2V0dXBSKHdlYlIsIGRhdGEpO1xuXG4gICAgc3RhdHVzVGV4dC5yZW1vdmUoKTtcbiAgICBpZiAoc3RhdHVzQ29udGFpbmVyLmNoaWxkcmVuLmxlbmd0aCA9PSAwKSB7XG4gICAgICBzdGF0dXNDb250YWluZXIucGFyZW50Tm9kZS5yZW1vdmUoKTtcbiAgICB9XG4gICAgcmV0dXJuIHdlYlI7XG4gIH0pKG5ldyBXZWJSKGRhdGEub3B0aW9ucykpO1xuXG4gIC8vIEtlZXAgdHJhY2sgb2YgaW5pdGlhbCBPSlMgYmxvY2sgcmVuZGVyXG4gIGNvbnN0IHJlbmRlcmVkT2pzID0ge307XG5cbiAgY29uc3QgcHJvY2VzcyA9IGFzeW5jIChjb250ZXh0LCBpbnB1dHMpID0+IHtcbiAgICBjb25zdCB3ZWJSID0gYXdhaXQgd2ViUlByb21pc2U7XG4gICAgY29uc3QgZXZhbHVhdG9yID0gbmV3IFdlYlJFdmFsdWF0b3Iod2ViUiwgY29udGV4dClcbiAgICBhd2FpdCBldmFsdWF0b3IucHJvY2VzcyhpbnB1dHMpO1xuICAgIHJldHVybiBldmFsdWF0b3IuY29udGFpbmVyO1xuICB9XG5cbiAgcmV0dXJuIHtcbiAgICBwcm9jZXNzLFxuICAgIHdlYlJQcm9taXNlLFxuICAgIHJlbmRlcmVkT2pzLFxuICB9O1xufVxuIn1dfQ==
+</script>
+<div id="exercise-loading-indicator" class="exercise-loading-indicator d-none d-flex align-items-center gap-2">
+<div id="exercise-loading-status" class="d-flex gap-2">
+
+</div>
+<div class="spinner-grow spinner-grow-sm">
+
+</div>
+</div>
+<script type="vfs-file">
+WyJkYXRhL3RldHJpcy5jc3YiXQ==
+</script>
+</section>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>This scenario is drawn from materials by Dr.&nbsp;Danielle Navarro via her <a href="https://learningstatisticswithr.com/">Learning Statistics with R</a> textbook.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>The activity in this lab adapts and builds upon materials provided by Dr.&nbsp;Kevin P. McIntyre via <a href="https://sites.google.com/view/openstatslab/">Open Stats Labs</a>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InZpZXdvZiB1c2VyQ2hvaWNlMSA9IElucHV0cy5yYWRpbyhcbiAgWyAgICAgXG4gICAgXCJPbmUgc2FtcGxlIHQtdGVzdFwiLCAgICAgXG4gICAgXCJJbmRlcGVuZGVudCBtZWFzdXJlcyB0LXRlc3RcIiwgICAgIFxuICAgIFwiUGFpcmVkIHNhbXBsZXMgdC10ZXN0XCIsXG4gIF0sICAgIFxuICB7ICAgICBcbiAgICBsYWJlbDogbnVsbCwgICAgIFxuICAgIHZhbHVlOiBudWxsICAgXG4gIH0gXG4pO1xuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC0yIiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoieyAgIGlmICh1c2VyQ2hvaWNlMSA9PT0gbnVsbCkge1xuICAgICAgcmV0dXJuIGh0bWxgPGVtPlBsZWFzZSBzZWxlY3QgYW4gYW5zd2VyIGFib3ZlLjwvZW0+YDsgICBcbiAgfSBlbHNlIGlmICh1c2VyQ2hvaWNlMSA9PT0gXCJJbmRlcGVuZGVudCBtZWFzdXJlcyB0LXRlc3RcIikgeyAgICAgXG4gICAgICByZXR1cm4gaHRtbGA8ZGl2IHN0eWxlPVwiY29sb3I6IGdyZWVuOyBmb250LXdlaWdodDogYm9sZDtcIj4gQ29ycmVjdCE8L2Rpdj5gOyAgIFxuICB9IGVsc2UgeyAgICAgXG4gICAgcmV0dXJuIGh0bWxgPGRpdiBzdHlsZT1cImNvbG9yOiByZWQ7XCI+IFRyeSBhZ2FpbiE8L2Rpdj5gOyAgIFxuICB9IFxufVxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCd1c2VyQ2hvaWNlMScpIn1dfQ==
+</script>
+<script type="module">
+if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
+window._ojs.paths.runtimeToDoc = "../..";
+window._ojs.paths.runtimeToRoot = "../..";
+window._ojs.paths.docToRoot = "";
+window._ojs.selfContained = false;
+window._ojs.runtime.interpretFromScriptTags();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

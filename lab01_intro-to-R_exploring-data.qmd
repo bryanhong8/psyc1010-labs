@@ -131,6 +131,7 @@ Let's try assigning a new value to the `favourite_number` object. What do you th
 
 ```{webr}
 #| exercise: ex_1 
+#| envir: global
 # Put in a new value for favourite_number 
 favourite_number <- ______  
 

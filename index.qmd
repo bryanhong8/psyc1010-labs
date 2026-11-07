@@ -19,6 +19,7 @@ You can access the workbooks for each of the weekly labs below:
 -   [Lab 6: Effect Sizes and Confidence Intervals](lab06_effect-sizes_confidence-intervals.qmd)
 -   [Lab 7: Introducing the t-statistic](lab07_introducing-t-statistic.qmd)
 -   [Lab 8: More About t-tests (Independent + Paired)](lab08_more-about-t-tests.qmd)
+-   [Lab 9: Introducing the ANOVA](lab09_introducing-anovas.qmd)
 
 # Acknowledgements
 

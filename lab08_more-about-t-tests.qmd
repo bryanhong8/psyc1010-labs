@@ -146,7 +146,7 @@ intellect_descriptives |>
   geom_bar(stat="identity", aes(fill = Condition)) + 
   geom_errorbar(aes(ymin = mean - se, ymax = mean + se), width = 0.1) +
   labs(x = "Experimental Condition",
-       y = "Frequency") +
+       y = "Average Intellect Rating") +
   scale_fill_grey() +
   theme_minimal()
 ```
@@ -364,7 +364,7 @@ The final step is to report the results from our analyses using APA formatting. 
 
 As an example, we could report the findings of our analysis like:
 
-> "A paired samples t-test was used to compare gaze preference to the singer of the familiar song differ the baseline and test phases. Infants spent a longer time looking at the singer of the familiar song after they had sung the familiar song (M = 0.593, S = 0.179) than before (M = 0.521, SD = 0.177), *t*(31) = -2.42, *p* = 0.022, 95% CI \[-0.133. -0.011\], *d* = 0.43. This was a small effect."
+> "A paired samples t-test was used to compare gaze preference to the singer of the familiar song differ the baseline and test phases. Infants spent a longer time looking at the singer of the familiar song after they had sung the familiar song (M = 0.593, S = 0.179) than before (M = 0.521, SD = 0.177), *t*(31) = -2.42, *p* = 0.022, 95% CI \[-0.133. -0.011\], *d* = 0.43. This was a medium-sized effect."
 
 # That's all for now, great work!
 
