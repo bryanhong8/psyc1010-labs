@@ -296,7 +296,7 @@ One note here is that the results here will differ a bit from those reported in 
 
 ## Effect sizes
 
-To evaluate the practical significance of our results, we will need a measure of effect size. There are a few different ways to evaluate the effect size for an ANOVA, but the most commonly used measure for an ANOVA is called **eta-squared (η^2^)**, which tells use the proportion the total variability that can be explained by our effect:
+To evaluate the practical significance of our results, we will need a measure of effect size. There are a few different ways to evaluate the effect size for an ANOVA, but the most commonly used measure for an ANOVA is called **eta-squared (η^2^)**, which tells use the proportion of the total variability that can be explained by our effect:
 
 $$
 \eta^2=\dfrac{SS_{Between}}{SS_{Total}}
