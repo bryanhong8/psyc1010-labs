@@ -29,7 +29,7 @@ By the end of this lab, you should be able to:
 -   Distinguish between within-group and between-group variance
 -   Identify situations in which it is appropriate to use an independent measure one-way ANOVA
 -   Use `R` to conduct and interpret the output of an independent measures one-way ANOVA, including effect sizes and post-hoc comparisons
--   Report the output of an independent measures one-way ANOVA APA using formatting
+-   Report the output of an independent measures one-way ANOVA using APA formatting
 :::
 
 So far, we've learned about different tests that allow us to compare two values, whether that is a single sample to a known population value (i.e., z-test or one-sample t-test) or two samples to one another (i.e., independent measures t-test or paired samples t-test). Although the name of the technique refers to variances, an **analysis of variance (ANOVA)** grants us the ability to compare more than two values.
@@ -155,7 +155,7 @@ The way in which an ANOVA assesses mean differences is slightly different than t
 
 # Can playing Tetris reduce the occurrence of intrusive memories?
 
-To make what we learned earlier a bit more concrete, we will use an independent measures one-way ANOVA to analyze data from a study by James et al. (2015).[^2] Following traumatic experiences, some people have flashbacks, which are also called “intrusive memories”" and are characterized by involuntary images of aspects of the traumatic event. Although people often try to simply forget traumatic memories, this approach is not very effective. Instead, previous research suggests that a better approach may be to try to change aspects of the memory after it is formed. For example, some research shows that traumatic memories can be altered and weakened to the point that they are no longer intrusive.
+To make what we learned earlier a bit more concrete, we will use an independent measures one-way ANOVA to analyze data from a study by James et al. (2015).[^2] Following traumatic experiences, some people have flashbacks, which are also called "intrusive memories" and are characterized by involuntary images of aspects of the traumatic event. Although people often try to simply forget traumatic memories, this approach is not very effective. Instead, previous research suggests that a better approach may be to try to change aspects of the memory after it is formed. For example, some research shows that traumatic memories can be altered and weakened to the point that they are no longer intrusive.
 
 [^2]: The activity in this lab adapts and builds upon materials provided by Dr. Kevin P. McIntyre via [Open Stats Labs](https://sites.google.com/view/openstatslab/).
 
